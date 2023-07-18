@@ -19,6 +19,18 @@
             android:onClick="@{()-> MainViewModel.getTestModel()}"
             android:text="Call api"/>
 
+        <Button
+            android:id="@+id/button_login_google"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign With Google"/>
+
+        <Button
+            android:id="@+id/button_signout_google"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Out"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

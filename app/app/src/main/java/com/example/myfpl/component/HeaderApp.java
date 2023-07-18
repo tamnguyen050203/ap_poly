@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.myfpl.R;
 import com.example.myfpl.util.DateUtil;
-import com.example.myfpl.util.TextUtil;
+import com.example.myfpl.util.StringUtil;
 
 public class HeaderApp extends RelativeLayout implements View.OnClickListener {
 
@@ -76,7 +76,7 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
                 String userNameText = style.getString(R.styleable.HeaderApp_app_user_name_text);
                 Drawable avt = style.getDrawable(R.styleable.HeaderApp_app_avatar_src);
 
-                userName.setText(TextUtil.nullOrEmpty(userNameText) ? userNameText : "Default Name");
+                userName.setText(StringUtil.nullOrEmpty(userNameText) ? userNameText : "Default Name");
                 avatar.setImageDrawable(avt != null ? avt : getResources().getDrawable(R.drawable.avt, getContext().getTheme()));
             } else {
                 Drawable iconBtnLeft = style.getDrawable(R.styleable.HeaderApp_app_button_left_src);
@@ -88,7 +88,7 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
             centerContainer.setVisibility(isUserHeader ? GONE : VISIBLE);
             if (isUserHeader) {
                 String titleText = style.getString(R.styleable.HeaderApp_app_header_title);
-                title.setText(TextUtil.nullOrEmpty(titleText) ? titleText : "TextDefault");
+                title.setText(StringUtil.nullOrEmpty(titleText) ? titleText : "TextDefault");
             }
 //            end handle center container
 
@@ -102,7 +102,7 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
 
                 if (isTextRightButton) {
                     String textButtonRight = style.getString(R.styleable.HeaderApp_app_text_button_right);
-                    textRightButton.setText(TextUtil.nullOrEmpty(textButtonRight) ? textButtonRight : "Default Text");
+                    textRightButton.setText(StringUtil.nullOrEmpty(textButtonRight) ? textButtonRight : "Default Text");
                 } else {
                     Drawable iconButtonRight = style.getDrawable(R.styleable.HeaderApp_app_right_button_src);
                     buttonRight.setImageDrawable(iconButtonRight != null ? iconButtonRight : getResources().getDrawable(R.drawable.ic_notify, getContext().getTheme()));
