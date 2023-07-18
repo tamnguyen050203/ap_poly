@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.LoginActivity">
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:flexDirection="column">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="162dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drawable_gb_login"
+            app:layout_flexGrow="1"/>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexDirection="column">
+
+        <ImageView
+            android:id="@+id/image_logo"
+            android:layout_width="wrap_content"
+            android:transitionName="logo"
+            android:src="@drawable/ic_app"
+            app:layout_alignSelf="center"
+            android:layout_marginTop="50dp"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

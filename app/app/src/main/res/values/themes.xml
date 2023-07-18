@@ -1,6 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.MyFPL" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!--Custom for share element transition-->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowDisablePreview">true</item>
+
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorPrimaryVariant">@color/primary_color</item>
