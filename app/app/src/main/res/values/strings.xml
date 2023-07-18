@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MyFPL</string>
+
+    <string name="lich_thi">Lịch thi sắp tới của bạn</string>
+    <string name="lich_hoc">Lịch học hôm nay</string>
+    <string name="thong_bao">Thông báo mới</string>
+    <string name="chon_co_so">Chọn cơ sở đào tạo</string>
+    <string name="login_with_google">Đăng nhập với Google</string>
+
+    <!--    Bottom navigation-->
+    <string name="home">Trang chủ</string>
+    <string name="schedule">Lịch</string>
+    <string name="student">Sinh viên</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    -->
+
+
+</resources>

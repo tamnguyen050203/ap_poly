@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HeaderApp">
+        <!--        center container attrs-->
+        <attr name="app_header_title" format="string" />
+
+        <!--        left container attrs-->
+        <attr name="app_text_session" format="string" />
+        <attr name="app_user_name_text" format="string" />
+        <attr name="app_avatar_src" format="reference" />
+        <attr name="app_button_left_src" format="reference" />
+        <attr name="app_is_user_container" format="boolean" />
+
+        <!--        right container attrs-->
+        <attr name="app_right_button_src" format="reference" />
+        <attr name="app_enable_right_button" format="boolean" />
+        <attr name="app_is_button_text" format="boolean" />
+        <attr name="app_text_button_right" format="string"/>
+    </declare-styleable>
+</resources>

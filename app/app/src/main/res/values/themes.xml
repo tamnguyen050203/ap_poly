@@ -1,0 +1,54 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MyFPL" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryVariant">@color/primary_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/primary_text_color</item>
+        <item name="colorSecondaryVariant">@color/primary_color_20</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="BottomNavigationViewTextStyle">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+    </style>
+
+    <style name="TextPrimaryBase">
+        <item name="color">@color/primary_text_color</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:fontFamily">@font/inter_semibold</item>
+    </style>
+    
+    <style name="TextSecondaryBase" parent="TextPrimaryBase">
+        <item name="android:fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="Text13SemiBold" parent="TextPrimaryBase">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="Text13Medium" parent="TextSecondaryBase">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="Text16SemiBold" parent="TextPrimaryBase">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Text25SemiBold" parent="TextPrimaryBase">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="Text16Bold">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/inter_bold</item>
+    </style>
+
+</resources>
