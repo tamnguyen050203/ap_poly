@@ -50,10 +50,12 @@ class AuthController extends Controller
             'refresh_token_expires_at' => $refresh_expires_at,
         ])->save();
 
+        //save user info to auth global
+        auth()->login($student);
+
         return response()->json([
             'access_token' => $access_token,
             'refreshToken' => $refreshToken,
-            'user' => $student,
         ]);
     }
 

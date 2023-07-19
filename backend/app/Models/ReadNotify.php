@@ -14,13 +14,13 @@ class ReadNotify extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        "user_id",
+        "student_id",
         "notification_id",
     ];
 
-    public function user(): HasMany
+    public function student(): HasMany
     {
-        return $this->HasMany(User::class);
+        return $this->HasMany(Student::class);
     }
 
     public function notification(): HasMany

@@ -3,65 +3,46 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNotificationRequest;
-use App\Http\Requests\UpdateNotificationRequest;
 use App\Models\Notification;
+use App\Models\ReadNotify;
+use App\Models\Student;
+use Illuminate\Http\Request;
+
 
 class NotificationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->model = (new Notification())->query();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+function getNotify(Request $request)
+{
+
+    $type = $request->type;
+    $notify = $this->model
+        ->when($type != 0, function ($query) use ($type) {
+            return $query->where('type', $type);
+        })
+        ->latest('updated_at')
+        ->paginate(5);
+
+
+    $access_token = hash('sha256', $request->bearerToken());
+    $student_id = Student::query()->where('access_token',$access_token)->first()->id;
+
+    foreach ($notify as $notification) {
+        $notification->type = $notification->getTypeNameAttribute();
+        // Use ReadNotify model to set isRead for notify
+        $readNotify = ReadNotify::where([
+            ['student_id', $student_id],
+            ['notification_id', $notification->id],
+        ])->first();
+        $notification->isRead = (bool) $readNotify;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreNotificationRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateNotificationRequest $request, Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Notification $notification)
-    {
-        //
-    }
+    return response()->json([
+        'notify' => $notify,
+    ]);
+}
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -15,5 +16,6 @@ route::group(['prefix' => 'auth'], function () {
 });
 
 route::group(['prefix' => 'student', 'middleware' => 'tokenIsValid'], function () {
-    route::get('get-info', [StudentController::class, 'getInfo']);
+    route::get('info', [StudentController::class, 'getInfo']);
+    route::get('notify/{type}', [NotificationController::class, 'getNotify']);
 });

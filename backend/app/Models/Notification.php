@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\NotifyType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,8 +21,9 @@ class Notification extends Model
         "updated_date",
     ];
 
-    public function getDateFormat(): string
+    public function getTypeNameAttribute(): string
     {
-        return 'Y-m-d H:i';
+        return NotifyType::getArrayView()[$this->type];
     }
+
 }
