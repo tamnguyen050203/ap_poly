@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.NotifyActivity"
+    android:orientation="vertical">
+
+    <com.example.myfpl.component.HeaderApp
+        android:id="@+id/headerApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/default_padding"
+        android:layout_marginTop="10dp"
+        app:app_is_button_text="true"
+        app:app_text_button_right="Đọc tất cả"
+        app:app_is_user_container="false"/>
+
+</LinearLayout>
