@@ -18,12 +18,12 @@ class NotificationController extends Controller
 
 function getNotify(Request $request)
 {
-
     $type = $request->type;
     $notify = $this->model
         ->when($type != 0, function ($query) use ($type) {
             return $query->where('type', $type);
         })
+        ->select('id', 'title', 'content', 'author', 'type', 'created_at', 'updated_at')
         ->latest('updated_at')
         ->paginate(5);
 
