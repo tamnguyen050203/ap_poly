@@ -1,6 +1,7 @@
 package com.example.myfpl.adapters;
 
 import android.annotation.SuppressLint;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 

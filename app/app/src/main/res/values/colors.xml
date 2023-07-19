@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
 
     <!--    custom color-->
     <color name="primary_color">#FB8232</color>
@@ -27,4 +28,5 @@
 
     <color name="screen_background">#F8FBFF</color>
     <color name="indicator_color">#E2E2E2</color>
+    <color name="indiactor_color">#1A011635</color>
 </resources>

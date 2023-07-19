@@ -142,9 +142,9 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
         return this;
     }
 
-    public void setLabelContainerVisibility(boolean visibility) {
+    public void hiddenLabelContainer(boolean visibility) {
         if (labelContainer != null) {
-            labelContainer.setVisibility(visibility ? VISIBLE : GONE);
+            labelContainer.setVisibility(visibility ? GONE : VISIBLE);
             requestLayout();
         }
     }

@@ -1,12 +1,12 @@
 package com.example.myfpl.ui.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.myfpl.R;
@@ -16,9 +16,10 @@ import com.example.myfpl.viewmodels.TestViewModel;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class NavigationActivity extends FragmentActivity {
+    private static final String TAG = NavigationActivity.class.getSimpleName();
     private ActivityNavigationBinding binding;
-    private TestViewModel testViewModel;
     private MainViewPager mainViewPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,19 +29,23 @@ public class NavigationActivity extends FragmentActivity {
         init();
     }
 
-    public void init(){
+    public void init() {
         mainViewPagerAdapter = new MainViewPager(NavigationActivity.this);
 
         binding.viewPager.setAdapter(mainViewPagerAdapter);
         addEvent();
     }
 
-    public void addEvent(){
+    public void hiddenLabelContainer(boolean visibilityHeaderApp, boolean attackToStatus) {
+        binding.headerApp.hiddenLabelContainer(visibilityHeaderApp);
+    }
+
+    public void addEvent() {
         binding.bottomTab.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.homeFragment:
                         binding.viewPager.setCurrentItem(0);
                         break;
@@ -58,6 +63,7 @@ public class NavigationActivity extends FragmentActivity {
         binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
+
                 binding.bottomTab.getMenu().getItem(position).setChecked(true);
             }
         });

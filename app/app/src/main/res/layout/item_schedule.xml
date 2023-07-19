@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/drawable_border_schedule_item"
+    android:orientation="horizontal"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp">
+
+    <View
+        android:id="@+id/vertical_indicator"
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/indicator_rounded"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/visible_part"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_schedule"
+                    style="@style/Text16SemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="Android Networking" />
+
+                <TextView
+                    android:id="@+id/subject_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/inter_medium"
+                    android:lines="1"
+                    android:text="MOB403"
+                    android:textColor="@color/primary_text_color_50"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/room"
+                    style="@style/Text13Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="T301 • Tòa T" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/button_alarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_alarm_inactive" />
+
+                <TextView
+                    android:id="@+id/schedule_time"
+                    style="@style/Text13Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:text="17-7" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hidden_part"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/shift"
+                style="@style/Text13Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ca: 1" />
+
+            <TextView
+                android:id="@+id/lecturer"
+                style="@style/Text13Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giảng viên: channn3" />
+
+            <TextView
+                android:id="@+id/amphitheater"
+                style="@style/Text13Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giảng đường: Phan mem Quang Trung" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

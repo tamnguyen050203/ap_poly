@@ -24,6 +24,18 @@
         <item name="android:fontFamily">@font/inter_semibold</item>
     </style>
 
+    <style name="ButtonAppStyle" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
     <style name="TextPrimaryBase">
         <item name="color">@color/primary_text_color</item>
         <item name="android:textColor">@color/primary_text_color</item>
