@@ -17,11 +17,9 @@ class ScheduleController extends Controller
 
     public function getSchedules(Request $request)
     {
-        $access_token = auth()->user()->access_token;
         $class_group_id = StudentClass::
-        whereHas('student', function ($query) use ($access_token) {
-            $query->where('access_token', $access_token);
-        })->first()->class_group_id;
+        where('student_id', '=', auth()->user()->id)
+            ->first()->class_group_id;
 
         if (!$class_group_id) {
             return response()->json([
@@ -45,6 +43,7 @@ class ScheduleController extends Controller
             ->select(
                 'schedules.id',
                 'lessons.name as lesson_name',
+                'class_groups.link as class_group_link',
                 'class_groups.name as class_group_name',
                 'rooms.name as room_name',
                 'schedules.date',

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\ReadNotify;
-use App\Models\Student;
 use Illuminate\Http\Request;
 
 
@@ -27,15 +26,11 @@ class NotificationController extends Controller
             ->latest('updated_at')
             ->paginate(5);
 
-
-        $access_token = hash('sha256', $request->bearerToken());
-        $student_id = Student::query()->where('access_token', $access_token)->first()->id;
-
         foreach ($notify as $notification) {
             $notification->type = $notification->getTypeNameAttribute();
             // Use ReadNotify model to set isRead for notify
             $readNotify = ReadNotify::where([
-                ['student_id', $student_id],
+                ['student_id', auth()->user()->id],
                 ['notification_id', $notification->id],
             ])->first();
             $notification->isRead = (bool) $readNotify;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -15,7 +14,7 @@ class StudentController extends Controller
         $this->model = (new Student())->query();
     }
 
-    public function getInfo(Request $request): JsonResponse
+    public function getInfo(): JsonResponse
     {
         $student = auth()->user()
             ->only(
