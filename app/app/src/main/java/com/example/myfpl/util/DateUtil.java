@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.YearMonth;
 import java.util.Date;
 
 public class DateUtil {
@@ -39,5 +40,25 @@ public class DateUtil {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static YearMonth getCurrentMonth(){
+        return YearMonth.now();
+    }
+
+    public static YearMonth getStartMonth(int monthAmount){
+        return getCurrentMonth().minusMonths(monthAmount);
+    }
+
+    public static YearMonth getStartMonth(){
+        return getCurrentMonth().minusMonths(100);
+    }
+
+    public static YearMonth getEndMonth(int monthAmount){
+        return getCurrentMonth().plusMonths(monthAmount);
+    }
+
+    public static YearMonth getEndMonth(){
+        return getCurrentMonth().plusMonths(100);
     }
 }

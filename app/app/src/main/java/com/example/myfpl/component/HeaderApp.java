@@ -86,7 +86,7 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
 
 //            handle center container
             centerContainer.setVisibility(isUserHeader ? GONE : VISIBLE);
-            if (isUserHeader) {
+            if (!isUserHeader) {
                 String titleText = style.getString(R.styleable.HeaderApp_app_header_title);
                 title.setText(StringUtil.nullOrEmpty(titleText) ? titleText : "TextDefault");
             }
