@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class StudentClass extends Model
 {
@@ -23,7 +22,7 @@ class StudentClass extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function classGroup(): belongsTo
+    public function class_group(): belongsTo
     {
         return $this->belongsTo(ClassGroup::class);
     }

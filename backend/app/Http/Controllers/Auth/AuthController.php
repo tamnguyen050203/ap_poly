@@ -50,20 +50,17 @@ class AuthController extends Controller
             'refresh_token_expires_at' => $refresh_expires_at,
         ])->save();
 
-        //save user info to auth global
-        auth()->login($student);
-
         return response()->json([
             'access_token' => $access_token,
             'refreshToken' => $refreshToken,
-        ]);
+        ], 200);
     }
 
     public function refreshToken(Request $request): JsonResponse
     {
-        $refreshToken = $request->refreshToken;
+        $refreshToken = hash('sha256', $request->bearerToken());
 
-        $student = Student::where('refresh_token', hash('sha256', $refreshToken))->first();
+        $student = Student::where('refresh_token', $refreshToken)->first();
 
         if ($student) {
             // Check if the token has expired
@@ -72,9 +69,11 @@ class AuthController extends Controller
                 return response()->json(['error' => 'Refresh token has expired'], 401);
             } else {
                 // Token is still valid
-                $token = Str::random(500);
+                $token = Str::random(400);
+                $expires_at = now()->addMinutes(60);
                 $student->forceFill([
-                    'api_token' => hash('sha256', $token),
+                    'access_token' => hash('sha256', $token),
+                    'access_token_expires_at' => $expires_at,
                 ])->save();
                 return response()->json([
                     'access_token' => $token,

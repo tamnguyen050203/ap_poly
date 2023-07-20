@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -15,19 +14,23 @@ class StudentController extends Controller
         $this->model = (new Student())->query();
     }
 
-    public function getInfo(Request $request): JsonResponse
+    public function getInfo(): JsonResponse
     {
-        $bearerToken = hash('sha256', $request->bearerToken());
-        $student = $this->model
-            ->with(['specialize' => function ($query) {
-                $query->select('id', 'name');
-            }])
-            ->where('access_token', $bearerToken)
-            ->select('id', 'name', 'email', 'avatar', 'specialize_id')
-            ->first();
+        $student = auth()->user()
+            ->only(
+                'id',
+                'name',
+                'email',
+                'avatar',
+                'provider_id',
+                'dob',
+                'phone',
+            );
+
+        $student['specialize'] = auth()->user()->specialize->name;
 
         return response()->json([
-            'user' => $student,
+            'student' => $student,
         ]);
     }
 }
