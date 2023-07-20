@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\Student;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
@@ -35,7 +35,7 @@ class AuthController extends Controller
         }
 
         // Create access token and set expiration time
-        $access_token = Str::random(500);
+        $access_token = Str::random(400);
         $expires_at = now()->addMinutes(60);
         $student->forceFill([
             'access_token' => hash('sha256', $access_token),
@@ -43,8 +43,8 @@ class AuthController extends Controller
         ])->save();
 
         // Create refresh token and set expiration time
-        $refreshToken = Str::random(350);
-        $refresh_expires_at = now()->addDays(350);
+        $refreshToken = Str::random(300);
+        $refresh_expires_at = now()->addDays(3);
         $student->forceFill([
             'refresh_token' => hash('sha256', $refreshToken),
             'refresh_token_expires_at' => $refresh_expires_at,
