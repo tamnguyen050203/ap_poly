@@ -20,6 +20,8 @@ class EnsureTokenIsValid
                 // Token has expired
                 return response()->json(['error' => 'Token has expired'], 401);
             } else {
+                $student = Student::find($token->id);
+                auth()->login($student);
                 // Token is still valid
                 return $next($request);
             }

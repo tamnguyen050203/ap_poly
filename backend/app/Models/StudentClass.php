@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StudentClass extends Model
 {
@@ -17,13 +17,13 @@ class StudentClass extends Model
         "class_group_id",
     ];
 
-    public function student(): hasMany
+    public function student(): belongsTo
     {
-        return $this->hasMany(Student::class);
+        return $this->belongsTo(Student::class);
     }
 
-    public function classGroup(): hasMany
+    public function class_group(): belongsTo
     {
-        return $this->hasMany(ClassGroup::class);
+        return $this->belongsTo(ClassGroup::class);
     }
 }

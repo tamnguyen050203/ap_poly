@@ -36,7 +36,7 @@ class Schedule extends Model
         return $this->belongsTo(Lesson::class);
     }
 
-    public function classGroup(): BelongsTo
+    public function class_group(): BelongsTo
     {
         return $this->belongsTo(ClassGroup::class);
     }

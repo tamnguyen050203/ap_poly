@@ -13,6 +13,11 @@ class Room extends Model
 
     protected $fillable = [
         "name",
-
+        "amphitheater_id",
     ];
+
+    public function amphitheater()
+    {
+        return $this->belongsTo(Amphitheater::class);
+    }
 }
