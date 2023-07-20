@@ -16,8 +16,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".NotifyActivity"
+            android:name=".ui.activities.DetailNotificationActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.activities.NotifyActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.activities.LoginActivity"
             android:exported="false" />
@@ -35,7 +44,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.activities.NavigationActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
