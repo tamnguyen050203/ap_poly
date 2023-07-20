@@ -17,8 +17,7 @@ class ScheduleController extends Controller
 
     public function getSchedules(Request $request)
     {
-        $access_token = hash('sha256', $request->bearerToken());
-
+        $access_token = auth()->user()->access_token;
         $class_group_id = StudentClass::
         whereHas('student', function ($query) use ($access_token) {
             $query->where('access_token', $access_token);
