@@ -2,6 +2,7 @@ package com.example.myfpl.util;
 
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 
 public class StringUtil {
     public static boolean nullOrEmpty(String text){
@@ -12,6 +13,7 @@ public class StringUtil {
     }
 
     public static Spanned builderTitle(String section, String content){
-         return Html.fromHtml("<font color=\"#80011635\">"+section+":</font> " + "<font color=\"#011635\">"+content+"</font>");
+        Log.d("TextValue", "builderTitle: " + "<font color=\"#808A9A\">"+section+":</font> " + "<font color=\"#011635\">"+content+"</font>");
+         return Html.fromHtml("<font color=\"#808A9A\">"+section+":</font> " + "<font color=\"#011635\">"+content+"</font>");
     }
 }

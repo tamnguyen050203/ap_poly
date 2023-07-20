@@ -33,6 +33,7 @@ public class NavigationActivity extends FragmentActivity {
         mainViewPagerAdapter = new MainViewPager(NavigationActivity.this);
 
         binding.viewPager.setAdapter(mainViewPagerAdapter);
+        binding.viewPager.setUserInputEnabled(false);
         addEvent();
     }
 
@@ -63,7 +64,6 @@ public class NavigationActivity extends FragmentActivity {
         binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
-
                 binding.bottomTab.getMenu().getItem(position).setChecked(true);
             }
         });

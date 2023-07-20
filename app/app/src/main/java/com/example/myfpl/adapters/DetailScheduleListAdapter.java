@@ -10,22 +10,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfpl.R;
 import com.example.myfpl.databinding.ItemScheduleBinding;
+import com.example.myfpl.databinding.ItemScheduleDetailBinding;
 import com.example.myfpl.models.TestModelSchedule;
 import com.example.myfpl.util.DateUtil;
 import com.example.myfpl.util.StringUtil;
 
 import java.util.List;
 
-public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapter.ItemViewHolder> {
+public class DetailScheduleListAdapter extends RecyclerView.Adapter<DetailScheduleListAdapter.ItemViewHolder> {
     private List<TestModelSchedule> listData;
     HandleEventListItem eventListItem;
 
-    public ScheduleListAdapter(HandleEventListItem eventListItem) {
+    public DetailScheduleListAdapter(HandleEventListItem eventListItem) {
         this.eventListItem = eventListItem;
     }
 
 
-    public ScheduleListAdapter(List<TestModelSchedule> listData) {
+    public DetailScheduleListAdapter(List<TestModelSchedule> listData) {
         this.listData = listData;
     }
 
@@ -41,20 +42,19 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
 
     @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemScheduleBinding binding = ItemScheduleBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+    public DetailScheduleListAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemScheduleDetailBinding binding = ItemScheduleDetailBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ItemViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull DetailScheduleListAdapter.ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (listData.get(position) != null) {
             holder.binding.item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listData.get(position).setExpand(!listData.get(position).isExpand());
-                    holder.binding.hiddenPart.setVisibility(listData.get(position).isExpand() ? View.VISIBLE : View.GONE);
                     eventListItem.onItemClick(listData.get(position), position);
+                    listData.get(position).setExpand(!listData.get(position).isExpand());
                 }
             });
 
@@ -62,7 +62,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
                 @Override
                 public void onClick(View view) {
                     listData.get(position).setAlarm(!listData.get(position).isAlarm());
-                    holder.binding.item.setBackgroundResource(
+                    holder.binding.itemMain.setBackgroundResource(
                             listData.get(position).isAlarm() ? R.drawable.drawable_alarm_border_schedule_item : R.drawable.drawable_border_schedule_item
                     );
                     holder.binding.verticalIndicator.setBackgroundResource(
@@ -86,9 +86,9 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
-        private ItemScheduleBinding binding;
+        private ItemScheduleDetailBinding binding;
 
-        public ItemViewHolder(ItemScheduleBinding binding) {
+        public ItemViewHolder(ItemScheduleDetailBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -100,19 +100,9 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
             binding.room.setText(testModelSchedule.getRoom());
             binding.lecturer.setText(StringUtil.builderTitle("Giảng viên", testModelSchedule.getLecturer()));
             binding.amphitheater.setText(StringUtil.builderTitle("Giảng đường", testModelSchedule.getAmphitheater()));
-            if(testModelSchedule.isTestSchedule()){
-                binding.scheduleTime.setText(
-                        DateUtil.getDateFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getStartTime())
-                                .concat(" • ")
-                                .concat(DateUtil.getTimeFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getStartTime()))
-                );
-                binding.shiftOrDate.setText(StringUtil.builderTitle("Ca", testModelSchedule.getShift()));
-            }else{
-                binding.scheduleTime.setText("Ca " + testModelSchedule.getShift() + " • "
-                                .concat(DateUtil.getTimeFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getStartTime()))
-                );
-                binding.shiftOrDate.setText(StringUtil.builderTitle("Ngày", DateUtil.getDateFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getStartTime())));
-            }
+            binding.timeEnd.setText(DateUtil.getTimeFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getEndTime()));
+            binding.timeStart.setText(DateUtil.getTimeFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getStartTime()));
+            binding.shiftOrDate.setText(StringUtil.builderTitle("Ngày", DateUtil.getDateFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getStartTime())));
         }
     }
 

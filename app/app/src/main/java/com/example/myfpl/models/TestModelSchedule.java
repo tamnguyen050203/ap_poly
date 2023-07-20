@@ -7,26 +7,45 @@ import java.util.List;
 public class TestModelSchedule implements Serializable {
     private String scheduleTitle;
     private String subjectCode;
-    private String time;
+    private String startTime;
+    private String endTime;
     private String shift;
     private String lecturer;
     private String amphitheater;
     private String room;
     private boolean isAlarm;
 
-
     private boolean isExpand;
+    private boolean isTestSchedule;
 
-    public TestModelSchedule(String scheduleTitle, String subjectCode, String time, String shift, String lecturer, String amphitheater, String room, boolean isAlarm) {
+    public TestModelSchedule(String scheduleTitle, String subjectCode, String time, String endTime, String shift, String lecturer, String amphitheater, String room, boolean isAlarm, boolean isTestSchedule) {
         this.scheduleTitle = scheduleTitle;
         this.subjectCode = subjectCode;
-        this.time = time;
+        this.startTime = time;
+        this.endTime = endTime;
         this.shift = shift;
         this.lecturer = lecturer;
         this.amphitheater = amphitheater;
         this.room = room;
         this.isAlarm = isAlarm;
         this.isExpand = false;
+        this.isTestSchedule = isTestSchedule;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public boolean isTestSchedule() {
+        return isTestSchedule;
+    }
+
+    public void setTestSchedule(boolean testSchedule) {
+        isTestSchedule = testSchedule;
     }
 
     public boolean isExpand() {
@@ -61,12 +80,12 @@ public class TestModelSchedule implements Serializable {
         this.subjectCode = subjectCode;
     }
 
-    public String getTime() {
-        return time;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getShift() {
@@ -101,17 +120,17 @@ public class TestModelSchedule implements Serializable {
         this.room = room;
     }
 
-    public static List<TestModelSchedule> getListModel() {
+    public static List<TestModelSchedule> getListModel(int size) {
         List<TestModelSchedule> list = new ArrayList<>();
 
-        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-13 00:39:30", "1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false));
-        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-13 00:39:30", "1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false));
-        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-13 00:39:30", "1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false));
-        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-13 00:39:30", "1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false));
-        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-13 00:39:30", "1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false));
-        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-13 00:39:30", "1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false));
-        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-13 00:39:30", "1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false));
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-13 09:30:30", "2023-07-13 011:30:30","1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, true));
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-12 07:30:30", "2023-07-13 09:30:30","1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, false));
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-11 07:30:30", "2023-07-13 09:30:30","1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, false));
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-10 09:30:30","2023-07-13 11:30:30", "1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, false));
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-9 09:30:30", "2023-07-13 11:30:30","1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, true));
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-8 07:30:30", "2023-07-13 09:30:30","1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, false));
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-7 09:30:30", "2023-07-13 11:30:30","1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, true));
 
-        return list;
+        return list.subList(0, size);
     }
 }

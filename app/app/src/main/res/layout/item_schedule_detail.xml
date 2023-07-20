@@ -1,33 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:animateLayoutChanges="true"
-    android:background="@drawable/drawable_border_schedule_item"
+    android:layout_marginTop="10dp"
     android:orientation="horizontal"
-    android:paddingHorizontal="10dp"
-    android:paddingVertical="10dp">
-
-    <View
-        android:id="@+id/vertical_indicator"
-        android:layout_width="3dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/indicator_rounded"/>
+    android:paddingHorizontal="15dp">
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingVertical="5dp">
+
+        <TextView
+            android:id="@+id/timeStart"
+            style="@style/Text13SemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="12:30" />
+
+        <View
+            android:id="@+id/vertical_indicator"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/indicator_rounded" />
+
+        <TextView
+            android:id="@+id/timeEnd"
+            style="@style/Text13SemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="12:30" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical">
+        android:background="@drawable/drawable_border_schedule_item"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <LinearLayout
             android:id="@+id/visible_part"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -78,15 +104,8 @@
                     android:id="@+id/button_alarm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_alarm_inactive" />
-
-                <TextView
-                    android:id="@+id/schedule_time"
-                    style="@style/Text13Medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="bottom"
-                    android:text="17-7" />
+                    android:src="@drawable/ic_alarm_inactive"
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
         </LinearLayout>
@@ -95,17 +114,7 @@
             android:id="@+id/hidden_part"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:visibility="gone"
             android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/shift_or_date"
-                style="@style/Text13Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ca: 1" />
 
             <TextView
                 android:id="@+id/lecturer"
@@ -113,6 +122,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giảng viên: channn3" />
+
+            <TextView
+                android:id="@+id/shift_or_date"
+                style="@style/Text13Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày: 20-7" />
 
             <TextView
                 android:id="@+id/amphitheater"
