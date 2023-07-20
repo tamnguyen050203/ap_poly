@@ -6,6 +6,7 @@ use Illuminate\Validation\Rules\Enum;
 
 class NotifyType extends Enum
 {
+    public const ALL = 0;
     public const ACTIVE = 1;
     public const WORK = 2;
     public const STUDY = 3;
@@ -14,6 +15,7 @@ class NotifyType extends Enum
     public static function getArrayView(): array
     {
         return [
+            self::ALL => 'Tất cả',
             self::ACTIVE => 'Hoạt động',
             self::WORK => 'Lảm việc',
             self::STUDY => 'Học tập',
