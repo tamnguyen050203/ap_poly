@@ -30,6 +30,7 @@ class StudentController extends Controller
         $student['specialize'] = auth()->user()->specialize->name;
 
         return response()->json([
+            'status' => 2000,
             'student' => $student,
         ]);
     }

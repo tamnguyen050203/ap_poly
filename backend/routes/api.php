@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Route;
 
 
 route::group(['prefix' => 'auth'], function () {
-    route::get('login', [AuthController::class, 'login']);
-    route::get('refresh-token', [AuthController::class, 'refreshToken']);
+    route::post('login', [AuthController::class, 'login']);
+    route::post('refresh-token', [AuthController::class, 'refreshToken']);
     route::group(['middleware' => 'tokenIsValid'], function () {
-        route::get('logout', [AuthController::class, 'logout']);
+        route::post('logout', [AuthController::class, 'signOut']);
     });
 });
 
