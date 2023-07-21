@@ -59,6 +59,7 @@ class ScheduleController extends Controller
             ->paginate(5);
 
         return response()->json([
+            'status' => 200,
             'schedules' => $schedules,
         ]);
     }

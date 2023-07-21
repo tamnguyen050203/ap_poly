@@ -18,7 +18,10 @@ class EnsureTokenIsValid
             // Check if the token has expired
             if (Carbon::parse($token->access_token_expires_at)->isPast()) {
                 // Token has expired
-                return response()->json(['error' => 'Token has expired'], 401);
+                return response()->json([
+                    'status' => 401,
+                    'error' => 'Token has expired'
+                ], 401);
             } else {
                 $student = Student::find($token->id);
                 auth()->login($student);
@@ -27,7 +30,10 @@ class EnsureTokenIsValid
             }
         } else {
             // Token doesn't exist
-            return response()->json(['error' => 'Token doesn\'t exist'], 401);
+            return response()->json([
+                'status' => 401,
+                'error' => 'Token doesn\'t exist'
+            ], 401);
         }
     }
 }
