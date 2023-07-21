@@ -5,19 +5,18 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up(): void
+    public function up()
     {
-        Schema::create('student_test_schedules', function (Blueprint $table) {
+        Schema::create('roll_calls', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('schedule_id')->constrained();
             $table->foreignId('student_id')->constrained();
-            $table->foreignId('test_schedule_id')->constrained();
-            $table->boolean('is_attend')->default(false);
             $table->boolean('flag')->default(true);
         });
     }
 
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('student_test_schedules');
+        Schema::dropIfExists('roll_calls');
     }
 };

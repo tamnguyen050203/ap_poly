@@ -68,8 +68,11 @@
     </style>
 
     <!--    style của tab layout-->
-    <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+    <!-- <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
         <item name="android:textSize">16sp</item>
+    </style> -->
+    <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="android:textSize">13sp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:fontFamily">@font/inter_bold</item>
     </style>

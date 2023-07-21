@@ -12,7 +12,7 @@
     <!--    custom color-->
     <color name="primary_color">#FB8232</color>
     <color name="primary_color_20">#33FB8232</color>
-    <color name="primary_text_color">#011635</color>
+    <color name="primary_text_color" id="primary_text_color" >#011635</color>
     <color name="primary_text_color_70">#B3011635</color>
     <color name="primary_text_color_50">#80011635</color>
     <color name="primary_text_color_30">#4D011635</color>
@@ -24,7 +24,7 @@
     <color name="red_light">#EC4310</color>
     <color name="red_light_20">#33F88C6B</color>
     <color name="green_light">#61C571</color>
-    <color name="green_light_20">#61C571</color>
+    <color name="green_light_20">#3361C571</color>
 
     <color name="screen_background">#F8FBFF</color>
     <color name="indicator_color">#E2E2E2</color>

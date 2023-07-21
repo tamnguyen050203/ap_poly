@@ -16,5 +16,25 @@
         app:app_is_button_text="true"
         app:app_text_button_right="Đọc tất cả"
         app:app_is_user_container="false"/>
-
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/topTab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:tabMode="scrollable"
+            android:scrollbars="none"
+            android:background="@drawable/custom_tab_bg"
+            app:tabIndicator="@drawable/custom_indicator"
+            android:elevation="0dp"
+            app:tabRippleColor="@null"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabIndicatorHeight="1dp"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabTextColor="@color/primary_text_color"
+            app:tabTextAppearance="@style/TabLayoutStyle"
+            />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 </LinearLayout>
