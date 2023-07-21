@@ -17,9 +17,10 @@ class TestScheduleController extends Controller
 
     public function getTestSchedules(Request $request)
     {
-        $testSchedule_id = StudentTestSchedule::query()
-            ->where('student_id', auth()->user()->id)
-            ->pluck('test_schedule_id');
+        $studentTestSchedule = StudentTestSchedule::query()
+            ->where('student_id', auth()->user()->id);
+        $test_schedule_id = $studentTestSchedule->pluck('test_schedule_id');
+        $is_attend = $studentTestSchedule->pluck('is_attend');
 
         // Find class group name
         $class_group_id = StudentClass::
@@ -35,7 +36,7 @@ class TestScheduleController extends Controller
             ->join('rooms', 'rooms.id', '=', 'test_schedules.room_id')
             ->join('lessons', 'lessons.id', '=', 'test_schedules.lesson_id')
             ->join('amphitheaters', 'amphitheaters.id', '=', 'rooms.amphitheater_id')
-            ->whereIn('test_schedules.id', $testSchedule_id)
+            ->whereIn('test_schedules.id', $test_schedule_id)
             ->select(
                 'test_schedules.id',
                 'lessons.name as lesson_name',
@@ -46,17 +47,18 @@ class TestScheduleController extends Controller
                 'shifts.end_time',
                 'amphitheaters.name as amphitheater_name',
             )
-            ->latest('test_schedules.date')
+            ->latest('date')
             ->orderBy('shifts.start_time')
             ->paginate(5);
 
-        $testSchedule->getCollection()->transform(function ($item) use ($class_group_name) {
+        $testSchedule->getCollection()->transform(function ($item, $key) use ($is_attend, $class_group_name) {
+            $item->is_attend = !!$is_attend[$key];
             $item->class_group_name = $class_group_name;
             return $item;
         });
 
         return response()->json([
-            'testSchedule' => $testSchedule,
+            'studentTestSchedule' => $testSchedule,
         ], 200);
     }
 }
