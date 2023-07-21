@@ -9,7 +9,6 @@ import com.example.myfpl.ui.fragments.NormalScheduleFragment;
 import com.example.myfpl.ui.fragments.TestScheduleFragment;
 
 public class ScheduleViewPager extends FragmentStateAdapter {
-
     public ScheduleViewPager(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
@@ -27,5 +26,9 @@ public class ScheduleViewPager extends FragmentStateAdapter {
     @Override
     public int getItemCount() {
         return 2;
+    }
+
+    public interface EventHandler{
+        void onListScroll();
     }
 }

@@ -4,12 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->date('date')->default(now('dd-mm-yyyy'));
+            $table->date('date')->default(now());
             $table->string('detail');
             $table->foreignId('shift_id')->constrained();
             $table->foreignId('room_id')->constrained();

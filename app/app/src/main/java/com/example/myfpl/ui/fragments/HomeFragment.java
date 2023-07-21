@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.transition.AutoTransition;
@@ -17,11 +18,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myfpl.adapters.ScheduleListAdapter;
+import com.example.myfpl.adapters.SliderViewPager;
 import com.example.myfpl.databinding.FragmentHomeBinding;
 import com.example.myfpl.models.TestModelSchedule;
 import com.example.myfpl.util.ToastApp;
 import com.example.myfpl.viewmodels.NavigationViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,6 +40,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+//        binding.getRoot().setAnimatePa
         return binding.getRoot();
     }
 
@@ -53,7 +57,7 @@ public class HomeFragment extends Fragment {
         binding.listSchedule.setNestedScrollingEnabled(false);
 
         if (getActivity() != null) {
-            viewModel = new NavigationViewModel(getActivity().getApplication());
+            viewModel = new ViewModelProvider(requireActivity()).get(NavigationViewModel.class);
         }
 
         scheduleTestListAdapter = new ScheduleListAdapter(new ScheduleListAdapter.HandleEventListItem() {
@@ -68,7 +72,8 @@ public class HomeFragment extends Fragment {
             public void onAlarmClick(TestModelSchedule testModelSchedule, int itemIndex) {
 //                TransitionManager.beginDelayedTransition(binding.listTestSchedule, new AutoTransition());
             }
-        });;
+        });
+        ;
         binding.listTestSchedule.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.listTestSchedule.setAdapter(scheduleTestListAdapter);
 
@@ -77,6 +82,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(TestModelSchedule testModelSchedule, int itemIndex) {
                 TransitionManager.beginDelayedTransition(binding.listSchedule, new AutoTransition());
                 ToastApp.show(requireContext(), testModelSchedule.getScheduleTitle());
+                viewModel.setListSchedule(scheduleListAdapter.getListData());
             }
 
             @Override
@@ -86,6 +92,16 @@ public class HomeFragment extends Fragment {
         });
         binding.listSchedule.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.listSchedule.setAdapter(scheduleListAdapter);
+
+        //setup slider
+        setupSlider();
+    }
+
+    public void setupSlider() {
+        SliderViewPager sliderViewPagerAdapter = new SliderViewPager(getContext(), (ArrayList<TestModelSchedule>) TestModelSchedule.getListModel());
+        binding.slider.setAdapter(sliderViewPagerAdapter);
+
+        binding.dotIndicator.setViewPager(binding.slider);
     }
 
     public void addListener() {

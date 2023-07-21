@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,18 +16,22 @@ import android.view.ViewGroup;
 import com.example.myfpl.R;
 import com.example.myfpl.adapters.ScheduleViewPager;
 import com.example.myfpl.databinding.FragmentScheduleBinding;
+import com.example.myfpl.viewmodels.ScheduleFragmentViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class ScheduleFragment extends Fragment {
 
     private FragmentScheduleBinding binding;
+    private ScheduleFragmentViewModel viewModel;
     private static final String TAG = ScheduleFragment.class.getSimpleName();
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentScheduleBinding.inflate(inflater, container, false);
+//        View view  = inflater.inflate(R.layout.fragment_schedule, con)
         return binding.getRoot();
     }
 
@@ -36,42 +42,38 @@ public class ScheduleFragment extends Fragment {
         addEvent();
     }
 
-    public void init(){
+    public void init() {
+        //setup viewmodel
+        viewModel = new ViewModelProvider(requireActivity()).get(ScheduleFragmentViewModel.class);
+
         //setup tab layout;
         binding.viewPager.setAdapter(new ScheduleViewPager(requireActivity()));
         new TabLayoutMediator(binding.tabLayout, binding.viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                if( position == 0) tab.setText("Lịch Học");
+                if (position == 0) tab.setText("Lịch Học");
                 else tab.setText("Lịch Thi");
             }
         }).attach();
         binding.tabLayout.setSmoothScrollingEnabled(true);
-    }
-    public void addEvent(){
-        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                Log.d(TAG, "onTabSelected: ");
-                animationTab();
-            }
 
+        viewModel.getIsListScrolling().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                Log.d(TAG, "onTabUnselected: ");
-                animationTab();
-            }   
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                Log.d(TAG, "onTabReselected: ");
+            public void onChanged(Boolean isScroll) {
+                if (isScroll) {
+                    collapseCalendar();
+                }
             }
         });
     }
 
-    public void animationTab(){
-        int currentTabIndex = binding.tabLayout.getSelectedTabPosition();
+    public void addEvent() {
 
+    }
 
+    public void collapseCalendar() {
+        if (binding.calendarView.getExpanded()) {
+            binding.calendarView.collapse(400);
+        }
     }
 }

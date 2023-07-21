@@ -6,7 +6,9 @@
 
         <!--        left container attrs-->
         <attr name="app_text_session" format="string" />
+        <attr name="app_text_session_color" format="color" />
         <attr name="app_user_name_text" format="string" />
+        <attr name="app_user_name_color" format="color" />
         <attr name="app_avatar_src" format="reference" />
         <attr name="app_button_left_src" format="reference" />
         <attr name="app_is_user_container" format="boolean" />
@@ -16,5 +18,6 @@
         <attr name="app_enable_right_button" format="boolean" />
         <attr name="app_is_button_text" format="boolean" />
         <attr name="app_text_button_right" format="string"/>
+        <attr name="app_icon_tint_color" format="color"/>
     </declare-styleable>
 </resources>

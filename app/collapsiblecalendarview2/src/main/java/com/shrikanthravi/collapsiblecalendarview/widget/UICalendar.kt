@@ -17,7 +17,7 @@ import com.shrikanthravi.collapsiblecalendarview.view.LockScrollView
 import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
 import java.util.*
 import android.os.Build
-
+import kotlin.collections.ArrayList
 
 
 @SuppressLint("ClickableViewAccessibility")
@@ -139,7 +139,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
             mBtnNextWeek.setImageDrawable(buttonRightDrawable)
         }
 
-    var selectedItem: Day? = null
+    var selectedItem: ArrayList<Day> = ArrayList();
 
     private var mButtonLeftDrawableTintColor = Color.BLACK
     private var mButtonRightDrawableTintColor = Color.BLACK

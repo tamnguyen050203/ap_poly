@@ -11,28 +11,28 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:background="@color/screen_background"
         android:contentDescription="TabLayout"
-        app:tabRippleColor="@null"
-        app:tabMode="scrollable"
         android:transitionGroup="true"
-        android:animateLayoutChanges="true"
-        app:tabIndicatorColor="@color/primary_text_color"
         app:tabIndicatorAnimationMode="elastic"
-        app:tabTextAppearance="@style/TabLayoutStyle"
+        app:tabIndicatorColor="@color/primary_text_color"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@null"
         app:tabSelectedTextColor="@color/primary_text_color"
+        app:tabTextAppearance="@style/TabLayoutStyle"
         app:tabTextColor="@color/primary_text_color_30"
         tools:ignore="HardcodedText">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lịch Học"/>
+            android:text="Lịch Học" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lịch Thi"/>
+            android:text="Lịch Thi" />
     </com.google.android.material.tabs.TabLayout>
 
     <View
@@ -41,11 +41,22 @@
         android:layout_height="1dp"
         android:background="#D9D9D9" />
 
+    <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:expandIconColor="@color/primary_text_color"
+        app:selectedItem_background="@drawable/item_calendar_selected_background"
+        app:selectedItem_textColor="@color/primary_color"
+        app:textColor="@color/primary_text_color"
+        app:todayItem_background="@drawable/item_calendar_selected_background"
+        app:todayItem_textColor="@color/primary_color" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
 </LinearLayout>
 

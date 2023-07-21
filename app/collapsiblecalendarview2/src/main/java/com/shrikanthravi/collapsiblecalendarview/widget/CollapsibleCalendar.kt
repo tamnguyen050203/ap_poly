@@ -7,6 +7,7 @@ package com.shrikanthravi.collapsiblecalendarview.widget
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.os.Handler
 import android.util.AttributeSet
 import android.util.Log
@@ -19,6 +20,7 @@ import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.shrikanthravi.collapsiblecalendarview.R
 import com.shrikanthravi.collapsiblecalendarview.data.CalendarAdapter
 import com.shrikanthravi.collapsiblecalendarview.data.Day
@@ -27,7 +29,9 @@ import com.shrikanthravi.collapsiblecalendarview.view.BounceAnimator
 import com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
 import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
+import java.time.Instant
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CollapsibleCalendar : UICalendar, View.OnClickListener {
@@ -37,9 +41,23 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         calenderAdapter.mEventList = mAdapter!!.mEventList
         calenderAdapter.setFirstDayOfWeek(firstDayOfWeek)
         val today = GregorianCalendar()
-        this.selectedItem = null
+        this.selectedItem = ArrayList();
         this.selectedItemPosition = -1
-        this.selectedDay = Day(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
+        this.selectedDay = ArrayList();
+        this.selectedDay.add(
+            Day(
+                today.get(Calendar.YEAR),
+                today.get(Calendar.MONTH),
+                today.get(Calendar.DAY_OF_MONTH)
+            )
+        )
+        this.selectedItem.add(
+            Day(
+                today.get(Calendar.YEAR),
+                today.get(Calendar.MONTH),
+                today.get(Calendar.DAY_OF_MONTH)
+            )
+        )
         mCurrentWeekIndex = suitableRowIndex
         setAdapter(calenderAdapter)
     }
@@ -94,25 +112,28 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     /**
      * The date has been selected and can be used on Calender Listener
      */
-    var selectedDay: Day? = null
+    private var selectedDay: java.util.ArrayList<Day> = ArrayList()
         get() {
-            if (selectedItem == null) {
+            val listItemSelected = java.util.ArrayList<Day>();
+
+            if (selectedItem.size == 0) {
                 val cal = Calendar.getInstance()
                 val day = cal.get(Calendar.DAY_OF_MONTH)
                 val month = cal.get(Calendar.MONTH)
                 val year = cal.get(Calendar.YEAR)
-                return Day(
+                listItemSelected.add(
+                    Day(
                         year,
                         month + 1,
-                        day)
+                        day
+                    )
+                )
+                return listItemSelected
             }
-            return Day(
-                    selectedItem!!.year,
-                    selectedItem!!.month,
-                    selectedItem!!.day)
+            return selectedItem
         }
-        set(value: Day?) {
-            field = value
+        set(value: java.util.ArrayList<Day>) {
+            field = value;
             redraw()
         }
 
@@ -167,7 +188,11 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         init(context)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init(context)
     }
 
@@ -274,16 +299,25 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
             var rowCurrent: TableRow
             rowCurrent = TableRow(context)
             rowCurrent.layoutParams = TableLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             for (i in 0..6) {
                 val view = mInflater.inflate(R.layout.layout_day_of_week, null)
                 val txtDayOfWeek = view.findViewById<View>(R.id.txt_day_of_week) as TextView
-                txtDayOfWeek.setText(DateFormatSymbols(Locale("vi", "VN")).getShortWeekdays()[(i + firstDayOfWeek) % 7 + 1])
+                txtDayOfWeek.setText(
+                    DateFormatSymbols(
+                        Locale(
+                            "vi",
+                            "VN"
+                        )
+                    ).getShortWeekdays()[(i + firstDayOfWeek) % 7 + 1]
+                )
                 view.layoutParams = TableRow.LayoutParams(
-                        0,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        1f)
+                    0,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
                 rowCurrent.addView(view)
             }
             mTableHead.addView(rowCurrent)
@@ -294,17 +328,22 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
                 if (i % 7 == 0) {
                     rowCurrent = TableRow(context)
                     rowCurrent.layoutParams = TableLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT)
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
                     mTableBody.addView(rowCurrent)
                 }
                 val view = mAdapter.getView(i)
                 view.layoutParams = TableRow.LayoutParams(
-                        0,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        1f)
+                    0,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
                 params.let { params ->
-                    if (params != null && (mAdapter.getItem(i).diff < params.prevDays || mAdapter.getItem(i).diff > params.nextDaysBlocked)) {
+                    if (params != null && (mAdapter.getItem(i).diff < params.prevDays || mAdapter.getItem(
+                            i
+                        ).diff > params.nextDaysBlocked)
+                    ) {
                         view.isClickable = false
                         view.alpha = 0.3f
                     } else {
@@ -319,11 +358,68 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         }
     }
 
-    private fun capitalize (value: String) :String{
-        return value.substring(0, 1).toUpperCase(Locale("vi", "VN")) + value.substring(1, value.length)
+    private fun capitalize(value: String): String {
+        return value.substring(0, 1).toUpperCase(Locale("vi", "VN")) + value.substring(
+            1,
+            value.length
+        )
     }
 
-    fun onItemClicked(view: View, day: Day) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun plusDay(dayCount: Int) {
+        val calendar = Calendar.getInstance()
+        val toDay = Day(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        if (!selectedDay.contains(toDay)) {
+            selectedDay.add(toDay)
+        }
+        for (i in 1..dayCount) {
+            calendar.add(Calendar.DATE, 1)
+            onItemClicked(
+                null,
+                Day(
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+                )
+            )
+            Log.d(
+                "TAG>>LIB", "plusDay: " + Day(
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+                )
+            )
+        }
+    }
+
+    fun minusDay(dayCount: Int) {
+        val calendar = Calendar.getInstance()
+        val toDay = Day(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        if (!selectedDay.contains(toDay)) {
+            selectedDay.add(toDay)
+        }
+        for (i in 1..dayCount) {
+            calendar.add(Calendar.DATE, -1)
+            onItemClicked(
+                null,
+                Day(
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+                )
+            )
+        }
+    }
+
+    fun onItemClicked(view: View?, day: Day) {
         select(day)
 
         val cal = mAdapter!!.calendar
@@ -379,7 +475,12 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     fun prevMonth() {
         val cal = mAdapter!!.calendar
         params.let {
-            if (it != null && (Calendar.getInstance().get(Calendar.YEAR) * 12 + Calendar.getInstance().get(Calendar.MONTH) + it.prevDays / 30) > (cal.get(Calendar.YEAR) * 12 + cal.get(Calendar.MONTH))) {
+            if (it != null && (Calendar.getInstance()
+                    .get(Calendar.YEAR) * 12 + Calendar.getInstance()
+                    .get(Calendar.MONTH) + it.prevDays / 30) > (cal.get(Calendar.YEAR) * 12 + cal.get(
+                    Calendar.MONTH
+                ))
+            ) {
                 val myAnim = AnimationUtils.loadAnimation(context, R.anim.bounce)
                 val interpolator = BounceAnimator(0.1, 10.0)
                 myAnim.setInterpolator(interpolator)
@@ -403,7 +504,12 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     fun nextMonth() {
         val cal = mAdapter!!.calendar
         params.let {
-            if (it != null && (Calendar.getInstance().get(Calendar.YEAR) * 12 + Calendar.getInstance().get(Calendar.MONTH) + it.nextDaysBlocked / 30) < (cal.get(Calendar.YEAR) * 12 + cal.get(Calendar.MONTH))) {
+            if (it != null && (Calendar.getInstance()
+                    .get(Calendar.YEAR) * 12 + Calendar.getInstance()
+                    .get(Calendar.MONTH) + it.nextDaysBlocked / 30) < (cal.get(Calendar.YEAR) * 12 + cal.get(
+                    Calendar.MONTH
+                ))
+            ) {
                 val myAnim = AnimationUtils.loadAnimation(context, R.anim.bounce)
                 val interpolator = BounceAnimator(0.1, 10.0)
                 myAnim.setInterpolator(interpolator)
@@ -475,11 +581,13 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     }
 
     fun isSelectedDay(day: Day?): Boolean {
-        return (day != null
-                && selectedItem != null
-                && day.year == selectedItem!!.year
-                && day.month == selectedItem!!.month
-                && day.day == selectedItem!!.day)
+        return day != null && selectedDay.size > 0 && selectedDay.contains(day);
+
+//        return (day != null
+//                && selectedItem.size > 0
+//                && day.year == selectedItem[index].year
+//                && day.month == selectedItem[index].month
+//                && day.day == selectedItem[index].day)
     }
 
     fun isToday(day: Day?): Boolean {
@@ -609,7 +717,11 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     }
 
     fun select(day: Day) {
-        selectedItem = Day(day.year, day.month, day.day)
+        if (!selectedItem.contains(day)) {
+            selectedItem.add(Day(day.year, day.month, day.day))
+        } else {
+            selectedDay.remove(day)
+        }
 
         redraw()
 
@@ -638,7 +750,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
         fun onDaySelect()
 
         // triggered only when the views of day on calendar are clicked by user.
-        fun onItemClick(v: View)
+        fun onItemClick(v: View?)
 
         // triggered when the data of calendar are updated by changing month or adding events.
         fun onDataUpdate()

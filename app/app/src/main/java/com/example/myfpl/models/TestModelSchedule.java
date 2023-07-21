@@ -133,4 +133,14 @@ public class TestModelSchedule implements Serializable {
 
         return list.subList(0, size);
     }
+
+    public static List<TestModelSchedule> getListModel() {
+        List<TestModelSchedule> list = new ArrayList<>();
+
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-13 09:30:30", "2023-07-13 011:30:30","1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, true));
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-12 07:30:30", "2023-07-13 09:30:30","1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, false));
+        list.add(new TestModelSchedule("Android Networking", "MOB403", "2023-07-11 07:30:30", "2023-07-13 09:30:30","1", "chann3", "Phan Mem Quang Trung", "T301 • Tòa T", false, false));
+
+        return list;
+    }
 }

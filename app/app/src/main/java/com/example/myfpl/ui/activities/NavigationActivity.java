@@ -48,24 +48,24 @@ public class NavigationActivity extends FragmentActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.homeFragment:
-                        binding.viewPager.setCurrentItem(0);
+                        binding.viewPager.setCurrentItem(0, false);
                         break;
                     case R.id.scheduleFragment:
-                        binding.viewPager.setCurrentItem(1);
+                        binding.viewPager.setCurrentItem(1, false);
                         break;
                     case R.id.studentFragment:
-                        binding.viewPager.setCurrentItem(2);
+                        binding.viewPager.setCurrentItem(2, false);
                         break;
                 }
                 return true;
             }
         });
-
-        binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                binding.bottomTab.getMenu().getItem(position).setChecked(true);
-            }
-        });
+//
+//        binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                binding.bottomTab.getMenu().getItem(position).setChecked(true);
+//            }
+//        });
     }
 }

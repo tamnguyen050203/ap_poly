@@ -7,14 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myfpl.data.apis.TestService;
-import com.example.myfpl.data.room.TestDAO;
-import com.example.myfpl.helpers.ApiHelper;
-import com.example.myfpl.helpers.FirebaseHelper;
+import com.example.myfpl.helpers.retrofit.RetrofitHelper;
 import com.example.myfpl.models.Test;
 
 import java.util.List;
@@ -34,7 +29,7 @@ public class TestViewModel extends AndroidViewModel {
     private final ObservableBoolean isSuccess = new ObservableBoolean();
 
     public void getTestModel(){
-        ApiHelper.getInstance().create(TestService.class).getTestData()
+        RetrofitHelper.getInstance().create(TestService.class).getTestData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Test>>() {
