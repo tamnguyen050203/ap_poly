@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->date('date')->default(now('dd-mm-yyyy'));
+            $table->date('date')->default(now());
             $table->string('detail');
             $table->foreignId('shift_id')->constrained();
             $table->foreignId('room_id')->constrained();

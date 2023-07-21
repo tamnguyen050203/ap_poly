@@ -17,7 +17,7 @@ class ScheduleFactory extends Factory
     public function definition(): array
     {
         return [
-            'date' => $this->faker->dateTimeBetween('-1 weeks', 'now')->format('dd-mm-yyyy'),
+            'date' => $this->faker->dateTimeBetween('-1 weeks'),
             'detail' => $this->faker->text(),
             'shift_id' => Shift::query()->inRandomOrder()->first()->id,
             'room_id' => Room::query()->inRandomOrder()->first()->id,

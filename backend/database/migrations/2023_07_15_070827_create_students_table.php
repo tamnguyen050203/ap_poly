@@ -12,15 +12,14 @@ return new class extends Migration {
             $table->string('name')->nullable(false);
             $table->string('email')->nullable(false)->unique();
             $table->string('phone')->nullable(false)->unique()->nullable();
-            $table->string('campus')->nullable(false);
             $table->date('dob')->nullable(false)->nullable();
             $table->text('avatar')->nullable();
             $table->foreignId('specialize_id')->nullable()->constrained();
-            $table->string('provider_id')->nullable(false);
-            $table->text('access_token')->nullable(false);
-            $table->text('refresh_token')->nullable(false);
-            $table->dateTime('access_token_expires_at')->nullable(false);
-            $table->dateTime('refresh_token_expires_at')->nullable(false);
+            $table->string('provider_id')->nullable();
+            $table->text('access_token')->nullable();
+            $table->text('refresh_token')->nullable();
+            $table->dateTime('access_token_expires_at')->nullable();
+            $table->dateTime('refresh_token_expires_at')->nullable();
             $table->boolean('flag')->default(true);
         });
     }
