@@ -58,6 +58,7 @@ class TestScheduleController extends Controller
         });
 
         return response()->json([
+            'status' => 200,
             'studentTestSchedule' => $testSchedule,
         ], 200);
     }

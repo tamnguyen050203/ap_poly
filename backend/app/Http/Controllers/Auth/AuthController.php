@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Specialize;
 use App\Models\Student;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,13 +24,44 @@ class AuthController extends Controller
             ->first();
 
         if (!$student) {
+
+            if (!$request->name) {
+                return response()->json([
+                    'status' => 400,
+                    'error' => 'Name is required'
+                ], 400);
+            }
+
+            if (!$request->avatar) {
+                return response()->json([
+                    'status' => 400,
+                    'error' => 'Avatar is required'
+                ], 400);
+            }
+
+            if (!$request->provider_id) {
+                return response()->json([
+                    'status' => 400,
+                    'error' => 'Provider is required'
+                ], 400);
+            }
+
+            if (!$request->email) {
+                return response()->json([
+                    'status' => 400,
+                    'error' => 'Email is required'
+                ], 400);
+            }
+
+            $randomSpecialize = rand(1, Specialize::query()->count());
+
             $student = Student::firstOrCreate(
                 [
                     'email' => $request->email,
                     'name' => $request->name,
                     'avatar' => $request->avatar,
                     'provider_id' => $request->provider_id,
-                    'specialize_id' => $request->specialize_id,
+                    'specialize_id' => $randomSpecialize,
                 ]
             );
         }
@@ -51,8 +83,10 @@ class AuthController extends Controller
         ])->save();
 
         return response()->json([
+            'status' => 200,
             'access_token' => $access_token,
             'refreshToken' => $refreshToken,
+
         ], 200);
     }
 
@@ -66,7 +100,10 @@ class AuthController extends Controller
             // Check if the token has expired
             if (Carbon::parse($student->refresh_token_expires_at)->isPast()) {
                 // Token has expired
-                return response()->json(['error' => 'Refresh token has expired'], 401);
+                return response()->json([
+                    'status' => 401,
+                    'error' => 'Refresh token has expired'
+                ], 401);
             } else {
                 // Token is still valid
                 $token = Str::random(400);
@@ -76,21 +113,34 @@ class AuthController extends Controller
                     'access_token_expires_at' => $expires_at,
                 ])->save();
                 return response()->json([
+                    'status' => 200,
                     'access_token' => $token,
-                ]);
+
+                ], 200);
             }
         } else {
             // Token doesn't exist
-            return response()->json(['error' => 'Refresh token doesn\'t exist'], 401);
+            return response()->json([
+                'status' => 401,
+                'error' => 'Refresh token doesn\'t exist',
+            ],
+                401);
         }
     }
 
 
     public function signOut(): JsonResponse
     {
-        dd(auth()->user());
+        $student = auth()->user();
+        $student->forceFill([
+            'access_token' => null,
+            'access_token_expires_at' => null,
+            'refresh_token' => null,
+            'refresh_token_expires_at' => null,
+        ])->save();
         return response()->json([
-            'message' => 'Logged out successfully'
+            'status' => 200,
+            'message' => 'Logged out successfully',
         ]);
     }
 
