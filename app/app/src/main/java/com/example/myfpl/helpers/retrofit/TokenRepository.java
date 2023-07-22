@@ -1,5 +1,6 @@
 package com.example.myfpl.helpers.retrofit;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.example.myfpl.helpers.SharedPreferencesHelper;
@@ -7,20 +8,32 @@ import com.example.myfpl.helpers.SharedPreferencesHelper;
 public class TokenRepository {
     public static String TOKEN = "USER_TOKEN";
     public static String REFRESH_TOKEN = "REFRESH_TOKEN";
+    private final Context context;
+    @SuppressLint("StaticFieldLeak")
+    private static TokenRepository instance;
 
-    public static String getToken(Context context) {
+    private TokenRepository(Context context) {
+        this.context = context;
+    }
+
+    public static TokenRepository getInstance(Context context) {
+        if (instance == null) instance = new TokenRepository(context);
+        return instance;
+    }
+
+    public String getToken() {
         return SharedPreferencesHelper.getSharedPreferenceString(context, TOKEN, TOKEN);
     }
 
-    public static void setToken(Context context, String token) {
+    public void setToken(String token) {
         SharedPreferencesHelper.setSharedPreferenceString(context, TOKEN, token);
     }
 
-    public static String getRefreshToken(Context context) {
+    public String getRefreshToken() {
         return SharedPreferencesHelper.getSharedPreferenceString(context, REFRESH_TOKEN, REFRESH_TOKEN);
     }
 
-    public static void setRefreshToken(Context context, String refreshToken) {
+    public void setRefreshToken(String refreshToken) {
         SharedPreferencesHelper.setSharedPreferenceString(context, REFRESH_TOKEN, refreshToken);
     }
 }

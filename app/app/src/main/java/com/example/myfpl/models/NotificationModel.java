@@ -1,5 +1,7 @@
 package com.example.myfpl.models;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class NotificationModel implements Serializable {
@@ -77,5 +79,11 @@ public class NotificationModel implements Serializable {
 
     public void setUpdated_date(String updated_date) {
         this.updated_date = updated_date;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return title;
     }
 }
