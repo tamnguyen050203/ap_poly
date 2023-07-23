@@ -1,101 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/motion_layout"
     android:animateLayoutChanges="true"
+    android:background="@color/screen_background"
     android:paddingTop="10dp"
+    app:layoutDescription="@xml/fragment_home_scene"
     tools:context=".ui.fragments.HomeFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/button_notify"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:scrollbars="none">
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/round_drawable"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_notify" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/avatar_Container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="60sp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/avt" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/text_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="-5dp"
+        android:fontFamily="@font/poppins_bold"
+        android:lines="1"
+        android:text="Hi Vũ"
+        android:textColor="@color/primary_color"
+        android:textSize="28sp"
+        app:layout_constraintStart_toEndOf="@id/avatar_Container"
+        app:layout_constraintTop_toTopOf="@id/avatar_Container" />
+
+    <TextView
+        android:id="@+id/text_session"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="-5dp"
+        android:fontFamily="@font/poppins_medium"
+        android:lines="2"
+        android:text="Chào buổi sáng"
+        android:textColor="@color/primary_color_50"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/avatar_Container"
+        app:layout_constraintTop_toBottomOf="@id/text_welcome" />
+
+    <TextView
+        android:id="@+id/text_sub"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="-5dp"
+        android:fontFamily="@font/poppins_medium"
+        android:lines="2"
+        android:text="Đây là danh sách lịch học mà bạn cần kiểm tra"
+        android:textColor="@color/primary_color_50"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/avatar_Container"
+        app:layout_constraintTop_toBottomOf="@id/text_welcome" />
+
+    <View
+        android:id="@+id/holder_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="-140dp"
+        android:background="#fff"
+        app:layout_constraintTop_toTopOf="@id/scroll_view" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/drawable_gb_home_fragment"
+        android:elevation="10dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_sub"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
             android:orientation="vertical">
 
             <TextView
-                style="@style/Text16Bold"
-                android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:paddingHorizontal="15dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Môn bạn đang học"
-                android:textColor="@color/primary_text_color" />
-
-          <FrameLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:animateLayoutChanges="true">
-
-              <androidx.viewpager.widget.ViewPager
-                  android:id="@+id/slider"
-                  android:layout_width="match_parent"
-                  android:layout_marginTop="10dp"
-                  android:layout_height="165dp"/>
-
-              <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
-                  android:id="@+id/dot_indicator"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="bottom|end"
-                  android:layout_marginEnd="10dp"
-                  android:layout_marginBottom="15dp"
-                  app:dotsColor="@color/primary_color"
-                  app:dotsSize="8dp"
-                  app:dotsStrokeWidth="1dp"
-                  app:dotsSpacing="3dp"
-                  app:progressMode="true"
-                  app:selectedDotColor="@color/primary_color" />
-
-          </FrameLayout>
-
-            <TextView
-                android:id="@+id/schedule_test"
-                style="@style/Text16Bold"
-                android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:paddingHorizontal="15dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/lich_thi"
-                android:textColor="@color/primary_text_color" />
+                android:fontFamily="@font/inter_bold"
+                android:lines="1"
+                android:text="Lịch Thi Sắp Tới"
+                android:textColor="@color/primary_text_color"
+                android:textSize="17sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listTestSchedule"
                 android:layout_width="match_parent"
-                android:paddingHorizontal="15dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_height="wrap_content"/>
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <TextView
-                android:id="@+id/schedule"
-                style="@style/Text16Bold"
-                android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:paddingHorizontal="15dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/lich_hoc"
-                android:textColor="@color/primary_text_color" />
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/inter_bold"
+                android:lines="1"
+                android:text="Lịch Học Hôm Nay"
+                android:textColor="@color/primary_text_color"
+                android:textSize="17sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listSchedule"
                 android:layout_width="match_parent"
-                android:paddingHorizontal="15dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_height="wrap_content"/>
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_bold"
+                    android:lines="1"
+                    android:textStyle="bold"
+                    android:text="Thông Báo Mới"
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/btnAddition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm"
+                    android:textColor="@color/primary_color"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/poppins_semi_bold"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listNotify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

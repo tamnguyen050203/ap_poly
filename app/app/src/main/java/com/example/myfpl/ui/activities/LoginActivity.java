@@ -94,7 +94,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        ToastApp.show(LoginActivity.this, "Đăng nhập thành công với tài khoản " + Objects.requireNonNull(task.getResult().getUser()).getDisplayName());
+                                        ToastApp.show(LoginActivity.this, "Đăng nhập thành công với tài khoản" + Objects.requireNonNull(task.getResult().getUser()).getDisplayName());
+                                        startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
                                     } else {
                                         ToastApp.show(LoginActivity.this, "Đăng nhập thất bại");
                                     }

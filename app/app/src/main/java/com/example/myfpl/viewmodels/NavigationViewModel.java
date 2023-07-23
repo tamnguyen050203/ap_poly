@@ -25,7 +25,7 @@ public class NavigationViewModel extends AndroidViewModel {
 
         //fake list data
         this.listTestSchedule = (LiveDataReactiveStreams.fromPublisher(getListData(2).toFlowable(BackpressureStrategy.LATEST)));
-        this.listSchedule = LiveDataReactiveStreams.fromPublisher(getListData(2).toFlowable(BackpressureStrategy.LATEST));
+        this.listSchedule = LiveDataReactiveStreams.fromPublisher(getListData(1).toFlowable(BackpressureStrategy.LATEST));
     }
 
     public LiveData<List<TestModelSchedule>> getListTestSchedule() {

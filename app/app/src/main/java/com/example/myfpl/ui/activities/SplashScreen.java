@@ -15,6 +15,8 @@ import android.view.View;
 
 import com.example.myfpl.databinding.ActivitySplashScreenBinding;
 
+import java.util.Objects;
+
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
     private ActivitySplashScreenBinding binding;
@@ -40,10 +42,8 @@ public class SplashScreen extends AppCompatActivity {
                 Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
                 // below method is used to make scene transition
                 // and adding fade animation in it.
-                Pair<View, String> logo = Pair.create(binding.imageLogo, ViewCompat.getTransitionName(binding.imageLogo));
-                Pair<View, String> background_logo = Pair.create(binding.background, ViewCompat.getTransitionName(binding.background));
                 ActivityOptionsCompat options = makeSceneTransitionAnimation(
-                        SplashScreen.this, logo, background_logo);
+                        SplashScreen.this, binding.imageLogo, Objects.requireNonNull(ViewCompat.getTransitionName(binding.imageLogo)));
                 // starting our activity with below method.
                 startActivity(intent, options.toBundle());
             }

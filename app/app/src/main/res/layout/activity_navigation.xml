@@ -1,47 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:orientation="vertical"
     android:background="@color/screen_background">
-
-    <com.example.myfpl.component.HeaderApp
-        android:id="@+id/headerApp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:background="@color/primary_color"
-        android:elevation="5dp"
-        android:paddingHorizontal="@dimen/default_padding"
-        app:app_icon_tint_color="@color/white"
-        app:app_is_user_container="true"
-        app:app_text_session_color="#B3FFFFFF"
-        app:app_user_name_color="@color/white"
-        app:app_user_name_text="Trần Anh Vũ" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/bottomTab"
-        android:layout_below="@id/headerApp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomTab"
+    <nl.joery.animatedbottombar.AnimatedBottomBar
+        android:id="@+id/bottom_bar"
+        android:background="#F9F9FC"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        app:abb_selectedTabType="text"
+        app:abb_indicatorAppearance="round"
+        app:abb_textAppearance="@style/BottomNavigationViewTextStyle"
+        app:abb_indicatorMargin="16dp"
+        app:abb_indicatorHeight="4dp"
         android:elevation="5dp"
-        app:itemIconTint="@color/navigation_item_color"
-        app:itemTextColor="@color/navigation_item_color"
-        app:menu="@menu/bottom_navigation" />
+        app:abb_tabs="@menu/bottom_navigation"
+        app:abb_selectedIndex="0" />
 
-</RelativeLayout>
+</LinearLayout>

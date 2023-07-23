@@ -12,7 +12,7 @@
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/primary_text_color</item>
-        <item name="colorSecondaryVariant">@color/primary_color_20</item>
+        <item name="colorSecondaryVariant">@color/primary_color_50</item>
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Status bar color. -->
@@ -21,7 +21,7 @@
     </style>
 
     <style name="BottomNavigationViewTextStyle">
-        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
     </style>
 
     <style name="ButtonAppStyle" parent="@style/Widget.MaterialComponents.Button">

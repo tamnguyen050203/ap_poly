@@ -1,8 +1,13 @@
 package com.example.myfpl.ui.fragments;
 
-import android.animation.LayoutTransition;
-import android.annotation.SuppressLint;
+import static com.example.myfpl.util.DateUtil.ConvertTimeToString;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,29 +16,25 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.myfpl.adapters.ScheduleListAdapter;
-import com.example.myfpl.adapters.SliderViewPager;
+import com.example.myfpl.adapters.SmallNotificationAdapter;
 import com.example.myfpl.databinding.FragmentHomeBinding;
+import com.example.myfpl.models.NotificationModel;
 import com.example.myfpl.models.TestModelSchedule;
-import com.example.myfpl.util.ToastApp;
+import com.example.myfpl.ui.activities.DetailNotificationActivity;
+import com.example.myfpl.ui.activities.NotifyActivity;
+import com.example.myfpl.util.DateUtil;
 import com.example.myfpl.viewmodels.NavigationViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private static final String TAG = HomeFragment.class.getSimpleName();
     private NavigationViewModel viewModel;
-    private ScheduleListAdapter scheduleTestListAdapter;
     private ScheduleListAdapter scheduleListAdapter;
+    private ScheduleListAdapter scheduleTestListAdapter;
+    private SmallNotificationAdapter smallNotificationAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,37 +53,36 @@ public class HomeFragment extends Fragment {
     }
 
     public void init() {
-        binding.motionLayout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
-        binding.listTestSchedule.setNestedScrollingEnabled(false);
-        binding.listSchedule.setNestedScrollingEnabled(false);
-
         if (getActivity() != null) {
             viewModel = new ViewModelProvider(requireActivity()).get(NavigationViewModel.class);
         }
+        binding.textSession.setText(DateUtil.getCurrentSession());
 
-        scheduleTestListAdapter = new ScheduleListAdapter(new ScheduleListAdapter.HandleEventListItem() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onItemClick(TestModelSchedule testModelSchedule, int itemIndex) {
-                TransitionManager.beginDelayedTransition(binding.listTestSchedule, new AutoTransition());
-                ToastApp.show(requireContext(), testModelSchedule.getScheduleTitle());
-            }
+        setupScheduleList();
+        setupScheduleTestList();
+        setupSmallNotification();
+    }
 
+    public void setupSmallNotification() {
+        smallNotificationAdapter = new SmallNotificationAdapter(requireContext(), NotificationModel.getData(), new SmallNotificationAdapter.HandleEvent() {
             @Override
-            public void onAlarmClick(TestModelSchedule testModelSchedule, int itemIndex) {
-//                TransitionManager.beginDelayedTransition(binding.listTestSchedule, new AutoTransition());
+            public void OnItemClick(NotificationModel notificationModel, int index) {
+                Intent i = new Intent(requireActivity(), DetailNotificationActivity.class);
+                i.putExtra("detail", notificationModel);
+                i.putExtra("createdAt", ConvertTimeToString(notificationModel.getCreated_date()));
+                requireActivity().startActivity(i);
             }
         });
-        ;
-        binding.listTestSchedule.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.listTestSchedule.setAdapter(scheduleTestListAdapter);
+        binding.listNotify.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
 
+        binding.listNotify.setAdapter(smallNotificationAdapter);
+    }
+
+    public void setupScheduleList() {
         scheduleListAdapter = new ScheduleListAdapter(new ScheduleListAdapter.HandleEventListItem() {
             @Override
             public void onItemClick(TestModelSchedule testModelSchedule, int itemIndex) {
-                TransitionManager.beginDelayedTransition(binding.listSchedule, new AutoTransition());
-                ToastApp.show(requireContext(), testModelSchedule.getScheduleTitle());
-                viewModel.setListSchedule(scheduleListAdapter.getListData());
+                Log.d(TAG, "onItemClick: " + testModelSchedule.getScheduleTitle());
             }
 
             @Override
@@ -90,36 +90,51 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        binding.listSchedule.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.listSchedule.setAdapter(scheduleListAdapter);
 
-        //setup slider
-        setupSlider();
+        binding.listSchedule.setAdapter(scheduleListAdapter);
+    }
+
+    public void setupScheduleTestList() {
+        scheduleTestListAdapter = new ScheduleListAdapter(new ScheduleListAdapter.HandleEventListItem() {
+            @Override
+            public void onItemClick(TestModelSchedule testModelSchedule, int itemIndex) {
+                Log.d(TAG, "onItemClick: " + testModelSchedule.getScheduleTitle());
+            }
+
+            @Override
+            public void onAlarmClick(TestModelSchedule testModelSchedule, int itemIndex) {
+
+            }
+        });
+
+        binding.listTestSchedule.setAdapter(scheduleTestListAdapter);
     }
 
     public void setupSlider() {
-        SliderViewPager sliderViewPagerAdapter = new SliderViewPager(getContext(), (ArrayList<TestModelSchedule>) TestModelSchedule.getListModel());
-        binding.slider.setAdapter(sliderViewPagerAdapter);
 
-        binding.dotIndicator.setViewPager(binding.slider);
     }
 
     public void addListener() {
-        if (viewModel != null) {
-            viewModel.getListTestSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
-                @Override
-                public void onChanged(List<TestModelSchedule> testModelSchedules) {
-                    scheduleTestListAdapter.setListData(testModelSchedules);
-                }
-            });
+        viewModel.getListSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
+            @Override
+            public void onChanged(List<TestModelSchedule> testModelSchedules) {
+                scheduleListAdapter.setListData(testModelSchedules);
+            }
+        });
 
-            viewModel.getListSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
-                @Override
-                public void onChanged(List<TestModelSchedule> testModelSchedules) {
-                    scheduleListAdapter.setListData(testModelSchedules);
-                }
-            });
-        }
+        viewModel.getListTestSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
+            @Override
+            public void onChanged(List<TestModelSchedule> testModelSchedules) {
+                scheduleTestListAdapter.setListData(testModelSchedules);
+            }
+        });
+
+        binding.btnAddition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireActivity().startActivity(new Intent(requireContext(), NotifyActivity.class));
+            }
+        });
     }
 
     @Override

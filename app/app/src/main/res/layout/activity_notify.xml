@@ -12,10 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/default_padding"
-        android:layout_marginTop="10dp"
         app:app_is_button_text="true"
+        android:paddingVertical="5dp"
+        app:app_header_title="Thông Báo"
         app:app_text_button_right="Đọc tất cả"
         app:app_is_user_container="false"/>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/topTab"
             android:layout_width="match_parent"

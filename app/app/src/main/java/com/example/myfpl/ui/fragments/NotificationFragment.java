@@ -20,6 +20,7 @@ import com.example.myfpl.ui.activities.DetailNotificationActivity;
 import com.example.myfpl.util.ToastApp;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class NotificationFragment extends Fragment {
@@ -27,10 +28,12 @@ public class NotificationFragment extends Fragment {
 
     private String type;
     private ArrayList<NotificationModel> list;
+
     public NotificationFragment() {
 
     }
-    public static NotificationFragment instance(String type){
+
+    public static NotificationFragment instance(String type) {
         NotificationFragment fragment = new NotificationFragment();
         Bundle args = new Bundle();
         args.putString("type", type);
@@ -42,7 +45,7 @@ public class NotificationFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-          type = getArguments().getString("type");
+            type = getArguments().getString("type");
         }
         addData();
     }
@@ -57,22 +60,23 @@ public class NotificationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       NotificationAdapter adapter = new NotificationAdapter(filteredList(type, list), getContext());
+        NotificationAdapter adapter = new NotificationAdapter(filteredList(type, list), getContext());
         binding.rvNotification.setAdapter(adapter);
 
     }
-    public ArrayList<NotificationModel> filteredList(String type, ArrayList<NotificationModel> unfilteredList){
-        if(type=="Tất cả") return unfilteredList;
+
+    public ArrayList<NotificationModel> filteredList(String type, ArrayList<NotificationModel> unfilteredList) {
+        if (Objects.equals(type, "Tất cả")) return unfilteredList;
         ArrayList<NotificationModel> filtered = new ArrayList<>();
-        for (NotificationModel element: unfilteredList ) {
-            if(element.getType()==type){
+        for (NotificationModel element : unfilteredList) {
+            if (Objects.equals(element.getType(), type)) {
                 filtered.add(element);
             }
         }
         return filtered;
     }
 
-    public void addData(){
+    public void addData() {
         list = new ArrayList<>();
         list.add(new NotificationModel(
                 "nt01",
@@ -136,7 +140,8 @@ public class NotificationFragment extends Fragment {
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. \"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
                 "2023-07-13 00:39:30",
                 "2023-07-13 00:39:30"
-        ));     list.add(new NotificationModel(
+        ));
+        list.add(new NotificationModel(
                 "nt08",
                 "Thông báo hộ trợ sinh viên đăng ký BHYT tháng 6/2023",
                 "nhitq",

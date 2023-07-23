@@ -102,7 +102,6 @@ dependencies {
 
     //calendar view
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
-    // The view calendar library
-//    implementation 'com.kizitonwose.calendar:view:2.3.0'
-//    implementation 'com.github.shrikanth7698:Collapsible-Calendar-View-Android:v1.0.3'
+
+    implementation 'nl.joery.animatedbottombar:library:1.1.0'
 }

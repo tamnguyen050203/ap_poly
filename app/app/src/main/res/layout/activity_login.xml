@@ -1,83 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="4"
     tools:context=".ui.activities.LoginActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/primary_color"
-        android:transitionName="background"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
 
         <ImageView
             android:id="@+id/image_logo"
-            android:layout_width="250dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="2"
-            android:transitionName="logo"
-            android:src="@drawable/ic_app_forceground"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="-60dp"
+            android:src="@drawable/app_logo_new"
+            android:transitionName="logo" />
 
-        <com.google.android.flexbox.FlexboxLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/drawable_gb_login"
-            android:elevation="10dp"
-            app:flexDirection="column"
-            android:padding="5dp"
-            android:layout_weight="3">
+            android:layout_below="@id/image_logo"
+            android:layout_marginTop="-30dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="MYFPL"
+            android:textAlignment="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#4873FF"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="10dp"
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                app:layout_flexGrow="1">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/choose_option"
                     android:layout_width="match_parent"
-                    android:background="@drawable/round_drawable"
-                    android:elevation="2dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/chon_co_so"
-                    style="@style/Text16SemiBold"
-                    android:gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_height="44dp"/>
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="WELCOME"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_login"
+                <TextView
                     android:layout_width="match_parent"
-                    app:elevation="10dp"
-                    style="@style/ButtonAppStyle"
-                    android:layout_marginHorizontal="10dp"
-                    app:backgroundTint="@color/white"
-                    android:text="@string/login_with_google"
-                    app:icon="@drawable/ic_google"
-                    app:iconTint="@null"
-                    android:layout_height="44dp"/>
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Trường Cao đẳng Thực hành FPT là trường đào tạo trong lòng doanh nghiệp, xuất phát từ Tập đoàn FPT, đào tạo sinh viên với triết lý 'Thực học – Thực nghiệp'"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                app:layout_alignSelf="center"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/fpt"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        </com.google.android.flexbox.FlexboxLayout>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/choose_option"
+                    style="@style/Text16SemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/round_drawable"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="@string/chon_co_so" />
 
-</FrameLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_login"
+                    style="@style/ButtonAppStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:text="@string/login_with_google"
+                    app:backgroundTint="@color/white"
+                    app:elevation="10dp"
+                    app:icon="@drawable/ic_google"
+                    app:iconTint="@null" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

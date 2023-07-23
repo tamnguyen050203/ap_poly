@@ -140,7 +140,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:clickable="false"
-                app:cpb_background_progressbar_color="@color/primary_color_20"
+                app:cpb_background_progressbar_color="@color/primary_color_50"
                 app:cpb_progress="10"
                 app:cpb_progressbar_color="@color/primary_color"
                 app:cpb_round_border="true" />

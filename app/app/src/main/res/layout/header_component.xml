@@ -95,7 +95,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ellipsize="end"
-            android:fontFamily="@font/inter_bold"
+            android:fontFamily="@font/poppins_medium"
+            android:textStyle="bold"
             android:gravity="center"
             android:maxLines="2"
             android:text="Thông báo"
@@ -126,7 +127,8 @@
             android:layout_height="wrap_content"
             android:text="Doc tast ca"
             android:textColor="@color/primary_text_color"
-            android:theme="@style/Text13Medium" />
+            android:theme="@style/Text13Medium"
+            android:fontFamily="@font/poppins_medium"/>
 
     </LinearLayout>
 

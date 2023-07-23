@@ -65,7 +65,7 @@ public class ListItemDialogAdapter extends RecyclerView.Adapter<ListItemDialogAd
 
         boolean isSelected = position == chooseOption;
         holder.binding.item.setBackgroundResource(isSelected ? R.drawable.drawable_item_selected : R.drawable.drawable_item_unselected);
-        holder.binding.textItem.setTextColor(isSelected ? UIUtil.getColor(context, R.color.primary_color): UIUtil.getColor(context, R.color.primary_text_color));
+        holder.binding.textItem.setTextColor(isSelected ? UIUtil.getColor(context, R.color.white): UIUtil.getColor(context, R.color.primary_text_color));
     }
 
     @Override

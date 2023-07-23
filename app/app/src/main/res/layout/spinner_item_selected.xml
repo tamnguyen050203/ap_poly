@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:paddingStart="10dp"
-            android:textColor="@color/primary_color"
+            android:textColor="@color/white"
             android:text="Item ne"
             tools:ignore="RtlSymmetry" />
 
