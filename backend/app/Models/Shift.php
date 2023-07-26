@@ -16,4 +16,9 @@ class Shift extends Model
         "start_time",
         "end_time",
     ];
+
+    public function formatTime($time): string
+    {
+        return date('H:i', strtotime($time));
+    }
 }
