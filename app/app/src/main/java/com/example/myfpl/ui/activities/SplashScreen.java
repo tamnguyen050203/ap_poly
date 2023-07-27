@@ -1,17 +1,18 @@
 package com.example.myfpl.ui.activities;
 
+import static androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.core.view.ViewCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.transition.Fade;
 import android.view.View;
 
-import com.example.myfpl.R;
 import com.example.myfpl.databinding.ActivitySplashScreenBinding;
 
 import java.util.Objects;
@@ -41,11 +42,12 @@ public class SplashScreen extends AppCompatActivity {
                 Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
                 // below method is used to make scene transition
                 // and adding fade animation in it.
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                ActivityOptionsCompat options = makeSceneTransitionAnimation(
                         SplashScreen.this, binding.imageLogo, Objects.requireNonNull(ViewCompat.getTransitionName(binding.imageLogo)));
                 // starting our activity with below method.
                 startActivity(intent, options.toBundle());
             }
+//            binding.imageLogo, Objects.requireNonNull(ViewCompat.getTransitionName(binding.imageLogo))
         }, 2000);
     }
 }

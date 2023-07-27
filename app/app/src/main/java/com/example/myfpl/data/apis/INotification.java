@@ -9,6 +9,7 @@ import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
 
 public interface INotification {
-    @GET("")
+    @GET("/api/student/notifies/0")
     Observable<List<NotificationModel>> getNotificationData();
+
 }

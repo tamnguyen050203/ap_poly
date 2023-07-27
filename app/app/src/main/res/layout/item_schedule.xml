@@ -1,0 +1,114 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/item_schedule"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/drawable_border_schedule_item"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:gravity="center_horizontal"
+            android:text="07:00"
+            android:textColor="@color/primary_text_color"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/timeState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-8dp"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:text="AM"
+            android:textColor="#66303B85"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#EDEDF0" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="15dp">
+
+        <TextView
+            android:id="@+id/subject_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Android Netwoking"
+            android:textColor="@color/primary_text_color_80"
+            android:layout_marginBottom="2dp"
+            android:textSize="14sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="2dp"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_location" />
+
+            <TextView
+                android:id="@+id/place"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:text="T001, Tòa T - Phan Mem QT"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/primary_text_color_50"
+                android:textSize="12sp"
+                android:lines="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_lecture" />
+
+            <TextView
+                android:id="@+id/lecuturer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:text="Channn3"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/primary_text_color_50"
+                android:textSize="12sp"
+                android:lines="1" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

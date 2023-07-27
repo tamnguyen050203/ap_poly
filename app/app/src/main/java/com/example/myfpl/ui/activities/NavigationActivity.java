@@ -1,12 +1,13 @@
 package com.example.myfpl.ui.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.myfpl.R;
@@ -15,10 +16,13 @@ import com.example.myfpl.databinding.ActivityNavigationBinding;
 import com.example.myfpl.viewmodels.TestViewModel;
 import com.google.android.material.navigation.NavigationBarView;
 
+import nl.joery.animatedbottombar.AnimatedBottomBar;
+
 public class NavigationActivity extends FragmentActivity {
+    private static final String TAG = NavigationActivity.class.getSimpleName();
     private ActivityNavigationBinding binding;
-    private TestViewModel testViewModel;
     private MainViewPager mainViewPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,37 +32,24 @@ public class NavigationActivity extends FragmentActivity {
         init();
     }
 
-    public void init(){
+    public void init() {
         mainViewPagerAdapter = new MainViewPager(NavigationActivity.this);
-
         binding.viewPager.setAdapter(mainViewPagerAdapter);
+        binding.viewPager.setUserInputEnabled(false);
+
         addEvent();
     }
 
-    public void addEvent(){
-        binding.bottomTab.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
+    public void addEvent() {
+        binding.bottomBar.setOnTabSelectListener(new AnimatedBottomBar.OnTabSelectListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.homeFragment:
-                        binding.viewPager.setCurrentItem(0);
-                        break;
-                    case R.id.scheduleFragment:
-                        binding.viewPager.setCurrentItem(1);
-                        break;
-                    case R.id.studentFragment:
-                        binding.viewPager.setCurrentItem(2);
-                        break;
-                }
-                return true;
+            public void onTabSelected(int lastIndex, @Nullable AnimatedBottomBar.Tab lastTab, int newIndex, @NonNull AnimatedBottomBar.Tab newTab) {
+                binding.viewPager.setCurrentItem(newIndex, false);
             }
-        });
 
-        binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
-            public void onPageSelected(int position) {
-                binding.bottomTab.getMenu().getItem(position).setChecked(true);
+            public void onTabReselected(int index, @NonNull AnimatedBottomBar.Tab tab) {
+
             }
         });
     }

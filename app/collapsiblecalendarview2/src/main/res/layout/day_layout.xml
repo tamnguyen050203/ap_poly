@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="8dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_day"
+        android:layout_width="@dimen/day_circle_width"
+        android:layout_height="@dimen/day_circle_height"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:textColor="#CC011635"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent" />
+
+        <ImageView
+            android:id="@+id/img_event_tag"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            app:srcCompat="@drawable/event_drawable"
+            android:layout_alignEnd="@id/txt_day"
+            android:layout_alignTop="@id/txt_day"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:visibility="gone" />
+
+</RelativeLayout >

@@ -73,7 +73,7 @@ class AuthController extends Controller
 
         // Create access token and set expiration time
         $access_token = Str::random(400);
-        $expires_at = now()->addMinutes(60);
+        $expires_at = now()->addMinutes(1);
         $student->forceFill([
             'access_token' => hash('sha256', $access_token),
             'access_token_expires_at' => $expires_at,
@@ -97,7 +97,7 @@ class AuthController extends Controller
 
     public function refreshToken(Request $request): JsonResponse
     {
-        $refreshToken = hash('sha256', $request->bearerToken());
+        $refreshToken = hash('sha256', $request->refresh_token);
 
         $student = Student::where('refresh_token', $refreshToken)->first();
 
@@ -125,11 +125,13 @@ class AuthController extends Controller
             }
         } else {
             // Token doesn't exist
-            return response()->json([
-                'status' => 401,
-                'error' => 'Refresh token doesn\'t exist',
-            ],
-                401);
+            return response()->json(
+                [
+                    'status' => 401,
+                    'error' => 'Refresh token doesn\'t exist',
+                ],
+                401
+            );
         }
     }
 
@@ -148,5 +150,4 @@ class AuthController extends Controller
             'message' => 'Logged out successfully',
         ]);
     }
-
 }

@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.fragments.ScheduleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="@color/screen_background"
+        android:contentDescription="TabLayout"
+        android:transitionGroup="true"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorColor="@color/primary_text_color"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@null"
+        app:tabSelectedTextColor="@color/primary_text_color"
+        app:tabTextAppearance="@style/TabLayoutStyle"
+        app:tabTextColor="@color/primary_text_color_30"
+        tools:ignore="HardcodedText">
 
-</FrameLayout>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lịch Học" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lịch Thi" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <View
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D9D9D9" />
+
+    <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:expandIconColor="@color/primary_text_color"
+        app:selectedItem_background="@drawable/item_calendar_selected_background"
+        app:selectedItem_textColor="@color/primary_color"
+        app:textColor="@color/primary_text_color"
+        app:todayItem_background="@drawable/item_calendar_selected_background"
+        app:todayItem_textColor="@color/primary_color" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
+
+
+    <!--
+
+
+
+
+    -->

@@ -7,16 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
 
     <!--    custom color-->
-    <color name="primary_color">#FB8232</color>
-    <color name="primary_color_20">#33FB8232</color>
-    <color name="primary_text_color" id="primary_text_color" >#011635</color>
-    <color name="primary_text_color_70">#B3011635</color>
-    <color name="primary_text_color_50">#80011635</color>
-    <color name="primary_text_color_30">#4D011635</color>
-    <color name="primary_text_color_20">#33011635</color>
-    <color name="orange">#FFA800</color>
+    <color name="primary_color">#303B85</color>
+    <color name="primary_color_50">#80303B85</color>
+    <color name="primary_text_color" id="primary_text_color" >#0F0E2D</color>
+    <color name="primary_text_color_70">#B30F0E2D</color>
+    <color name="primary_text_color_50">#800F0E2D</color>
+    <color name="primary_text_color_30">#4D0F0E2D</color>
+    <color name="primary_text_color_20">#800F0E2D</color>
+    <color name="primary_text_color_80">#CC0F0E2D</color>
+    <color name="orange_light">#FFA800</color>
     <color name="aqua_light">#B7DBFD</color>
     <color name="aqua">#73BAFC</color>
     <color name="aqua_20">#3373BAFC</color>
@@ -24,7 +26,10 @@
     <color name="red_light_20">#33F88C6B</color>
     <color name="green_light">#61C571</color>
     <color name="green_light_20">#3361C571</color>
+    <color name="orange">#FB8232</color>
+    <color name="orange_20">#33FB8232</color>
 
-    <color name="screen_background">#F8FBFF</color>
+    <color name="screen_background">#D5E7FF</color>
     <color name="indicator_color">#E2E2E2</color>
+    <color name="indiactor_color">#1A011635</color>
 </resources>

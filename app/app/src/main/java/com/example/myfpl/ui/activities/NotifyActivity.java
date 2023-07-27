@@ -27,12 +27,13 @@ public class NotifyActivity extends AppCompatActivity {
         list = new ArrayList<>();
         init();
     }
-    public void init(){
+
+    public void init() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         adapter = new NotificationFragmentAdapter(fragmentManager, getLifecycle());
         binding.viewPager.setAdapter(adapter);
         new TabLayoutMediator(binding.topTab, binding.viewPager, (tab, position) -> {
-            switch (position){
+            switch (position) {
                 case 0:
                     tab.setText("Tất cả");
                     break;
@@ -53,10 +54,11 @@ public class NotifyActivity extends AppCompatActivity {
 
 
     }
-        public void goToDetail(NotificationModel object, String date){
+
+    public void goToDetail(NotificationModel object, String date) {
         Intent i = new Intent(NotifyActivity.this, DetailNotificationActivity.class);
-        i.putExtra("detail",object);
-        i.putExtra("createdAt",date);
+        i.putExtra("detail", object);
+        i.putExtra("createdAt", date);
         this.startActivity(i);
     }
 }
