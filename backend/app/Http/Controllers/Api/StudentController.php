@@ -22,7 +22,6 @@ class StudentController extends Controller
                 'name',
                 'email',
                 'avatar',
-                'provider_id',
                 'dob',
                 'phone',
             );
