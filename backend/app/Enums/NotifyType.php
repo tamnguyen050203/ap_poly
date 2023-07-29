@@ -12,19 +12,19 @@ class NotifyType extends Enum
     public const STUDY = 3;
     public const FEE = 4;
 
-    public static function getArrayView(): array
-    {
-        return [
-            self::ALL => 'Tất cả',
-            self::ACTIVE => 'Hoạt động',
-            self::WORK => 'Lảm việc',
-            self::STUDY => 'Học tập',
-            self::FEE => 'Phí',
-        ];
-    }
-
     public static function getKeyByValue($value): string
     {
         return array_search($value, self::getArrayView(), true);
+    }
+
+    public static function getArrayView(): array
+    {
+        return [
+            self::ALL => 'Tất Cả',
+            self::ACTIVE => 'Hoạt Động',
+            self::WORK => 'Lảm Việc',
+            self::STUDY => 'Học Tập',
+            self::FEE => 'Học  Phí',
+        ];
     }
 }

@@ -26,6 +26,7 @@ class NotificationController extends Controller
             ->latest('updated_at')
             ->paginate(5);
 
+        
         foreach ($notify as $notification) {
             $notification->type = $notification->getTypeNameAttribute();
             // Use ReadNotify model to set isRead for notify
