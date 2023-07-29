@@ -13,7 +13,8 @@ return new class extends Migration {
             $table->text('content');
             $table->string('author', 150);
             $table->string('type', 100);
-            $table->timestamps();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
             $table->boolean('flag')->default(true);
         });
     }
