@@ -7,8 +7,8 @@ use Illuminate\Validation\Rules\Enum;
 class NotifyType extends Enum
 {
     public const ALL = 0;
-    public const ACTIVE = 1;
-    public const WORK = 2;
+    public const ACTIVITY = 1;
+    public const JOB = 2;
     public const STUDY = 3;
     public const FEE = 4;
 
@@ -21,8 +21,8 @@ class NotifyType extends Enum
     {
         return [
             self::ALL => 'Tất Cả',
-            self::ACTIVE => 'Hoạt Động',
-            self::WORK => 'Lảm Việc',
+            self::ACTIVITY => 'Hoạt Động',
+            self::JOB => 'Việc Làm',
             self::STUDY => 'Học Tập',
             self::FEE => 'Học  Phí',
         ];
