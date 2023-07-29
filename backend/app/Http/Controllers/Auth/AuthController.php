@@ -73,7 +73,7 @@ class AuthController extends Controller
 
         // Create access token and set expiration time
         $access_token = Str::random(400);
-        $expires_at = now()->addMinutes(1);
+        $expires_at = now()->addMinutes(60);
         $student->forceFill([
             'access_token' => hash('sha256', $access_token),
             'access_token_expires_at' => $expires_at,
