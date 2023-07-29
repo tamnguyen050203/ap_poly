@@ -24,7 +24,7 @@ class NotifyType extends Enum
             self::ACTIVITY => 'Hoạt Động',
             self::JOB => 'Việc Làm',
             self::STUDY => 'Học Tập',
-            self::FEE => 'Học  Phí',
+            self::FEE => 'Học Phí',
         ];
     }
 }
