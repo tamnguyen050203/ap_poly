@@ -113,7 +113,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:text="Hôm nay"
-            android:textColor="#3C31C4"
+            android:textColor="#262E65"
             android:textSize="12sp"
             android:textStyle="bold" />
 

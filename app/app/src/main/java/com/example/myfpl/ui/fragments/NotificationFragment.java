@@ -26,6 +26,7 @@ import com.example.myfpl.viewmodels.NotifyViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -76,24 +77,25 @@ public class NotificationFragment extends Fragment {
     }
 
     public List<NotificationModel> filteredList(String type, List<NotificationModel> unfilteredList) {
-        if (Objects.equals(type, "Tất cả")) return unfilteredList;
+        if (Objects.equals(type.toLowerCase(Locale.ROOT), "Tất cả".toLowerCase(Locale.ROOT)))
+            return unfilteredList;
         List<NotificationModel> filtered = new ArrayList<>();
         for (NotificationModel element : unfilteredList) {
-            if (Objects.equals(element.getType(), type)) {
+            if (Objects.equals(element.getType().toLowerCase(Locale.ROOT), type.toLowerCase(Locale.ROOT))) {
                 filtered.add(element);
             }
         }
         return filtered;
     }
 
-    public void AppListener(){
+    public void AppListener() {
         viewModel.getLiveDataNotification().observe(getViewLifecycleOwner(), new Observer<NotificationDTO>() {
             @Override
             public void onChanged(NotificationDTO notificationDTO) {
 //                Log.d("TAG>>>>>", "onChanged: " + notificationDTO);
-                if(notificationDTO==null){
+                if (notificationDTO == null) {
                     list = new ArrayList<>();
-                }else{
+                } else {
 //                    Log.d("TAG>>>>", "onChanged: " + notificationDTO);
                     list = notificationDTO.getNotify().getData();
                     adapter.setListData(
@@ -178,6 +180,6 @@ public class NotificationFragment extends Fragment {
 //                "2023-07-13 00:39:30",
 //                "2023-07-13 00:39:30"
 //        ));
-   // }
+    // }
 
 }
