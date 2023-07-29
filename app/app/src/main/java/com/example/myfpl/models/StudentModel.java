@@ -1,17 +1,29 @@
 package com.example.myfpl.models;
 
+import androidx.annotation.NonNull;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class StudentModel {
+public class StudentModel implements Serializable {
+    @SerializedName("id")
     String id;
+    @SerializedName("name")
     String name;
+    @SerializedName("email")
     String email;
+    @SerializedName("avatar")
     String avatar;
+    @SerializedName("phone")
     String phone;
-    Date dob;
+    @SerializedName("dob")
+    String dob;
+    @SerializedName("specialize")
     String specialize;
 
-    public StudentModel(String id, String name, String email, String avatar, String phone, Date dob, String specialize) {
+    public StudentModel(String id, String name, String email, String avatar, String phone, String dob, String specialize) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -61,11 +73,11 @@ public class StudentModel {
         this.phone = phone;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -75,5 +87,11 @@ public class StudentModel {
 
     public void setSpecialize(String specialize) {
         this.specialize = specialize;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Student: " + name + " Email: " + email + " Phone: " + phone + " Dob: " + dob + " Specialize: " + specialize;
     }
 }

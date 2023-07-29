@@ -1,14 +1,15 @@
 package com.example.myfpl.data.apis;
 
+import com.example.myfpl.data.DTO.StudentDTO;
 import com.example.myfpl.models.StudentModel;
+import io.reactivex.rxjava3.core.Observable;
 
-import java.util.List;
-
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface StudentService {
 
     @GET("api/student/info")
-    Call<List<StudentModel>> getStudentInfo();
+    Single<StudentDTO.StudentResponseDTO> getStudentInfo();
 }
