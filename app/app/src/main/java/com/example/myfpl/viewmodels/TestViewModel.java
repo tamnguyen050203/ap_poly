@@ -63,30 +63,30 @@ public class TestViewModel extends AndroidViewModel {
     }
 
     public void refreshToken() {
-        RetrofitHelper.createService(INotification.class, getApplication().getApplicationContext()).getNotificationData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<NotificationModel>>() {
-                    @Override
-                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<NotificationModel> notificationModels) {
-                        Log.d(TAG, "onNext: " + notificationModels);
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//        RetrofitHelper.createService(INotification.class, getApplication().getApplicationContext()).getNotificationData()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<List<NotificationModel>>() {
+//                    @Override
+//                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<NotificationModel> notificationModels) {
+//                        Log.d(TAG, "onNext: " + notificationModels);
+//                    }
+//
+//                    @Override
+//                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
     }
 
     public void tryToLogin() {

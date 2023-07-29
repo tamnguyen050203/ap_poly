@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\RandomInfo;
 use App\Models\Specialize;
 use App\Models\Student;
 use Illuminate\Http\JsonResponse;
@@ -54,12 +55,16 @@ class AuthController extends Controller
             }
 
             $randomSpecialize = rand(1, Specialize::query()->count());
+            $dob = RandomInfo::randomDateOfBirth(1995, 2005);
+            $phone = RandomInfo::randomPhone();
 
             $student = Student::firstOrCreate(
                 [
                     'email' => $request->email,
                     'name' => $request->name,
                     'avatar' => $request->avatar,
+                    'dob' => $dob,
+                    'phone' => $phone,
                     'provider_id' => $request->provider_id,
                     'specialize_id' => $randomSpecialize,
                 ]
@@ -68,7 +73,7 @@ class AuthController extends Controller
 
         // Create access token and set expiration time
         $access_token = Str::random(400);
-        $expires_at = now()->addMinutes(1);
+        $expires_at = now()->addMinutes(60);
         $student->forceFill([
             'access_token' => hash('sha256', $access_token),
             'access_token_expires_at' => $expires_at,

@@ -29,12 +29,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
-    private ArrayList<NotificationModel> list;
+    private List<NotificationModel> list;
     private Context context;
 
-    public NotificationAdapter(ArrayList<NotificationModel> list, Context context) {
+    public NotificationAdapter(List<NotificationModel> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -60,7 +61,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             return;
         }
         holder.binding.tvNotificationName.setText(notificationModel.getTitle());
-        holder.binding.tvCreatedAt.setText(ConvertTimeToString(notificationModel.getCreated_date()));
+//        holder.binding.tvCreatedAt.setText(ConvertTimeToString(notificationModel.getCreated_date()));
         holder.binding.tvAuthor.setText(notificationModel.getAuthor());
         holder.binding.tvType.setText(notificationModel.getType());
         switch (holder.binding.tvType.getText().toString()) {
