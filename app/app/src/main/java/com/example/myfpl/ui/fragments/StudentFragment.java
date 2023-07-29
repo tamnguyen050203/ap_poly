@@ -98,6 +98,7 @@ public class StudentFragment extends Fragment {
                         infoModelList.add(new InfoModel("Email", studentResponseDTO.getStudent().getEmail()));
 //                        infoModelList.add(new InfoModel("Lớp", studentModel.getClass()));
                         infoModelList.add(new InfoModel("Chuyên ngành", studentResponseDTO.getStudent().getSpecialize()));
+                        binding.email.setText(studentResponseDTO.getStudent().getEmail());
                         infoListAdapter.notifyDataSetChanged();
                         binding.nameStudent.setText(studentResponseDTO.getStudent().getName());
                         Glide.with(requireContext()).load(studentResponseDTO.getStudent().getAvatar()).into(binding.avatarStudent);
