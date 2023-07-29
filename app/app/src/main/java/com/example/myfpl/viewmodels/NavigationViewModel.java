@@ -17,27 +17,27 @@ import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Observable;
 
 public class NavigationViewModel extends AndroidViewModel {
-    private LiveData<List<TestModelSchedule>> listTestSchedule;
-    private LiveData<List<TestModelSchedule>> listSchedule = new MediatorLiveData<>();
+    private MutableLiveData<List<TestModelSchedule>> listTestSchedule = new MutableLiveData<>();
+    private MutableLiveData<List<TestModelSchedule>> listSchedule = new MutableLiveData<>();
 
     public NavigationViewModel(@NonNull Application application) {
         super(application);
 
         //fake list data
-        this.listTestSchedule = (LiveDataReactiveStreams.fromPublisher(getListData(2).toFlowable(BackpressureStrategy.LATEST)));
-        this.listSchedule = LiveDataReactiveStreams.fromPublisher(getListData(1).toFlowable(BackpressureStrategy.LATEST));
+        listSchedule.setValue(TestModelSchedule.getListModel(5));
+        listTestSchedule.setValue(TestModelSchedule.getListModel(5));
     }
 
-    public LiveData<List<TestModelSchedule>> getListTestSchedule() {
+    public MutableLiveData<List<TestModelSchedule>> getListTestSchedule() {
         return listTestSchedule;
     }
 
-    public LiveData<List<TestModelSchedule>> getListSchedule(){
+    public MutableLiveData<List<TestModelSchedule>> getListSchedule(){
         return  listSchedule;
     }
 
     public void setListSchedule(List<TestModelSchedule> list){
-        this.listSchedule = (LiveDataReactiveStreams.fromPublisher(Observable.just(list).toFlowable(BackpressureStrategy.LATEST)));
+        this.listSchedule.setValue(list);
     }
 
     public Observable<List<TestModelSchedule>> getListData(int size){

@@ -723,6 +723,8 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
             selectedDay.remove(day)
         }
 
+        Log.d("TAG>>>", "select: " + selectedDay.toString())
+
         redraw()
 
         if (mListener != null) {

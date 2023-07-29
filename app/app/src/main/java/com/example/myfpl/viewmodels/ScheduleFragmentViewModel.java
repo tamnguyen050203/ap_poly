@@ -6,7 +6,16 @@ import androidx.lifecycle.ViewModel;
 
 public class ScheduleFragmentViewModel extends ViewModel {
 
-    private MutableLiveData<Boolean> isListScrolling = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isListScrolling = new MutableLiveData<>();
+    private final MutableLiveData<String> currentDateSelected = new MutableLiveData<>();
+
+    public MutableLiveData<String> getCurrentDateSelected() {
+        return currentDateSelected;
+    }
+
+    public void setCurrentDateSelected(String currentDateSelected){
+        this.currentDateSelected.setValue(currentDateSelected);
+    }
 
     public MutableLiveData<Boolean> getIsListScrolling() {
         return isListScrolling;

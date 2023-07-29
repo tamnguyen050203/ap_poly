@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#F9F9FB"
     tools:context=".ui.fragments.ScheduleFragment">
 
     <com.google.android.material.tabs.TabLayout
@@ -12,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
-        android:background="@color/screen_background"
         android:contentDescription="TabLayout"
         android:transitionGroup="true"
         app:tabIndicatorAnimationMode="elastic"
@@ -47,10 +47,15 @@
         android:layout_height="wrap_content"
         app:expandIconColor="@color/primary_text_color"
         app:selectedItem_background="@drawable/item_calendar_selected_background"
-        app:selectedItem_textColor="@color/primary_color"
+        app:selectedItem_textColor="#fff"
         app:textColor="@color/primary_text_color"
         app:todayItem_background="@drawable/item_calendar_selected_background"
-        app:todayItem_textColor="@color/primary_color" />
+        app:todayItem_textColor="#fff" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D9D9D9" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

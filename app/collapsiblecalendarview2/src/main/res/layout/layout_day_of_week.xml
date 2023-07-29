@@ -3,7 +3,7 @@
     android:id="@+id/txt_day_of_week"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:fontFamily="@font/inter_semibold"
+    android:fontFamily="@font/poppins_semi_bold"
     android:gravity="center"
     android:paddingBottom="4dp"
     android:textColor="#011635"

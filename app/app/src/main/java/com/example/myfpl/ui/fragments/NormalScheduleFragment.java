@@ -53,7 +53,6 @@ public class NormalScheduleFragment extends Fragment {
             scheduleFragmentViewModel = new ViewModelProvider(getActivity()).get(ScheduleFragmentViewModel.class);
         }
 
-
         addEvent();
         setupList();
     }
