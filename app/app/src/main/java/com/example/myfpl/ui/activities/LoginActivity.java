@@ -17,8 +17,12 @@ import android.widget.Button;
 
 import com.example.myfpl.R;
 import com.example.myfpl.adapters.ListItemDialogAdapter;
+import com.example.myfpl.data.DTO.LoginDTO;
+import com.example.myfpl.data.apis.AuthService;
 import com.example.myfpl.databinding.ActivityLoginBinding;
 import com.example.myfpl.helpers.FirebaseHelper;
+import com.example.myfpl.helpers.retrofit.RetrofitHelper;
+import com.example.myfpl.helpers.retrofit.TokenRepository;
 import com.example.myfpl.models.DialogItemModel;
 import com.example.myfpl.util.StringUtil;
 import com.example.myfpl.util.ToastApp;
@@ -37,6 +41,11 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -95,6 +104,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         ToastApp.show(LoginActivity.this, "Đăng nhập thành công với tài khoản" + Objects.requireNonNull(task.getResult().getUser()).getDisplayName());
+                                        String email = Objects.requireNonNull(task.getResult().getUser()).getEmail();
+                                        String username = task.getResult().getUser().getDisplayName();
+                                        String providerId = task.getResult().getUser().getProviderId();
+                                        String avatar = task.getResult().getUser().getPhotoUrl().toString();
+                                        login(email, username, providerId, avatar);
                                         startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
                                     } else {
                                         ToastApp.show(LoginActivity.this, "Đăng nhập thất bại");
@@ -110,6 +124,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                ToastApp.show(LoginActivity.this, "Vui lòng kiểm tra lại kết nối mạng!");
             }
         }
+    }
+
+    public void login(String email, String username, String providerId, String avatar) {
+        LoginDTO.LoginRequestDTO loginRequestDTO = new LoginDTO.LoginRequestDTO(email, username, providerId, avatar);
+
+        RetrofitHelper.createService(AuthService.class, getApplication().getApplicationContext()).login(loginRequestDTO)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<LoginDTO.LoginResponseDTO>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(LoginDTO.@io.reactivex.rxjava3.annotations.NonNull LoginResponseDTO loginResponseDTO) {
+                        TokenRepository.getInstance(getApplication().getApplicationContext()).setToken(loginResponseDTO.getAccessToken());
+                        TokenRepository.getInstance(getApplication().getApplicationContext()).setRefreshToken(loginResponseDTO.getRefreshToken());
+
+                        Log.d(TAG, "onSuccess: " + loginResponseDTO);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
     }
 
     public void handleButtonOption() {
