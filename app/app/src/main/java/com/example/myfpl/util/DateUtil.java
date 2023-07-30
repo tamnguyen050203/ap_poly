@@ -71,17 +71,18 @@ public class DateUtil {
     public static YearMonth getEndMonth() {
         return getCurrentMonth().plusMonths(100);
     }
-
     public static String ConvertTimeToString(String input) {
         try {
+            Log.d("convert:",""+input);
             String str = input;
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss.SSSSSSXXX");
             Date date = df.parse(str);
+            Log.d("convert1:",""+date);
             long givenDate = date.getTime();
             long current = System.currentTimeMillis() / 1000;
             System.out.println(current);
             System.out.println(givenDate / 1000);
-            long timeDistance = 649072;
+            long timeDistance = current - (givenDate/1000);
             String convertedTime = "";
             if (timeDistance <= 59) {
                 convertedTime = timeDistance + " giây trước";

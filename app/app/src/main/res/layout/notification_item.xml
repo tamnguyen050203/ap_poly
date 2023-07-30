@@ -68,7 +68,9 @@
                     android:fontFamily="@font/inter_medium"
                     android:textColor="@color/primary_text_color_50"
                     android:text="nhintq2"
-                    android:textSize="13dp" />
+                    android:textSize="13dp"
+                    android:maxWidth="100dp"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -86,10 +88,12 @@
                     android:paddingHorizontal="15dp"
                     android:paddingTop="2dp"
                     android:paddingBottom="3dp"
-                    android:text="Học phí"
+                    android:text="Hoạt động"
                     android:textAlignment="center"
                     android:textColor="@color/green_light"
-                    android:textSize="13dp" />
+                    android:textSize="13dp"
+                    android:minWidth="100dp"
+                    />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

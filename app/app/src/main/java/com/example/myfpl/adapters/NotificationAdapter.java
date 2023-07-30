@@ -60,24 +60,30 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         if (notificationModel == null) {
             return;
         }
+
         holder.binding.tvNotificationName.setText(notificationModel.getTitle());
-//        holder.binding.tvCreatedAt.setText(ConvertTimeToString(notificationModel.getCreated_date()));
+        holder.binding.tvCreatedAt.setText(ConvertTimeToString(notificationModel.getCreated_at()));
         holder.binding.tvAuthor.setText(notificationModel.getAuthor());
         holder.binding.tvType.setText(notificationModel.getType());
+        if(notificationModel.getRead()){
+            holder.binding.isRead.setVisibility(View.INVISIBLE);
+        }else{
+            holder.binding.isRead.setVisibility(View.VISIBLE);
+        }
         switch (holder.binding.tvType.getText().toString()) {
-            case "Học tập":
+            case "Học Tập":
                 holder.binding.tvType.setBackgroundResource(R.drawable.notification_type_blue);
                 holder.binding.tvType.setTextColor(ContextCompat.getColor(context, R.color.aqua));
                 break;
-            case "Học phí":
+            case "Học Phí":
                 holder.binding.tvType.setBackgroundResource(R.drawable.notification_type_orange);
                 holder.binding.tvType.setTextColor(ContextCompat.getColor(context, R.color.orange));
                 break;
-            case "Hoạt động":
+            case "Hoạt Động":
                 holder.binding.tvType.setBackgroundResource(R.drawable.notification_type_green);
                 holder.binding.tvType.setTextColor(ContextCompat.getColor(context, R.color.green_light));
                 break;
-            case "Việc làm":
+            case "Việc Làm":
                 holder.binding.tvType.setBackgroundResource(R.drawable.notification_type_red);
                 holder.binding.tvType.setTextColor(ContextCompat.getColor(context, R.color.red_light));
                 break;
@@ -87,7 +93,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(View view) {
                 // go to detail content and pass data
                 ToastApp.show(context, "Item" + notificationModel.getId());
-                ((NotifyActivity) context).goToDetail(notificationModel, ConvertTimeToString(notificationModel.getCreated_date()));
+                ((NotifyActivity) context).goToDetail(notificationModel, ConvertTimeToString(notificationModel.getCreated_at()));
             }
         });
     }
