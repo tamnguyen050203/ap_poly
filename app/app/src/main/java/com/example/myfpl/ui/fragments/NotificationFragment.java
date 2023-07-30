@@ -71,8 +71,7 @@ public class NotificationFragment extends Fragment {
                 new NotifyViewModel.NotifyViewModelFactory(requireActivity().getApplication())).get(NotifyViewModel.class);
         AppListener();
 //        NotificationAdapter adapter = new NotificationAdapter(filteredList(type, list), getContext());
-        adapter = new NotificationAdapter(new ArrayList(), getContext());
-        binding.rvNotification.setAdapter(adapter);
+
     }
 
     public List<NotificationModel> filteredList(String type, List<NotificationModel> unfilteredList) {
@@ -90,15 +89,14 @@ public class NotificationFragment extends Fragment {
         viewModel.getLiveDataNotification().observe(getViewLifecycleOwner(), new Observer<NotificationDTO>() {
             @Override
             public void onChanged(NotificationDTO notificationDTO) {
-//                Log.d("TAG>>>>>", "onChanged: " + notificationDTO);
                 if(notificationDTO==null){
                     list = new ArrayList<>();
                 }else{
-//                    Log.d("TAG>>>>", "onChanged: " + notificationDTO);
                     list = notificationDTO.getNotify().getData();
-                    adapter.setListData(
-                            (ArrayList<NotificationModel>) filteredList(type, (ArrayList<NotificationModel>) list));
-//                    Log.d("TAG>>>>", "onChanged: " + list.size());
+//                    adapter.setListData(
+//                            (ArrayList<NotificationModel>) filteredList(type, list));
+                    adapter = new NotificationAdapter(filteredList(type, list), getContext());
+                    binding.rvNotification.setAdapter(adapter);
                 }
             }
         });
