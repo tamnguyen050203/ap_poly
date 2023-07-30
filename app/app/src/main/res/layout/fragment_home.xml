@@ -59,7 +59,7 @@
         android:fontFamily="@font/poppins_bold"
         android:lines="1"
         android:text="Hi Vũ"
-        android:textColor="@color/primary_color"
+        android:textColor="#f2f2f2"
         android:textSize="28sp"
         app:layout_constraintStart_toEndOf="@id/avatar_Container"
         app:layout_constraintTop_toTopOf="@id/avatar_Container" />
@@ -73,7 +73,7 @@
         android:fontFamily="@font/poppins_medium"
         android:lines="2"
         android:text="Chào buổi sáng"
-        android:textColor="@color/primary_color_50"
+        android:textColor="#f2f2f2"
         android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@id/avatar_Container"
         app:layout_constraintTop_toBottomOf="@id/text_welcome" />
@@ -87,7 +87,7 @@
         android:fontFamily="@font/poppins_medium"
         android:lines="2"
         android:text="Đây là danh sách lịch học mà bạn cần kiểm tra"
-        android:textColor="@color/primary_color_50"
+        android:textColor="#f2f2f2"
         android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@id/avatar_Container"
         app:layout_constraintTop_toBottomOf="@id/text_welcome" />

@@ -16,6 +16,7 @@ import com.example.myfpl.util.DateUtil;
 import com.example.myfpl.util.StringUtil;
 
 import java.util.List;
+import java.util.Locale;
 
 public class DetailScheduleListAdapter extends RecyclerView.Adapter<DetailScheduleListAdapter.ItemViewHolder> {
     private List<TestModelSchedule> listData;
@@ -50,27 +51,19 @@ public class DetailScheduleListAdapter extends RecyclerView.Adapter<DetailSchedu
     @Override
     public void onBindViewHolder(@NonNull DetailScheduleListAdapter.ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (listData.get(position) != null) {
+
             holder.binding.item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     eventListItem.onItemClick(listData.get(position), position);
-                    listData.get(position).setExpand(!listData.get(position).isExpand());
                 }
             });
 
-            holder.binding.buttonAlarm.setOnClickListener(new View.OnClickListener() {
+            holder.binding.btnAlarm.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onClick(View view) {
                     listData.get(position).setAlarm(!listData.get(position).isAlarm());
-                    holder.binding.itemMain.setBackgroundResource(
-                            listData.get(position).isAlarm() ? R.drawable.drawable_alarm_border_schedule_item : R.drawable.drawable_border_schedule_item
-                    );
-                    holder.binding.verticalIndicator.setBackgroundResource(
-                            listData.get(position).isAlarm() ? R.drawable.indicator_rounded_active : R.drawable.indicator_rounded
-                    );
-                    holder.binding.buttonAlarm.setImageResource(
-                            listData.get(position).isAlarm() ? R.drawable.ic_alarm_active : R.drawable.ic_alarm_inactive
-                    );
                     eventListItem.onAlarmClick(listData.get(position), position);
                 }
             });
@@ -95,14 +88,20 @@ public class DetailScheduleListAdapter extends RecyclerView.Adapter<DetailSchedu
 
         @SuppressLint("SetTextI18n")
         public void onBind(TestModelSchedule testModelSchedule, int itemIndex) {
-            binding.titleSchedule.setText(testModelSchedule.getScheduleTitle());
-            binding.subjectCode.setText(testModelSchedule.getSubjectCode());
-            binding.room.setText(testModelSchedule.getRoom());
-            binding.lecturer.setText(StringUtil.builderTitle("Giảng viên", testModelSchedule.getLecturer()));
-            binding.amphitheater.setText(StringUtil.builderTitle("Giảng đường", testModelSchedule.getAmphitheater()));
-            binding.timeEnd.setText(DateUtil.getTimeFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getEndTime()));
-            binding.timeStart.setText(DateUtil.getTimeFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getStartTime()));
-            binding.shiftOrDate.setText(StringUtil.builderTitle("Ngày", DateUtil.getDateFromString("yyyy-MM-dd hh:MM:ss", testModelSchedule.getStartTime())));
+            binding.amphitheater.setText(testModelSchedule.getAmphitheater());
+            binding.lecuturer.setText(testModelSchedule.getLecturer());
+            binding.roomAShift.setText(
+                    testModelSchedule.getRoom() + " - " + testModelSchedule.getShift()
+            );
+
+            binding.timeStateEnd.setText(DateUtil.getMeridiemFromString("yyyy-MM-dd hh:mm:ss", testModelSchedule.getEndTime()).toUpperCase(Locale.ROOT));
+            binding.timEnd.setText(DateUtil.getTimeFromString("yyyy-MM-dd hh:mm:ss", testModelSchedule.getEndTime()));
+            binding.timeStart.setText(DateUtil.getTimeFromString("yyyy-MM-dd hh:mm:ss", testModelSchedule.getStartTime()));
+            binding.timeState.setText(DateUtil.getMeridiemFromString("yyyy-MM-dd hh:mm:ss", testModelSchedule.getStartTime()).toUpperCase(Locale.ROOT));
+
+            binding.btnAlarm.setImageResource(
+                    testModelSchedule.isAlarm() ? R.drawable.ic_alarm_active : R.drawable.ic_alarm_inactive
+            );
         }
     }
 

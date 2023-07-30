@@ -42,7 +42,7 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
     protected var mBtnNextWeek: ImageView
     protected var expandIconView: ExpandIconView
     protected var clEntireTextView: LinearLayout
-    protected var mTodayIcon : ImageView
+    protected var mTodayIcon : TextView
     var datePattern = "MMMM"
         set(value: String) {
             field = value
