@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.CommunityScreen"
     android:background="@color/green_light"
-  >
+    app:layoutDescription="@xml/activity_community_screen_scene">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -22,6 +22,7 @@
         >
 
         <ImageView
+            android:id="@+id/buttonBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_back_white" />
@@ -56,29 +57,28 @@
             />
     </LinearLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scroll_view"
+    <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_marginTop="175dp"
         android:background="@drawable/drawable_gb_home_fragment"
         android:elevation="10dp"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="20dp"
+        android:numColumns="2"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="31dp"
+        android:verticalSpacing="10dp"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout2"
-        app:layout_constraintVertical_bias="0.993">
+        app:layout_constraintVertical_bias="0.98"
 
-        <GridView
-            android:id="@+id/gridView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="2" />
-
-    </androidx.core.widget.NestedScrollView>
+        >
+    </GridView>
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
