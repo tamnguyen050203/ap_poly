@@ -5,8 +5,10 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.myfpl.R;
+import com.example.myfpl.component.HeaderApp;
 import com.example.myfpl.databinding.ActivityDetailNotificationBinding;
 import com.example.myfpl.models.NotificationModel;
 
@@ -27,6 +29,22 @@ public class DetailNotificationActivity extends AppCompatActivity {
         binding.tvNotificationNameDetail.setText(notification.getTitle());
         binding.tvCreatedAtDetail.setText(createdAt);
         binding.tvTypeDetail.setText(notification.getType());
+        binding.headerApp1.setHeaderClickListener(new HeaderApp.HeaderHandleClickListener() {
+            @Override
+            public void onLeftButtonClick() {
+                finish();
+            }
+
+            @Override
+            public void onUserContainerClick() {
+
+            }
+
+            @Override
+            public void onRightButtonClick() {
+
+            }
+        });
         switch (notification.getType()) {
             case "Học tập":
                 binding.tvTypeDetail.setBackgroundResource(R.drawable.notification_type_blue);

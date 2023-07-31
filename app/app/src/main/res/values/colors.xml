@@ -10,9 +10,10 @@
     <color name="transparent">#00000000</color>
 
     <!--    custom color-->
-<!--    <color name="primary_color">#303B85</color>-->
+    <!--    <color name="primary_color">#303B85</color>-->
     <color name="primary_color">#FFA04B</color>
     <color name="primary_color_50">#80303B85</color>
+    <color name="primary_color_100">#303B85</color>
     <color name="primary_text_color" id="primary_text_color" >#0F0E2D</color>
     <color name="primary_text_color_70">#B30F0E2D</color>
     <color name="primary_text_color_50">#800F0E2D</color>

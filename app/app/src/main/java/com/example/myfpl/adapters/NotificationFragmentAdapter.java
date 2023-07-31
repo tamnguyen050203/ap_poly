@@ -18,11 +18,11 @@ public class NotificationFragmentAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
             switch (position){
-                case 1:return NotificationFragment.instance("Học tập");
-                case 2:return NotificationFragment.instance("Học phí");
-                case 3:return NotificationFragment.instance("Hoạt động");
-                case 4:return NotificationFragment.instance("Việc làm");
-                default:return NotificationFragment.instance("Tất cả");
+                case 1:return NotificationFragment.instance("Học Tập");
+                case 2:return NotificationFragment.instance("Học Phí");
+                case 3:return NotificationFragment.instance("Hoạt Động");
+                case 4:return NotificationFragment.instance("Việc Làm");
+                default:return NotificationFragment.instance("Tất Cả");
             }
 
     }

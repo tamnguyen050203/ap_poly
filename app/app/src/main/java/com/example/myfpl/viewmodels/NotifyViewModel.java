@@ -21,6 +21,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class NotifyViewModel extends AndroidViewModel {
+    private static final String TAG = "NotifyViewModel";
     private INotification iNotification;
     private MutableLiveData<NotificationDTO> liveDataNotification = new MutableLiveData<>();
 
@@ -44,7 +45,7 @@ public class NotifyViewModel extends AndroidViewModel {
 
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull NotificationDTO notificationDTO) {
-                        Log.d(">>>>", notificationDTO+"");
+                        Log.d(">>>>", notificationDTO.getNotify().getData().get(1)+"");
                         liveDataNotification.setValue(notificationDTO);
                     }
 
@@ -54,10 +55,56 @@ public class NotifyViewModel extends AndroidViewModel {
                     }
                 });
     }
+
+    public void readNotification(NotificationDTO.ReadNotificationRequestDTO readNotificationRequestDTO){
+        iNotification.readNotification(readNotificationRequestDTO.getNotifyId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<NotificationDTO.ReadNotificationResponseDTO>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(NotificationDTO.@io.reactivex.rxjava3.annotations.NonNull ReadNotificationResponseDTO readNotificationResponseDTO) {
+                        Log.d(TAG, "onSuccess: " + readNotificationResponseDTO);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
+    }
+
+    public void readAllNotification() {
+        iNotification.readAllNotification()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<NotificationDTO.ReadNotificationResponseDTO>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(NotificationDTO.@io.reactivex.rxjava3.annotations.NonNull ReadNotificationResponseDTO readNotificationResponseDTO) {
+                        Log.d(TAG, "onSuccess: " + readNotificationResponseDTO);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
+    }
+
     public NotifyViewModel(@NonNull Application application) {
         super(application);
         iNotification = RetrofitHelper.createService(INotification.class, application);
     }
+
     public static class NotifyViewModelFactory implements ViewModelProvider.Factory {
         private Application application;
 

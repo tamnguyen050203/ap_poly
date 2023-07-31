@@ -77,7 +77,7 @@ public class NotificationFragment extends Fragment {
     }
 
     public List<NotificationModel> filteredList(String type, List<NotificationModel> unfilteredList) {
-        if (Objects.equals(type.toLowerCase(Locale.ROOT), "Tất cả".toLowerCase(Locale.ROOT)))
+        if (Objects.equals(type.toLowerCase(Locale.ROOT), "Tất Cả".toLowerCase(Locale.ROOT)))
             return unfilteredList;
         List<NotificationModel> filtered = new ArrayList<>();
         for (NotificationModel element : unfilteredList) {
