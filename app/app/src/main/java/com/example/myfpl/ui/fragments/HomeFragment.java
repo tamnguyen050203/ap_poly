@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
             public void OnItemClick(NotificationModel notificationModel, int index) {
                 Intent i = new Intent(requireActivity(), DetailNotificationActivity.class);
                 i.putExtra("detail", notificationModel);
-                i.putExtra("createdAt", ConvertTimeToString(notificationModel.getCreated_date()));
+                i.putExtra("createdAt", ConvertTimeToString(notificationModel.getCreated_at()));
                 requireActivity().startActivity(i);
             }
         });

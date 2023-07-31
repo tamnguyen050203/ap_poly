@@ -60,7 +60,7 @@ public class SmallNotificationAdapter extends RecyclerView.Adapter<SmallNotifica
             return;
         }
         holder.binding.notifyTitle.setText(notificationModel.getTitle());
-        holder.binding.publishDate.setText(ConvertTimeToString(notificationModel.getCreated_date()));
+        holder.binding.publishDate.setText(ConvertTimeToString(notificationModel.getCreated_at()));
         holder.binding.namePublisher.setText(notificationModel.getAuthor());
         switch (notificationModel.getType()) {
             case "Học tập":
