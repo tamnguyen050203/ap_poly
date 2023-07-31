@@ -8,23 +8,24 @@
 
     <ImageView
         android:id="@+id/image_logo"
-        android:transitionName="logo"
-        android:layout_width="wrap_content"
-        android:src="@drawable/ic_app"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_marginTop="160dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="20dp"
-        android:layout_height="wrap_content"/>
+        android:src="@drawable/app_logo_new"
+        android:transitionName="logo" />
+
 
     <ImageView
-        android:transitionName="logo"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:src="@drawable/fpt"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
-        android:layout_alignParentBottom="true" />
+        android:src="@drawable/fpt"
+        android:transitionName="logo" />
 
 </RelativeLayout>

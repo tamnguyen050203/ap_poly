@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\RandomInfo;
 use App\Models\Specialize;
 use App\Models\Student;
 use Illuminate\Http\JsonResponse;
@@ -54,12 +55,16 @@ class AuthController extends Controller
             }
 
             $randomSpecialize = rand(1, Specialize::query()->count());
+            $dob = RandomInfo::randomDateOfBirth(1995, 2005);
+            $phone = RandomInfo::randomPhone();
 
             $student = Student::firstOrCreate(
                 [
                     'email' => $request->email,
                     'name' => $request->name,
                     'avatar' => $request->avatar,
+                    'dob' => $dob,
+                    'phone' => $phone,
                     'provider_id' => $request->provider_id,
                     'specialize_id' => $randomSpecialize,
                 ]
@@ -92,7 +97,7 @@ class AuthController extends Controller
 
     public function refreshToken(Request $request): JsonResponse
     {
-        $refreshToken = hash('sha256', $request->bearerToken());
+        $refreshToken = hash('sha256', $request->refresh_token);
 
         $student = Student::where('refresh_token', $refreshToken)->first();
 
@@ -120,11 +125,13 @@ class AuthController extends Controller
             }
         } else {
             // Token doesn't exist
-            return response()->json([
-                'status' => 401,
-                'error' => 'Refresh token doesn\'t exist',
-            ],
-                401);
+            return response()->json(
+                [
+                    'status' => 401,
+                    'error' => 'Refresh token doesn\'t exist',
+                ],
+                401
+            );
         }
     }
 
@@ -143,5 +150,4 @@ class AuthController extends Controller
             'message' => 'Logged out successfully',
         ]);
     }
-
 }

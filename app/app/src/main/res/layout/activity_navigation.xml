@@ -1,51 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
 
-    <data>
-
-    </data>
-
-    <RelativeLayout
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        android:background="@color/screen_background">
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
 
-        <com.example.myfpl.component.HeaderApp
-            android:id="@+id/headerApp"
-            android:layout_width="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:paddingHorizontal="@dimen/default_padding"
-            android:paddingTop="10dp"
-            app:app_is_user_container="true"
-            android:paddingBottom="5dp"
-            android:layout_height="wrap_content"/>
+    <nl.joery.animatedbottombar.AnimatedBottomBar
+        android:id="@+id/bottom_bar"
+        android:background="#F9F9FC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:abb_selectedTabType="text"
+        app:abb_indicatorAppearance="round"
+        app:abb_textAppearance="@style/BottomNavigationViewTextStyle"
+        app:abb_indicatorMargin="16dp"
+        app:abb_indicatorHeight="4dp"
+        android:elevation="5dp"
+        app:abb_tabs="@menu/bottom_navigation"
+        app:abb_selectedIndex="0" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_above="@id/bottomTab"
-            android:layout_below="@id/headerApp"
-            android:layout_height="wrap_content"/>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomTab"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:background="@color/white"
-            app:itemIconTint="@color/navigation_item_color"
-            app:itemTextColor="@color/navigation_item_color"
-            android:elevation="5dp"
-            app:menu="@menu/bottom_navigation" />
-
-    </RelativeLayout>
-
-</layout>
+</LinearLayout>

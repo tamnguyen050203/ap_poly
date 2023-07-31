@@ -2,6 +2,7 @@ package com.example.myfpl.component;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -48,7 +51,7 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
         init(style);
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint({"UseCompatLoadingForDrawables", "ResourceAsColor"})
     public void init(TypedArray style) {
         parentContainer = findViewById(R.id.parentContainer);
         leftContainer = findViewById(R.id.left_container);
@@ -73,10 +76,12 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
 
             if (isUserHeader) {
                 sessionText.setText(DateUtil.getCurrentSession());
+                sessionText.setTextColor(style.getColor(R.styleable.HeaderApp_app_text_session_color, R.color.primary_color));
                 String userNameText = style.getString(R.styleable.HeaderApp_app_user_name_text);
                 Drawable avt = style.getDrawable(R.styleable.HeaderApp_app_avatar_src);
 
                 userName.setText(StringUtil.nullOrEmpty(userNameText) ? userNameText : "Default Name");
+                userName.setTextColor(style.getColor(R.styleable.HeaderApp_app_user_name_color, R.color.primary_color));
                 avatar.setImageDrawable(avt != null ? avt : getResources().getDrawable(R.drawable.avt, getContext().getTheme()));
             } else {
                 Drawable iconBtnLeft = style.getDrawable(R.styleable.HeaderApp_app_button_left_src);
@@ -106,6 +111,7 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
                 } else {
                     Drawable iconButtonRight = style.getDrawable(R.styleable.HeaderApp_app_right_button_src);
                     buttonRight.setImageDrawable(iconButtonRight != null ? iconButtonRight : getResources().getDrawable(R.drawable.ic_notify, getContext().getTheme()));
+                    DrawableCompat.setTint(buttonRight.getDrawable(), style.getColor(R.styleable.HeaderApp_app_icon_tint_color, R.color.primary_color));
                 }
             } else {
                 rightContainer.setVisibility(GONE);
@@ -142,9 +148,9 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
         return this;
     }
 
-    public void setLabelContainerVisibility(boolean visibility) {
+    public void hiddenLabelContainer(boolean visibility) {
         if (labelContainer != null) {
-            labelContainer.setVisibility(visibility ? VISIBLE : GONE);
+            labelContainer.setVisibility(visibility ? GONE : VISIBLE);
             requestLayout();
         }
     }
@@ -156,8 +162,8 @@ public class HeaderApp extends RelativeLayout implements View.OnClickListener {
         }
     }
 
-    public void setUserName(String name){
-        if(userName != null){
+    public void setUserName(String name) {
+        if (userName != null) {
             userName.setText(name);
             requestLayout();
         }

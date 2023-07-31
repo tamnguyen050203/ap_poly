@@ -30,4 +30,9 @@ public class ApiHelper {
         }
         return instance;
     }
+
+    public static <T> T createService (Class<T> service) {
+        return getInstance().create(service);
+    }
+
 }

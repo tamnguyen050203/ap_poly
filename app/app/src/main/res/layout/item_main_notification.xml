@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_notify"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/drawable_notify"
+    android:layout_marginEnd="10dp"
+    android:backgroundTint="@color/red_light_20"
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="10dp">
+
+    <TextView
+        android:id="@+id/namePublisher"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:lines="1"
+        android:text="nhintq2"
+        android:textColor="@color/primary_text_color_50"
+        android:textSize="11sp"
+        tools:ignore="SmallSp" />
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:gravity="center_vertical"
+       android:layout_marginTop="3dp"
+       android:orientation="horizontal">
+
+       <View
+           android:id="@+id/dot_indicator"
+           android:layout_width="6dp"
+           android:layout_height="6dp"
+           android:backgroundTint="@color/red_light"
+           android:backgroundTintMode="screen"
+           android:background="@drawable/circle_drawable"/>
+
+       <TextView
+           android:id="@+id/publishDate"
+           android:layout_width="200dp"
+           android:layout_height="wrap_content"
+           android:fontFamily="@font/poppins_medium"
+           android:lines="1"
+           android:text="4 ngày trước"
+           android:layout_marginStart="5dp"
+           android:textColor="@color/primary_text_color_80"
+           android:textSize="11sp"
+           tools:ignore="SmallSp" />
+
+   </LinearLayout>
+
+    <TextView
+        android:id="@+id/notifyTitle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:lines="2"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:text="Thông báo hộ trợ sinh viên đăng ký BHYT tháng 6/2023"
+        android:textColor="@color/primary_text_color"
+        android:textSize="14sp"
+        tools:ignore="SmallSp" />
+
+</LinearLayout>

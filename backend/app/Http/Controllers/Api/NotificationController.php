@@ -24,8 +24,9 @@ class NotificationController extends Controller
             })
             ->select('id', 'title', 'content', 'author', 'type', 'created_at', 'updated_at')
             ->latest('updated_at')
-            ->paginate(5);
+            ->paginate(15);
 
+        
         foreach ($notify as $notification) {
             $notification->type = $notification->getTypeNameAttribute();
             // Use ReadNotify model to set isRead for notify

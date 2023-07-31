@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_root"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_btn_group_month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/btn_prev_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_margin="2dp"
+            android:src="@drawable/left_icon" />
+
+        <ImageView
+            android:id="@+id/btn_next_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="2dp"
+            android:src="@drawable/right_icon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_btn_group_week"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/btn_prev_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="2dp"
+            android:src="@drawable/left_icon" />
+
+        <ImageView
+            android:id="@+id/btn_next_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="2dp"
+            android:src="@drawable/right_icon" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/cl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F9F9FB"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="25dp"
+        android:layout_marginBottom="20dp"
+        android:paddingVertical="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_schedule_active" />
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Tháng 7"
+            android:paddingTop="5dp"
+            android:textColor="#262E65"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
+            android:id="@+id/expandIcon"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:eiv_animationDuration="300"
+            app:eiv_color="#011635"
+            app:eiv_colorIntermediate="#011635"
+            app:eiv_colorLess="#011635"
+            app:eiv_colorMore="#011635"
+            app:eiv_roundedCorners="true"
+            app:eiv_switchColor="true" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/today_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:text="Hôm nay"
+            android:textColor="#262E65"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/table_head"
+        android:layout_width="match_parent"
+        android:paddingHorizontal="10dp"
+        android:layout_height="wrap_content">
+
+    </TableLayout>
+
+    <com.shrikanthravi.collapsiblecalendarview.view.LockScrollView
+        android:id="@+id/scroll_view_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/rounded_top_drawable"
+        android:scrollbars="none">
+
+        <TableLayout
+            android:id="@+id/table_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:isScrollContainer="true">
+
+        </TableLayout>
+
+    </com.shrikanthravi.collapsiblecalendarview.view.LockScrollView>
+
+
+</LinearLayout>

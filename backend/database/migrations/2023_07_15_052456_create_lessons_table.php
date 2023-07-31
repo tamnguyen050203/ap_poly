@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('code_name');
             $table->string('description');
         });
     }

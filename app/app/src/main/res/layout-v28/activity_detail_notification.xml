@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activities.NotifyActivity">
+
+    <com.example.myfpl.component.HeaderApp
+        android:id="@+id/headerApp1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/default_padding"
+        android:paddingVertical="5dp"
+        app:app_enable_right_button="false"
+        app:app_header_title="@string/chi_tiet_thong_bao"
+        app:app_is_user_container="false"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_top_1dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/default_padding"
+            android:paddingTop="14.5dp">
+
+            <TextView
+                android:id="@+id/tv_NotificationName_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:lines="2"
+                android:text="Thông báo hộ trợ sinh viên đăng ký BHYT tháng 6/2023"
+                android:textAppearance="@style/Text16Bold"
+                android:textColor="@color/primary_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4.32dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/default_padding">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_createdAt_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="4 ngày trước"
+                    android:textSize="15dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/inter_medium"
+                    android:text=" • "
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tv_author_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="nhintq2"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/tv_type_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/notification_type_green"
+                    android:fontFamily="@font/inter_medium"
+                    android:paddingStart="15dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="3dp"
+                    android:text="Học phí"
+                    android:textAlignment="center"
+                    android:textColor="@color/green_light"
+                    android:textSize="15dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_content_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="14dp"
+            android:lineHeight="20dp"
+            android:paddingHorizontal="@dimen/default_padding"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. "
+            android:textAppearance="@style/Text13Medium" />
+    </LinearLayout>
+</LinearLayout>
