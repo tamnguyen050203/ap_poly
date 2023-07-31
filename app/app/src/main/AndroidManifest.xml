@@ -18,6 +18,35 @@
         <activity
             android:name=".ui.activities.ExtensionScreen"
             android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".ui.activities.NotifyActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.activities.LoginActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".ui.activities.DetailNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.NavigationActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.activities.Test"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.activities.SplashScreen"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
