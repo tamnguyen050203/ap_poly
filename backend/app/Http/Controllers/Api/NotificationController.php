@@ -26,7 +26,7 @@ class NotificationController extends Controller
             ->latest('updated_at')
             ->paginate(15);
 
-        
+
         foreach ($notify as $notification) {
             $notification->type = $notification->getTypeNameAttribute();
             // Use ReadNotify model to set isRead for notify
@@ -40,6 +40,34 @@ class NotificationController extends Controller
         return response()->json([
             'status' => 200,
             'notify' => $notify,
+        ]);
+    }
+
+    function readNotify(Request $request)
+    {
+        $notifyId = $request->notifyId;
+        $studentId = auth()->user()->id;
+
+        $readNotify = ReadNotify::where([
+            ['student_id', $studentId],
+            ['notification_id', $notifyId],
+        ])->first();
+
+        if ($readNotify) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Đã đọc thông báo này',
+            ]);
+        }
+
+        ReadNotify::create([
+            'student_id' => $studentId,
+            'notification_id' => $notifyId,
+        ]);
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Đã đọc thông báo này',
         ]);
     }
 }

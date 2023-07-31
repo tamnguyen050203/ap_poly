@@ -21,4 +21,5 @@ route::group(['prefix' => 'student', 'middleware' => 'tokenIsValid'], function (
     route::get('notifies/{type}', [NotificationController::class, 'getNotify']);
     route::get('schedules', [ScheduleController::class, 'getSchedules']);
     route::get('testSchedules', [TestScheduleController::class, 'getTestSchedules']);
+    route::post('readNotify/{notifyId}', [NotificationController::class, 'readNotify']);
 });
