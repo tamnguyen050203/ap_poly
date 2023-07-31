@@ -5,7 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,8 @@ import com.example.myfpl.models.TuitionModel;
 import java.util.List;
 
 public class TuitionFragment extends Fragment {
+
+    private static final String TAG = TuitionFragment.class.getSimpleName();
 
     private List<TuitionModel> tuitionList;
 
@@ -42,12 +46,14 @@ public class TuitionFragment extends Fragment {
     }
 
     public void setupTuitionList() {
+        tuitionList = TuitionModel.getTuitionList();
         adapter = new TuitionListAdapter(tuitionList, getContext(), new TuitionListAdapter.HandleEvent() {
             @Override
             public void OnItemClick(TuitionModel tuitionModel, int index) {
-
+                Log.d(TAG, "OnItemClick: click tuition");
             }
         });
+        binding.listTuition.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.listTuition.setAdapter(adapter);
     }
 }
