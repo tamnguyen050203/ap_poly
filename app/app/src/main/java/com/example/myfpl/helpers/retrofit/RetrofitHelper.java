@@ -54,8 +54,8 @@ public class RetrofitHelper {
                     .authenticator(RetrofitAuthenticator.getInstance(tokenRepository, authServiceHolder));
 
 
-//            String bareUrl = "http://10.0.2.2:8000";
-            String bareUrl = "http://192.168.1.21:8000";
+            String bareUrl = "http://10.0.2.2:8000";
+//            String bareUrl = "http://192.168.1.21:8000";
             instance = new Retrofit.Builder()
                     .baseUrl(bareUrl)
                     .addConverterFactory(GsonConverterFactory.create())

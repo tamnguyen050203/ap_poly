@@ -92,6 +92,7 @@ public class StudentFragment extends Fragment {
 
                     @Override
                     public void onSuccess(StudentDTO.@io.reactivex.rxjava3.annotations.NonNull StudentResponseDTO studentResponseDTO) {
+                        Log.d(TAG, "onSuccess: " + studentResponseDTO.getStudent().getName());
                         infoModelList.add(new InfoModel("Ngày sinh", studentResponseDTO.getStudent().getDob()));
                         infoModelList.add(new InfoModel("Giới tính", "Nam"));
                         infoModelList.add(new InfoModel("Số điện thoại", studentResponseDTO.getStudent().getPhone()));
