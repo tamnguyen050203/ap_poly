@@ -36,7 +36,7 @@ public class NotifyActivity extends AppCompatActivity {
         binding.headerApp.setHeaderClickListener(new HeaderApp.HeaderHandleClickListener() {
             @Override
             public void onLeftButtonClick() {
-
+                finish();
             }
 
             @Override
