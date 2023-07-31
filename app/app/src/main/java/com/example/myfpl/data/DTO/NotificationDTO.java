@@ -5,6 +5,40 @@ import com.example.myfpl.models.NotificationModel;
 import java.util.List;
 
 public class NotificationDTO {
+
+    public static class ReadNotificationRequestDTO {
+        private String notifyId;
+
+        public ReadNotificationRequestDTO(String notifyId) {
+            this.notifyId = notifyId;
+        }
+
+        public String getNotifyId() {
+            return notifyId;
+        }
+
+        public void setNotifyId(String notifyId) {
+            this.notifyId = notifyId;
+        }
+    }
+
+    public static class ReadNotificationResponseDTO {
+        private final int status;
+        private final String message;
+
+        public ReadNotificationResponseDTO(int status, String message) {
+            this.status = status;
+            this.message = message;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
     private int status;
     private Notify notify;
     public class Notify {

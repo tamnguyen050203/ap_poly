@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.myfpl.adapters.NotificationFragmentAdapter;
+import com.example.myfpl.data.DTO.NotificationDTO;
 import com.example.myfpl.databinding.ActivityNotifyBinding;
 import com.example.myfpl.models.NotificationModel;
 import com.example.myfpl.viewmodels.NotifyViewModel;
@@ -57,7 +58,6 @@ public class NotifyActivity extends AppCompatActivity {
         }).attach();
 
         viewModel.getNotificationData();
-
     }
 
     public void goToDetail(NotificationModel object, String date) {
@@ -65,6 +65,11 @@ public class NotifyActivity extends AppCompatActivity {
         i.putExtra("detail", object);
         i.putExtra("createdAt", date);
         this.startActivity(i);
+    }
+
+    public void readNotification(String requestDTO) {
+        NotificationDTO.ReadNotificationRequestDTO request = new NotificationDTO.ReadNotificationRequestDTO(requestDTO);
+        viewModel.readNotification(request);
     }
 
 }
