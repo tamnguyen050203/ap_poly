@@ -86,7 +86,6 @@ public class NotifyActivity extends AppCompatActivity {
         i.putExtra("createdAt", date);
         this.startActivity(i);
     }
-<<<<<<< Updated upstream
 
     public void readNotification(String requestDTO) {
         NotificationDTO.ReadNotificationRequestDTO request = new NotificationDTO.ReadNotificationRequestDTO(requestDTO);
