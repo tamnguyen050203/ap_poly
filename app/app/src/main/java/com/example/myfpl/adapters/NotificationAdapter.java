@@ -65,6 +65,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.binding.tvCreatedAt.setText(ConvertTimeToString(notificationModel.getCreated_at()));
         holder.binding.tvAuthor.setText(notificationModel.getAuthor());
         holder.binding.tvType.setText(notificationModel.getType());
+        Log.d(">>>>>>", "onBindViewHolder Notification Adapter: " + notificationModel.getRead() + " id" + notificationModel.getId());
         if(notificationModel.getRead()){
             holder.binding.isRead.setVisibility(View.INVISIBLE);
         }else{
@@ -89,10 +90,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 break;
         }
         holder.binding.notificationItem.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View view) {
                 // go to detail content and pass data
                 ToastApp.show(context, "Item" + notificationModel.getId());
+                ((NotifyActivity) context).readNotification(notificationModel.getId());
+                notifyDataSetChanged();
                 ((NotifyActivity) context).goToDetail(notificationModel, ConvertTimeToString(notificationModel.getCreated_at()));
             }
         });

@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.myfpl.adapters.NotificationFragmentAdapter;
+import com.example.myfpl.component.HeaderApp;
+import com.example.myfpl.data.DTO.NotificationDTO;
 import com.example.myfpl.databinding.ActivityNotifyBinding;
 import com.example.myfpl.models.NotificationModel;
 import com.example.myfpl.viewmodels.NotifyViewModel;
@@ -28,6 +30,23 @@ public class NotifyActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         list = new ArrayList<>();
         init();
+
+        binding.headerApp.setHeaderClickListener(new HeaderApp.HeaderHandleClickListener() {
+            @Override
+            public void onLeftButtonClick() {
+
+            }
+
+            @Override
+            public void onUserContainerClick() {
+
+            }
+
+            @Override
+            public void onRightButtonClick() {
+                readAllNotification();
+            }
+        });
     }
 
     public void init() {
@@ -57,7 +76,6 @@ public class NotifyActivity extends AppCompatActivity {
         }).attach();
 
         viewModel.getNotificationData();
-
     }
 
     public void goToDetail(NotificationModel object, String date) {
@@ -67,4 +85,12 @@ public class NotifyActivity extends AppCompatActivity {
         this.startActivity(i);
     }
 
+    public void readNotification(String requestDTO) {
+        NotificationDTO.ReadNotificationRequestDTO request = new NotificationDTO.ReadNotificationRequestDTO(requestDTO);
+        viewModel.readNotification(request);
+    }
+
+    public void readAllNotification() {
+        viewModel.readAllNotification();
+    }
 }
