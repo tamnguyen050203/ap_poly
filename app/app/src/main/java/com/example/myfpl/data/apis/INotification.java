@@ -19,4 +19,7 @@ public interface INotification {
     Single<NotificationDTO.ReadNotificationResponseDTO> readNotification(
            @Path ("notifyId") NotificationDTO.ReadNotificationRequestDTO notifyId
     );
+
+    @POST("/api/student/readAllNotify")
+    Single<NotificationDTO.ReadNotificationResponseDTO> readAllNotification();
 }

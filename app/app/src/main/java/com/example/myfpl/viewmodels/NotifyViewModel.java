@@ -78,10 +78,33 @@ public class NotifyViewModel extends AndroidViewModel {
                 });
     }
 
+    public void readAllNotification() {
+        iNotification.readAllNotification()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<NotificationDTO.ReadNotificationResponseDTO>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(NotificationDTO.@io.reactivex.rxjava3.annotations.NonNull ReadNotificationResponseDTO readNotificationResponseDTO) {
+                        Log.d(TAG, "onSuccess: " + readNotificationResponseDTO);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
+    }
+
     public NotifyViewModel(@NonNull Application application) {
         super(application);
         iNotification = RetrofitHelper.createService(INotification.class, application);
     }
+
     public static class NotifyViewModelFactory implements ViewModelProvider.Factory {
         private Application application;
 
