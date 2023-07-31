@@ -98,6 +98,4 @@ public class NotifyActivity extends AppCompatActivity {
         viewModel.readAllNotification();
         viewModel.getNotificationData();
     }
-=======
->>>>>>> Stashed changes
 }
