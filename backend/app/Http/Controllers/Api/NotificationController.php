@@ -70,4 +70,31 @@ class NotificationController extends Controller
             'message' => 'Đã đọc thông báo này',
         ]);
     }
+
+    function readAllNotify()
+    {
+        $studentId = auth()->user()->id;
+
+        // Get all id of notification
+        $notifyIds = $this->model->select('id')->get()->pluck('id');
+
+        // Get all id of read notify
+        $readNotifyIds = ReadNotify::where('student_id', $studentId)->get()->pluck('notification_id');
+
+        // Get all id of unread notify
+        $unreadNotifyIds = $notifyIds->diff($readNotifyIds);
+
+        // Create read notify for all unread notify
+        foreach ($unreadNotifyIds as $notifyId) {
+            ReadNotify::create([
+                'student_id' => $studentId,
+                'notification_id' => $notifyId,
+            ]);
+        }
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Đã đọc tất cả thông báo',
+        ]);
+    }
 }
