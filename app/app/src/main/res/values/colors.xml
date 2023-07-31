@@ -12,6 +12,7 @@
     <!--    custom color-->
     <!--    <color name="primary_color">#303B85</color>-->
     <color name="primary_color">#FFA04B</color>
+    <color name="second_primary_color">#BDD9FF</color>
     <color name="primary_color_50">#80303B85</color>
     <color name="primary_color_100">#303B85</color>
     <color name="primary_text_color" id="primary_text_color" >#0F0E2D</color>
@@ -21,6 +22,7 @@
     <color name="primary_text_color_20">#800F0E2D</color>
     <color name="primary_text_color_80">#CC0F0E2D</color>
     <color name="secondary_text_color">#59629D</color>
+    <color name="blue_text">#6BA9FE</color>
     <color name="orange_light">#FFA800</color>
     <color name="aqua_light">#B7DBFD</color>
     <color name="aqua">#73BAFC</color>
@@ -38,6 +40,7 @@
     <color name="green_medium">#E8FEE1</color>
     <color name="green_light_white">#F5FFF5</color>
     <color name="stroke_info">#AEFAFFF5</color>
+    <color name="grey_item">#F9F9FC</color>
 
     <color name="screen_background">#F2B680</color>
     <color name="indicator_color">#E2E2E2</color>
