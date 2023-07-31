@@ -17,7 +17,7 @@ public interface INotification {
 
     @POST("/api/student/readNotify/{notifyId}")
     Single<NotificationDTO.ReadNotificationResponseDTO> readNotification(
-           @Path ("notifyId") NotificationDTO.ReadNotificationRequestDTO notifyId
+           @Path ("notifyId") String notifyId
     );
 
     @POST("/api/student/readAllNotify")

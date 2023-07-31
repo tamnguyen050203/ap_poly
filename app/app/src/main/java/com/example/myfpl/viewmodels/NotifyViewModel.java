@@ -45,7 +45,7 @@ public class NotifyViewModel extends AndroidViewModel {
 
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull NotificationDTO notificationDTO) {
-                        Log.d(">>>>", notificationDTO+"");
+                        Log.d(">>>>", notificationDTO.getNotify().getData().get(1)+"");
                         liveDataNotification.setValue(notificationDTO);
                     }
 
@@ -57,7 +57,7 @@ public class NotifyViewModel extends AndroidViewModel {
     }
 
     public void readNotification(NotificationDTO.ReadNotificationRequestDTO readNotificationRequestDTO){
-        iNotification.readNotification(readNotificationRequestDTO)
+        iNotification.readNotification(readNotificationRequestDTO.getNotifyId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<NotificationDTO.ReadNotificationResponseDTO>() {
