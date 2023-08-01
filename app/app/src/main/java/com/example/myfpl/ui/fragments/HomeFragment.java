@@ -18,48 +18,52 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myfpl.adapters.ScheduleListAdapter;
 import com.example.myfpl.adapters.SmallNotificationAdapter;
+import com.example.myfpl.data.DTO.ScheduleDTO;
 import com.example.myfpl.databinding.FragmentHomeBinding;
 import com.example.myfpl.models.NotificationModel;
+import com.example.myfpl.models.ScheduleModel;
 import com.example.myfpl.models.TestModelSchedule;
 import com.example.myfpl.ui.activities.DetailNotificationActivity;
 import com.example.myfpl.ui.activities.NotifyActivity;
 import com.example.myfpl.util.DateUtil;
 import com.example.myfpl.viewmodels.NavigationViewModel;
+import com.example.myfpl.viewmodels.ScheduleFragmentViewModel;
+import com.example.myfpl.viewmodels.ScheduleViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private static final String TAG = HomeFragment.class.getSimpleName();
-    private NavigationViewModel viewModel;
+    private ScheduleViewModel viewModel;
+    private List<ScheduleModel> listData;
     private ScheduleListAdapter scheduleListAdapter;
-    private ScheduleListAdapter scheduleTestListAdapter;
     private SmallNotificationAdapter smallNotificationAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-//        binding.getRoot().setAnimatePa
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         init();
         addListener();
     }
 
     public void init() {
         if (getActivity() != null) {
-            viewModel = new ViewModelProvider(requireActivity()).get(NavigationViewModel.class);
+            viewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
         }
+        viewModel.getScheduleData();
         binding.textSession.setText(DateUtil.getCurrentSession());
-
-        setupScheduleList();
-        setupScheduleTestList();
+//        setupScheduleList();
+//        setupScheduleTestList();
         setupSmallNotification();
     }
 
@@ -78,54 +82,45 @@ public class HomeFragment extends Fragment {
         binding.listNotify.setAdapter(smallNotificationAdapter);
     }
 
-    public void setupScheduleList() {
-        scheduleListAdapter = new ScheduleListAdapter(new ScheduleListAdapter.HandleEventListItem() {
-            @Override
-            public void onItemClick(TestModelSchedule testModelSchedule, int itemIndex) {
-                Log.d(TAG, "onItemClick: " + testModelSchedule.getScheduleTitle());
-            }
-
-            @Override
-            public void onAlarmClick(TestModelSchedule testModelSchedule, int itemIndex) {
-
-            }
-        });
-
-        binding.listSchedule.setAdapter(scheduleListAdapter);
-    }
-
-    public void setupScheduleTestList() {
-        scheduleTestListAdapter = new ScheduleListAdapter(new ScheduleListAdapter.HandleEventListItem() {
-            @Override
-            public void onItemClick(TestModelSchedule testModelSchedule, int itemIndex) {
-                Log.d(TAG, "onItemClick: " + testModelSchedule.getScheduleTitle());
-            }
-
-            @Override
-            public void onAlarmClick(TestModelSchedule testModelSchedule, int itemIndex) {
-
-            }
-        });
-
-        binding.listTestSchedule.setAdapter(scheduleTestListAdapter);
-    }
+//    public void setupScheduleList() {
+//        scheduleListAdapter = new ScheduleListAdapter(new ScheduleListAdapter.HandleEventListItem() {
+//            @Override
+//            public void onItemClick(TestModelSchedule testModelSchedule, int itemIndex) {
+//                Log.d(TAG, "onItemClick: " + testModelSchedule.getScheduleTitle());
+//            }
+//
+//            @Override
+//            public void onAlarmClick(TestModelSchedule testModelSchedule, int itemIndex) {
+//
+//            }
+//        });
+//
+//        binding.listSchedule.setAdapter(scheduleListAdapter);
+//    }
 
     public void setupSlider() {
 
     }
 
     public void addListener() {
-        viewModel.getListSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
-            @Override
-            public void onChanged(List<TestModelSchedule> testModelSchedules) {
-                scheduleListAdapter.setListData(testModelSchedules);
-            }
-        });
+//        viewModel.getListSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
+//            @Override
+//            public void onChanged(List<TestModelSchedule> testModelSchedules) {
+//                scheduleListAdapter.setListData(testModelSchedules);
+//            }
+//        });
 
-        viewModel.getListTestSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
+        viewModel.getLiveDataSchedule().observe(getViewLifecycleOwner(), new Observer<ScheduleDTO.ScheduleResponseDTO>() {
             @Override
-            public void onChanged(List<TestModelSchedule> testModelSchedules) {
-                scheduleTestListAdapter.setListData(testModelSchedules);
+            public void onChanged(ScheduleDTO.ScheduleResponseDTO scheduleResponseDTO) {
+                if (scheduleResponseDTO == null) {
+                    listData = new ArrayList<>();
+                } else {
+                    listData = scheduleResponseDTO.getSchedules().getData();
+                    Log.d(TAG, "onChanged: "+ listData.size());
+                    scheduleListAdapter = new ScheduleListAdapter(listData, getContext());
+                    binding.listTestSchedule.setAdapter(scheduleListAdapter);
+                }
             }
         });
 
@@ -140,5 +135,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        viewModel.getScheduleData();
     }
 }
