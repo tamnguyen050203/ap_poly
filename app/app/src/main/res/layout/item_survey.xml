@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="8dp"
+    android:layout_marginBottom="20dp"
+    app:cardCornerRadius="16dp"
+    android:backgroundTint="@color/grey_item">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/transparent"
+        android:backgroundTint="@color/transparent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/fee_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Têb môn: "
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/lesson_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/fee_name"
+                    android:text="Android Networking"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/desc_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giảng viên: "
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/lecturer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/desc_fee"
+                    android:text="Nguyễn Ngọc Chấn"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="16sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/code_student_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email: "
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/email_lecturer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/code_student_fee"
+                    android:text="Chann3@fpt.edu.vn"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="16sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E4E4E4"/>
+
+        <LinearLayout
+            android:id="@+id/btn_survey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đánh giá"
+                android:textSize="20sp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/text_pink"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
