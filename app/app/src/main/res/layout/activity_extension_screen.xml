@@ -76,7 +76,7 @@
                     android:layout_width="142sp"
                     android:layout_height="169sp"
                     android:gravity="center"
-                    android:onClick="onBack"
+                    android:onClick="onClickServiceScreen"
                     android:clickable="true"
                     android:layout_gravity="center"
                     android:orientation="vertical"

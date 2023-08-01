@@ -29,4 +29,9 @@ public class ExtensionScreen extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void onClickServiceScreen(View view){
+        Intent intent = new Intent(ExtensionScreen.this, SplashScreen.class);
+        startActivity(intent);
+        finish();
+    }
 }
