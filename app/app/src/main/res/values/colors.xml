@@ -41,6 +41,8 @@
     <color name="green_light_white">#F5FFF5</color>
     <color name="stroke_info">#AEFAFFF5</color>
     <color name="grey_item">#F9F9FC</color>
+    <color name="text_pink">#FF98AA</color>
+    <color name="pink_bg">#FF98AA</color>
 
     <color name="screen_background">#F2B680</color>
     <color name="indicator_color">#E2E2E2</color>
