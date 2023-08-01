@@ -36,7 +36,7 @@
                     android:textSize="16sp"/>
 
                 <TextView
-                    android:id="@+id/fee_name_value"
+                    android:id="@+id/lesson_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/fee_name"
@@ -62,7 +62,7 @@
                     android:textSize="16sp"/>
 
                 <TextView
-                    android:id="@+id/desc_fee_value"
+                    android:id="@+id/lecturer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/desc_fee"
@@ -87,7 +87,7 @@
                     android:textSize="16sp"/>
 
                 <TextView
-                    android:id="@+id/code_student_fee_value"
+                    android:id="@+id/email_lecturer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/code_student_fee"
@@ -104,7 +104,7 @@
             android:background="#E4E4E4"/>
 
         <LinearLayout
-            android:id="@+id/btn_pay"
+            android:id="@+id/btn_survey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

@@ -58,7 +58,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_item_survey"
+        android:id="@+id/list_item_tuition"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_marginTop="175dp"
