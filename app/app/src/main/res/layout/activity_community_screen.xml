@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.CommunityScreen"
+    android:background="@color/green_light"
+    app:layoutDescription="@xml/activity_community_screen_scene">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+       android:paddingStart="15dp"
+        >
+
+        <ImageView
+            android:id="@+id/buttonBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back_white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/extension_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="Cộng đồng"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+        <ImageView
+            android:id="@+id/illustration"
+            android:layout_width="175dp"
+            android:layout_height="90dp"
+            android:src="@drawable/img_community"
+            android:layout_marginStart="10dp"
+            />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="175dp"
+        android:background="@drawable/drawable_gb_home_fragment"
+        android:elevation="10dp"
+        android:numColumns="2"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="31dp"
+        android:verticalSpacing="10dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+        app:layout_constraintVertical_bias="0.98"
+
+        >
+    </GridView>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
