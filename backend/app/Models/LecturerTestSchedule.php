@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class LecturerTestSchedule extends Model
 {
@@ -18,9 +17,9 @@ class LecturerTestSchedule extends Model
         "test_schedule_id"
     ];
 
-    public function lecturer(): HasMany
+    public function lecturer(): BelongsTo
     {
-        return $this->hasMany(Lecturer::class);
+        return $this->BelongsTo(Lecturer::class);
     }
 
     public function testSchedule(): BelongsTo

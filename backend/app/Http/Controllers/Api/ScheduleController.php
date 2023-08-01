@@ -43,6 +43,7 @@ class ScheduleController extends Controller
             ->select(
                 'schedules.id',
                 'lessons.name as lesson_name',
+                'lessons.code_name as lesson_code_name',
                 'class_groups.link as class_group_link',
                 'class_groups.name as class_group_name',
                 'rooms.name as room_name',

@@ -23,14 +23,12 @@ public class NotifyActivity extends AppCompatActivity {
     private static final String TAG = "NotifyActivity";
     private ActivityNotifyBinding binding;
     private NotificationFragmentAdapter adapter;
-    private ArrayList<NotificationModel> list;
     private NotifyViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityNotifyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        list = new ArrayList<>();
         init();
 
         binding.headerApp.setHeaderClickListener(new HeaderApp.HeaderHandleClickListener() {
