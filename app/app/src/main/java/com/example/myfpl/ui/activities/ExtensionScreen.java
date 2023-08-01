@@ -2,6 +2,7 @@ package com.example.myfpl.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.view.View;
 import com.example.myfpl.R;
 import com.example.myfpl.databinding.ActivityExtensionScreenBinding;
 
-public class ExtensionScreen extends AppCompatActivity {
+public class ExtensionScreen extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityExtensionScreenBinding binding;
 
@@ -21,12 +22,35 @@ public class ExtensionScreen extends AppCompatActivity {
         setContentView(binding.getRoot());
         init();
     }
-    public void init(){
 
+    public void init() {
+        addEvent();
     }
-    public void onBack(View view){
-        Intent intent = new Intent(ExtensionScreen.this, SplashScreen.class);
-        startActivity(intent);
-        finish();
+
+    public void addEvent() {
+        binding.btnExtension.setOnClickListener(ExtensionScreen.this);
+        binding.btnCommunity.setOnClickListener(ExtensionScreen.this);
+        binding.btnFee.setOnClickListener(ExtensionScreen.this);
+        binding.btnSurvey.setOnClickListener(ExtensionScreen.this);
+    }
+
+    public void onBack(View view) {
+        onBackPressed();
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_extension:
+                break;
+            case R.id.btn_community:
+                startActivity(new Intent(ExtensionScreen.this, CommunityScreen.class));
+                break;
+            case R.id.btn_fee:
+                break;
+            case R.id.btn_survey:
+                break;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.myfpl.ui.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.example.myfpl.helpers.retrofit.RetrofitHelper;
 import com.example.myfpl.helpers.retrofit.TokenRepository;
 import com.example.myfpl.models.InfoModel;
 import com.example.myfpl.models.StudentModel;
+import com.example.myfpl.ui.activities.ExtensionScreen;
 import com.example.myfpl.util.DateUtil;
 import com.example.myfpl.viewmodels.NavigationViewModel;
 import com.example.myfpl.viewmodels.TestViewModel;
@@ -69,6 +71,7 @@ public class StudentFragment extends Fragment {
 
     public void init() {
         setupInfoList();
+        addEvent();
     }
 
     public void setupInfoList() {
@@ -76,6 +79,15 @@ public class StudentFragment extends Fragment {
         infoListAdapter = new InfoListAdapter(infoModelList, getContext());
         binding.listInfoStudent.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.listInfoStudent.setAdapter(infoListAdapter);
+    }
+
+    public void addEvent(){
+        binding.buttonExtension.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireContext().startActivity(new Intent(requireContext(), ExtensionScreen.class));
+            }
+        });
     }
 
     public void getInfoData() {
@@ -90,6 +102,7 @@ public class StudentFragment extends Fragment {
 
                     }
 
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onSuccess(StudentDTO.@io.reactivex.rxjava3.annotations.NonNull StudentResponseDTO studentResponseDTO) {
                         Log.d(TAG, "onSuccess: " + studentResponseDTO.getStudent().getName());
@@ -103,6 +116,7 @@ public class StudentFragment extends Fragment {
                         infoListAdapter.notifyDataSetChanged();
                         binding.nameStudent.setText(studentResponseDTO.getStudent().getName());
                         Glide.with(requireContext()).load(studentResponseDTO.getStudent().getAvatar()).into(binding.avatarStudent);
+                        Glide.with(requireContext()).load(studentResponseDTO.getStudent().getAvatar()).into(binding.subAvatarStudent);
                     }
 
                     @Override
