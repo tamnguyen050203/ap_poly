@@ -13,6 +13,9 @@ import com.example.myfpl.data.DTO.ScheduleDTO;
 import com.example.myfpl.data.apis.ScheduleService;
 import com.example.myfpl.helpers.retrofit.RetrofitHelper;
 
+import java.util.Date;
+import java.util.Map;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -41,8 +44,8 @@ public class ScheduleViewModel extends AndroidViewModel {
         this.liveDataTestSchedule.setValue(liveDataTestSchedule);
     }
 
-    public void getTestScheduleData(){
-        scheduleService.getTestSchedules()
+    public void getTestScheduleData(Map<String, String> date){
+        scheduleService.getTestSchedules(date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<ScheduleDTO.TestScheduleResponseDTO>() {
@@ -63,8 +66,8 @@ public class ScheduleViewModel extends AndroidViewModel {
                 });
     }
 
-    public void getScheduleData(){
-        scheduleService.getSchedules()
+    public void getScheduleData(Map<String, String> date){
+        scheduleService.getSchedules(date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<ScheduleDTO.ScheduleResponseDTO>() {

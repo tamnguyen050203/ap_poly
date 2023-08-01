@@ -30,7 +30,10 @@ import com.example.myfpl.util.DateUtil;
 import com.example.myfpl.viewmodels.ScheduleViewModel;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
@@ -41,7 +44,7 @@ public class HomeFragment extends Fragment {
     private TestScheduleListAdapter testScheduleListAdapter;
     private ScheduleListAdapter scheduleListAdapter;
     private SmallNotificationAdapter smallNotificationAdapter;
-
+    private Map<String, String> map;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,7 +55,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        map = new HashMap<>();
+        String date = DateUtil.getCurrentDate();
+        map.put("date", date);
         init();
         addListener();
     }
@@ -61,8 +66,8 @@ public class HomeFragment extends Fragment {
         if (getActivity() != null) {
             viewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
         }
-        viewModel.getTestScheduleData();
-        viewModel.getScheduleData();
+        viewModel.getTestScheduleData(map);
+        viewModel.getScheduleData(map);
         binding.textSession.setText(DateUtil.getCurrentSession());
 //        setupScheduleList();
 //        setupScheduleTestList();
@@ -150,7 +155,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.getTestScheduleData();
-        viewModel.getScheduleData();
+        viewModel.getTestScheduleData(map);
+        viewModel.getScheduleData(map);
     }
 }
