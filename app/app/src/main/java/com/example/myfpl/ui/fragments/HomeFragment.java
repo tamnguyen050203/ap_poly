@@ -17,17 +17,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myfpl.adapters.ScheduleListAdapter;
+import com.example.myfpl.adapters.TestScheduleListAdapter;
 import com.example.myfpl.adapters.SmallNotificationAdapter;
 import com.example.myfpl.data.DTO.ScheduleDTO;
 import com.example.myfpl.databinding.FragmentHomeBinding;
 import com.example.myfpl.models.NotificationModel;
 import com.example.myfpl.models.ScheduleModel;
-import com.example.myfpl.models.TestModelSchedule;
+import com.example.myfpl.models.TestScheduleModel;
 import com.example.myfpl.ui.activities.DetailNotificationActivity;
 import com.example.myfpl.ui.activities.NotifyActivity;
 import com.example.myfpl.util.DateUtil;
-import com.example.myfpl.viewmodels.NavigationViewModel;
-import com.example.myfpl.viewmodels.ScheduleFragmentViewModel;
 import com.example.myfpl.viewmodels.ScheduleViewModel;
 
 import java.util.ArrayList;
@@ -37,7 +36,9 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private static final String TAG = HomeFragment.class.getSimpleName();
     private ScheduleViewModel viewModel;
-    private List<ScheduleModel> listData;
+    private List<TestScheduleModel> listTestSchedule;
+    private List<ScheduleModel> listSchedule;
+    private TestScheduleListAdapter testScheduleListAdapter;
     private ScheduleListAdapter scheduleListAdapter;
     private SmallNotificationAdapter smallNotificationAdapter;
 
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment {
         if (getActivity() != null) {
             viewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
         }
+        viewModel.getTestScheduleData();
         viewModel.getScheduleData();
         binding.textSession.setText(DateUtil.getCurrentSession());
 //        setupScheduleList();
@@ -106,7 +108,7 @@ public class HomeFragment extends Fragment {
 //        viewModel.getListSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
 //            @Override
 //            public void onChanged(List<TestModelSchedule> testModelSchedules) {
-//                scheduleListAdapter.setListData(testModelSchedules);
+//                scheduleListAdapter.setlistTestSchedule(testModelSchedules);
 //            }
 //        });
 
@@ -114,12 +116,25 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(ScheduleDTO.ScheduleResponseDTO scheduleResponseDTO) {
                 if (scheduleResponseDTO == null) {
-                    listData = new ArrayList<>();
+                    listSchedule = new ArrayList<>();
                 } else {
-                    listData = scheduleResponseDTO.getSchedules().getData();
-                    Log.d(TAG, "onChanged: "+ listData.size());
-                    scheduleListAdapter = new ScheduleListAdapter(listData, getContext());
-                    binding.listTestSchedule.setAdapter(scheduleListAdapter);
+                    listSchedule = scheduleResponseDTO.getSchedules().getData();
+                    Log.d(TAG, "onChanged: " + listSchedule.size());
+                    scheduleListAdapter = new ScheduleListAdapter(listSchedule, getContext());
+                    binding.listSchedule.setAdapter(scheduleListAdapter);
+                }
+            }
+        });
+
+        viewModel.getliveDataTestSchedule().observe(getViewLifecycleOwner(), new Observer<ScheduleDTO.TestScheduleResponseDTO>() {
+            @Override
+            public void onChanged(ScheduleDTO.TestScheduleResponseDTO TestScheduleResponseDTO) {
+                if (TestScheduleResponseDTO == null) {
+                    listTestSchedule = new ArrayList<>();
+                } else {
+                    listTestSchedule = TestScheduleResponseDTO.getSchedules().getData();
+                    testScheduleListAdapter = new TestScheduleListAdapter(listTestSchedule, getContext());
+                    binding.listTestSchedule.setAdapter(testScheduleListAdapter);
                 }
             }
         });
@@ -135,6 +150,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        viewModel.getTestScheduleData();
         viewModel.getScheduleData();
     }
 }

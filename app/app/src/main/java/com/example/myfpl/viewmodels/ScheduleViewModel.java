@@ -22,18 +22,49 @@ public class ScheduleViewModel extends AndroidViewModel {
 
     private final String TAG = "ScheduleViewModel";
     private ScheduleService scheduleService;
+    private final MutableLiveData<ScheduleDTO.TestScheduleResponseDTO> liveDataTestSchedule = new MutableLiveData<>();
     private final MutableLiveData<ScheduleDTO.ScheduleResponseDTO> liveDataSchedule = new MutableLiveData<>();
 
     public MutableLiveData<ScheduleDTO.ScheduleResponseDTO> getLiveDataSchedule() {
         return liveDataSchedule;
     }
 
-    public void setLiveDataSchedule(ScheduleDTO.ScheduleResponseDTO liveDataNotification) {
-        this.liveDataSchedule.setValue(liveDataNotification);
+    public void setliveDataSchedule(ScheduleDTO.ScheduleResponseDTO liveDataSchedule) {
+        this.liveDataSchedule.setValue(liveDataSchedule);
+    }
+
+    public MutableLiveData<ScheduleDTO.TestScheduleResponseDTO> getliveDataTestSchedule() {
+        return liveDataTestSchedule;
+    }
+
+    public void setliveDataTestSchedule(ScheduleDTO.TestScheduleResponseDTO liveDataTestSchedule) {
+        this.liveDataTestSchedule.setValue(liveDataTestSchedule);
+    }
+
+    public void getTestScheduleData(){
+        scheduleService.getTestSchedules()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<ScheduleDTO.TestScheduleResponseDTO>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull ScheduleDTO.TestScheduleResponseDTO TestScheduleResponseDTO) {
+                        setliveDataTestSchedule(TestScheduleResponseDTO);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
     }
 
     public void getScheduleData(){
-        scheduleService.getTestSchedules()
+        scheduleService.getSchedules()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<ScheduleDTO.ScheduleResponseDTO>() {
@@ -44,8 +75,7 @@ public class ScheduleViewModel extends AndroidViewModel {
 
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull ScheduleDTO.ScheduleResponseDTO scheduleResponseDTO) {
-                        Log.d(TAG, scheduleResponseDTO.getSchedules().getData().get(1)+"");
-                        setLiveDataSchedule(scheduleResponseDTO);
+                        setliveDataSchedule(scheduleResponseDTO);
                     }
 
                     @Override
@@ -58,20 +88,5 @@ public class ScheduleViewModel extends AndroidViewModel {
     public ScheduleViewModel(@NonNull Application application) {
         super(application);
         scheduleService = RetrofitHelper.createService(ScheduleService.class, application);
-    }
-
-    public static class ScheduleViewModelFactory implements ViewModelProvider.Factory {
-        @NonNull
-        private final Application application;
-
-        public ScheduleViewModelFactory(@NonNull Application application) {
-            this.application = application;
-        }
-
-        @NonNull
-        @Override
-        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new ScheduleViewModel(application);
-        }
     }
 }

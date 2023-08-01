@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 public interface ScheduleService {
 
     @GET("/api/student/testSchedules")
-    Single<ScheduleDTO.ScheduleResponseDTO> getTestSchedules();
+    Single<ScheduleDTO.TestScheduleResponseDTO> getTestSchedules();
 
     @GET("/api/student/schedules")
     Single<ScheduleDTO.ScheduleResponseDTO> getSchedules();
