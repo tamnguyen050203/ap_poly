@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.myfpl.R;
 import com.example.myfpl.adapters.SurveyListAdapter;
 import com.example.myfpl.databinding.ActivitySurveyBinding;
-import com.example.myfpl.databinding.ActivityTuitionBinding;
 import com.example.myfpl.models.SurveyModel;
 
 import java.util.ArrayList;

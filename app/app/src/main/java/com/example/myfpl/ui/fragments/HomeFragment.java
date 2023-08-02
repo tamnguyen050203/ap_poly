@@ -17,8 +17,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myfpl.adapters.ScheduleListAdapter;
-import com.example.myfpl.adapters.TestScheduleListAdapter;
 import com.example.myfpl.adapters.SmallNotificationAdapter;
+import com.example.myfpl.adapters.TestScheduleListAdapter;
+import com.example.myfpl.data.DTO.NotificationDTO;
 import com.example.myfpl.data.DTO.ScheduleDTO;
 import com.example.myfpl.databinding.FragmentHomeBinding;
 import com.example.myfpl.models.NotificationModel;
@@ -27,10 +28,10 @@ import com.example.myfpl.models.TestScheduleModel;
 import com.example.myfpl.ui.activities.DetailNotificationActivity;
 import com.example.myfpl.ui.activities.NotifyActivity;
 import com.example.myfpl.util.DateUtil;
+import com.example.myfpl.viewmodels.NotifyViewModel;
 import com.example.myfpl.viewmodels.ScheduleViewModel;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +40,15 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private static final String TAG = HomeFragment.class.getSimpleName();
     private ScheduleViewModel viewModel;
+    private NotifyViewModel notifyViewModel;
     private List<TestScheduleModel> listTestSchedule;
     private List<ScheduleModel> listSchedule;
     private TestScheduleListAdapter testScheduleListAdapter;
     private ScheduleListAdapter scheduleListAdapter;
     private SmallNotificationAdapter smallNotificationAdapter;
     private Map<String, String> map;
+    private List<NotificationModel> list;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,17 +69,17 @@ public class HomeFragment extends Fragment {
     public void init() {
         if (getActivity() != null) {
             viewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
+            notifyViewModel = new ViewModelProvider(requireActivity()).get(NotifyViewModel.class);
         }
         viewModel.getTestScheduleData(map);
         viewModel.getScheduleData(map);
+        notifyViewModel.getNotificationData(6);
         binding.textSession.setText(DateUtil.getCurrentSession());
-//        setupScheduleList();
-//        setupScheduleTestList();
-        setupSmallNotification();
+
     }
 
-    public void setupSmallNotification() {
-        smallNotificationAdapter = new SmallNotificationAdapter(requireContext(), NotificationModel.getData(), new SmallNotificationAdapter.HandleEvent() {
+    public void setupSmallNotification(ArrayList<NotificationModel> list) {
+        smallNotificationAdapter = new SmallNotificationAdapter(requireContext(), list, new SmallNotificationAdapter.HandleEvent() {
             @Override
             public void OnItemClick(NotificationModel notificationModel, int index) {
                 Intent i = new Intent(requireActivity(), DetailNotificationActivity.class);
@@ -89,33 +93,23 @@ public class HomeFragment extends Fragment {
         binding.listNotify.setAdapter(smallNotificationAdapter);
     }
 
-//    public void setupScheduleList() {
-//        scheduleListAdapter = new ScheduleListAdapter(new ScheduleListAdapter.HandleEventListItem() {
-//            @Override
-//            public void onItemClick(TestModelSchedule testModelSchedule, int itemIndex) {
-//                Log.d(TAG, "onItemClick: " + testModelSchedule.getScheduleTitle());
-//            }
-//
-//            @Override
-//            public void onAlarmClick(TestModelSchedule testModelSchedule, int itemIndex) {
-//
-//            }
-//        });
-//
-//        binding.listSchedule.setAdapter(scheduleListAdapter);
-//    }
-
     public void setupSlider() {
 
     }
 
     public void addListener() {
-//        viewModel.getListSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
-//            @Override
-//            public void onChanged(List<TestModelSchedule> testModelSchedules) {
-//                scheduleListAdapter.setlistTestSchedule(testModelSchedules);
-//            }
-//        });
+
+        notifyViewModel.getLiveDataNotification().observe(getViewLifecycleOwner(), new Observer<NotificationDTO>() {
+            @Override
+            public void onChanged(NotificationDTO notificationDTO) {
+                if (notificationDTO == null) {
+                    list = new ArrayList<>();
+                } else {
+                    list = notificationDTO.getNotify().getData();
+                }
+                setupSmallNotification((ArrayList<NotificationModel>) list);
+            }
+        });
 
         viewModel.getLiveDataSchedule().observe(getViewLifecycleOwner(), new Observer<ScheduleDTO.ScheduleResponseDTO>() {
             @Override
@@ -150,6 +144,8 @@ public class HomeFragment extends Fragment {
                 requireActivity().startActivity(new Intent(requireContext(), NotifyActivity.class));
             }
         });
+
+
     }
 
     @Override
@@ -157,5 +153,6 @@ public class HomeFragment extends Fragment {
         super.onResume();
         viewModel.getTestScheduleData(map);
         viewModel.getScheduleData(map);
+        notifyViewModel.getNotificationData(6);
     }
 }

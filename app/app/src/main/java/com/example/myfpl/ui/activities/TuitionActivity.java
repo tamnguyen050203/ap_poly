@@ -1,10 +1,10 @@
 package com.example.myfpl.ui.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myfpl.R;
 import com.example.myfpl.adapters.TuitionListAdapter;

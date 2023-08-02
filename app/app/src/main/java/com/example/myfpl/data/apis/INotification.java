@@ -10,10 +10,11 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface INotification {
     @GET("/api/student/notifies/0")
-    Single<NotificationDTO> getNotificationData();
+    Single<NotificationDTO> getNotificationData(@Query("amount") int amount);
 
     @POST("/api/student/readNotify/{notifyId}")
     Single<NotificationDTO.ReadNotificationResponseDTO> readNotification(

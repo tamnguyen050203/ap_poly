@@ -1,24 +1,22 @@
 package com.example.myfpl.ui.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.myfpl.R;
-import com.example.myfpl.adapters.ScheduleViewPager;
 import com.example.myfpl.databinding.FragmentNormalScheduleBinding;
 import com.example.myfpl.viewmodels.ScheduleFragmentViewModel;
 
 public class TestScheduleFragment extends Fragment {
     private FragmentNormalScheduleBinding binding;
     private ScheduleFragmentViewModel viewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,7 +30,7 @@ public class TestScheduleFragment extends Fragment {
         init();
     }
 
-    private void init(){
+    private void init() {
         viewModel = new ViewModelProvider(requireActivity()).get(ScheduleFragmentViewModel.class);
     }
 }
