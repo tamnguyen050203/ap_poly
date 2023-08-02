@@ -4,7 +4,6 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -15,7 +14,6 @@ import com.example.myfpl.data.apis.INotification;
 import com.example.myfpl.helpers.retrofit.RetrofitHelper;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -33,8 +31,8 @@ public class NotifyViewModel extends AndroidViewModel {
         this.liveDataNotification = liveDataNotification;
     }
 
-    public void getNotificationData(){
-        iNotification.getNotificationData()
+    public void getNotificationData(int amount) {
+        iNotification.getNotificationData(amount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<NotificationDTO>() {
@@ -45,7 +43,7 @@ public class NotifyViewModel extends AndroidViewModel {
 
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull NotificationDTO notificationDTO) {
-                        Log.d(">>>>", notificationDTO.getNotify().getData().get(1)+"");
+                        Log.d(">>>>", notificationDTO.getNotify().getData().get(1) + "");
                         liveDataNotification.setValue(notificationDTO);
                     }
 
@@ -56,7 +54,7 @@ public class NotifyViewModel extends AndroidViewModel {
                 });
     }
 
-    public void readNotification(NotificationDTO.ReadNotificationRequestDTO readNotificationRequestDTO){
+    public void readNotification(NotificationDTO.ReadNotificationRequestDTO readNotificationRequestDTO) {
         iNotification.readNotification(readNotificationRequestDTO.getNotifyId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

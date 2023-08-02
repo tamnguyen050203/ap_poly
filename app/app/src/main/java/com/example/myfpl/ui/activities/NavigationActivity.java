@@ -1,20 +1,13 @@
 package com.example.myfpl.ui.activities;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.widget.ViewPager2;
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-
-import com.example.myfpl.R;
 import com.example.myfpl.adapters.MainViewPager;
 import com.example.myfpl.databinding.ActivityNavigationBinding;
-import com.example.myfpl.viewmodels.TestViewModel;
-import com.google.android.material.navigation.NavigationBarView;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 

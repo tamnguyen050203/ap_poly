@@ -1,6 +1,9 @@
 package com.example.myfpl.ui.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,12 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.myfpl.R;
 import com.example.myfpl.adapters.ScheduleViewPager;
 import com.example.myfpl.databinding.FragmentScheduleBinding;
 import com.example.myfpl.viewmodels.ScheduleFragmentViewModel;

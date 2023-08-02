@@ -63,19 +63,19 @@ public class SmallNotificationAdapter extends RecyclerView.Adapter<SmallNotifica
         holder.binding.publishDate.setText(ConvertTimeToString(notificationModel.getCreated_at()));
         holder.binding.namePublisher.setText(notificationModel.getAuthor());
         switch (notificationModel.getType()) {
-            case "Học tập":
+            case "Học Tập":
                 holder.binding.itemNotify.setBackgroundTintList(context.getResources().getColorStateList(R.color.aqua_20, context.getTheme()));
                 holder.binding.dotIndicator.setBackgroundTintList(context.getResources().getColorStateList(R.color.aqua, context.getTheme()));
                 break;
-            case "Việc làm":
+            case "Việc Làm":
                 holder.binding.itemNotify.setBackgroundTintList(context.getResources().getColorStateList(R.color.red_light_20, context.getTheme()));
                 holder.binding.dotIndicator.setBackgroundTintList(context.getResources().getColorStateList(R.color.red_light, context.getTheme()));
                 break;
-            case "Học phí":
+            case "Học Phí":
                 holder.binding.itemNotify.setBackgroundTintList(context.getResources().getColorStateList(R.color.orange_20, context.getTheme()));
                 holder.binding.dotIndicator.setBackgroundTintList(context.getResources().getColorStateList(R.color.orange, context.getTheme()));
                 break;
-            case "Hoạt động":
+            case "Hoạt Động":
                 holder.binding.itemNotify.setBackgroundTintList(context.getResources().getColorStateList(R.color.green_light_20, context.getTheme()));
                 holder.binding.dotIndicator.setBackgroundTintList(context.getResources().getColorStateList(R.color.green_light, context.getTheme()));
                 break;

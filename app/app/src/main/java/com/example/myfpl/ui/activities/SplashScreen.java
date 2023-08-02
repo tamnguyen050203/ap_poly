@@ -2,16 +2,14 @@ package com.example.myfpl.ui.activities;
 
 import static androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
-import androidx.core.view.ViewCompat;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 
 import com.example.myfpl.databinding.ActivitySplashScreenBinding;
 

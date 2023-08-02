@@ -1,11 +1,10 @@
 package com.example.myfpl.ui.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.myfpl.R;
 import com.example.myfpl.component.HeaderApp;
