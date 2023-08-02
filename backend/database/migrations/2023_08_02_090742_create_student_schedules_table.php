@@ -9,8 +9,11 @@ return new class extends Migration {
     {
         Schema::create('student_schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('student_class_id')->constrained('student_classes');
             $table->foreignId('schedule_id')->constrained('schedules');
+            $table->string('reminder_id')->nullable();
+            $table->boolean('is_alarm')->default(false);
+            $table->boolean('is_attended')->default(false);
             $table->boolean('flag')->default(true);
         });
     }

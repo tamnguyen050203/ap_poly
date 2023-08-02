@@ -15,16 +15,15 @@ class StudentScheduleFactory extends Factory
     public function definition()
     {
         $student_class_id = StudentClass::query()->inRandomOrder()->first()->id;
-        $class_group_id = StudentClass::query()->join(
-            'class_groups',
-            $student_class_id,
-            '=',
-            'class_groups.id')->first()->id;
+        $class_group_id = StudentClass::query()
+            ->where('id', '=', $student_class_id)->first()->class_group_id;
         $schedule_id = ClassGroup::query()->join(
             'schedules',
-            $class_group_id,
+            'class_groups.id',
             '=',
-            'schedules.class_group_id')->inRandomOrder()->first()->id;
+            'schedules.class_group_id')
+            ->where('class_groups.id', $class_group_id)
+            ->inRandomOrder()->first()->id;
         return [
             'student_class_id' => $student_class_id,
             'schedule_id' => $schedule_id,
