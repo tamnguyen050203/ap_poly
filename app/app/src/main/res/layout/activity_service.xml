@@ -23,6 +23,7 @@
             android:id="@+id/buttonBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:onClick="onBack"
             android:src="@drawable/ic_back_white" />
     </LinearLayout>
 

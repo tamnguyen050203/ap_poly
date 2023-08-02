@@ -25,9 +25,7 @@ public class ExtensionScreen extends AppCompatActivity {
 
     }
     public void onBack(View view){
-        Intent intent = new Intent(ExtensionScreen.this, SplashScreen.class);
-        startActivity(intent);
-        finish();
+        onBackPressed();
     }
     public void onClickServiceScreen(View view){
         Intent intent = new Intent(ExtensionScreen.this, SplashScreen.class);

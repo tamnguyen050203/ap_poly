@@ -34,12 +34,9 @@ public class ServiceScreen extends AppCompatActivity {
     }
     public void init(){
         Log.d(">>>>ServiceActivity"," model:"+ ServiceModel.getData());
-        binding.buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
+    }
+    public void onBack(View view) {
+        onBackPressed();
     }
 }
