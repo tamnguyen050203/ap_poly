@@ -17,7 +17,7 @@ class LecturerTestScheduleFactory extends Factory
         return [
             'lecturer_id' => Lecturer::query()->inRandomOrder()->first()->id,
             'test_schedule_id' => TestSchedule::query()->inRandomOrder()->first()->id,
-            'is_attend' => $this->faker->boolean(false),
+            'is_attended' => $this->faker->boolean(false),
         ];
     }
 }

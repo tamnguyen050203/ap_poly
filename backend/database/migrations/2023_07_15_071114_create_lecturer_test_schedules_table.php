@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('lecturer_id')->constrained();
             $table->foreignId('test_schedule_id')->constrained();
+            $table->boolean('is_attended')->default(false);
             $table->boolean('flag')->default(true);
         });
     }
