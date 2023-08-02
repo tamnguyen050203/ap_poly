@@ -43,6 +43,6 @@ class DatabaseSeeder extends Seeder
         LecturerTestSchedule::factory()->count(20)->create();
         StudentTestSchedule::factory()->count(20)->create();
         StudentClass::factory()->count(30)->create();
-        StudentSchedule::factory()->count(100)->create();
+        StudentSchedule::factory()->count(150)->create();
     }
 }
