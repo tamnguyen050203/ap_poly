@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('roll_calls', function (Blueprint $table) {
+        Schema::create('student_schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('schedule_id')->constrained();
-            $table->foreignId('student_id')->constrained();
+            $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('schedule_id')->constrained('schedules');
             $table->boolean('flag')->default(true);
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('roll_calls');
+        Schema::dropIfExists('student_schedules');
     }
 };
