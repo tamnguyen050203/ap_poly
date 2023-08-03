@@ -2,8 +2,6 @@ package com.example.myfpl.ui.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,11 +20,7 @@ import com.example.myfpl.data.apis.StudentService;
 import com.example.myfpl.databinding.FragmentStudentBinding;
 import com.example.myfpl.helpers.retrofit.RetrofitHelper;
 import com.example.myfpl.models.InfoModel;
-import com.example.myfpl.models.StudentModel;
 import com.example.myfpl.ui.activities.ExtensionScreen;
-import com.example.myfpl.util.DateUtil;
-import com.example.myfpl.viewmodels.NavigationViewModel;
-import com.example.myfpl.viewmodels.TestViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +39,7 @@ public class StudentFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentStudentBinding.inflate(inflater, container, false);
         return binding.getRoot();
