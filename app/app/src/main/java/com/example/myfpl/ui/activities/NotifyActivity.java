@@ -1,12 +1,11 @@
 package com.example.myfpl.ui.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 
 import com.example.myfpl.adapters.NotificationFragmentAdapter;
 import com.example.myfpl.component.HeaderApp;
@@ -14,23 +13,19 @@ import com.example.myfpl.data.DTO.NotificationDTO;
 import com.example.myfpl.databinding.ActivityNotifyBinding;
 import com.example.myfpl.models.NotificationModel;
 import com.example.myfpl.viewmodels.NotifyViewModel;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-
-import java.util.ArrayList;
 
 public class NotifyActivity extends AppCompatActivity {
     private static final String TAG = "NotifyActivity";
     private ActivityNotifyBinding binding;
     private NotificationFragmentAdapter adapter;
-    private ArrayList<NotificationModel> list;
     private NotifyViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityNotifyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        list = new ArrayList<>();
         init();
 
         binding.headerApp.setHeaderClickListener(new HeaderApp.HeaderHandleClickListener() {
@@ -76,8 +71,7 @@ public class NotifyActivity extends AppCompatActivity {
                     break;
             }
         }).attach();
-
-        viewModel.getNotificationData();
+        viewModel.getNotificationData(0);
     }
 
     public void goToDetail(NotificationModel object, String date) {
@@ -90,11 +84,11 @@ public class NotifyActivity extends AppCompatActivity {
     public void readNotification(String requestDTO) {
         NotificationDTO.ReadNotificationRequestDTO request = new NotificationDTO.ReadNotificationRequestDTO(requestDTO);
         viewModel.readNotification(request);
-        viewModel.getNotificationData();
+        viewModel.getNotificationData(0);
     }
 
     public void readAllNotification() {
         viewModel.readAllNotification();
-        viewModel.getNotificationData();
+        viewModel.getNotificationData(0);
     }
 }

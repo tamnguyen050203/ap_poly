@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\RollCall;
 use App\Models\Student;
+use App\Models\StudentSchedule;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class RollCallPolicy
+class StudentSchedulePolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class RollCallPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\Student  $student
-     * @param  \App\Models\RollCall  $rollCall
+     * @param  \App\Models\StudentSchedule  $studentSchedule
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Student $student, RollCall $rollCall)
+    public function view(Student $student, StudentSchedule $studentSchedule)
     {
         //
     }
@@ -48,10 +48,10 @@ class RollCallPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\Student  $student
-     * @param  \App\Models\RollCall  $rollCall
+     * @param  \App\Models\StudentSchedule  $studentSchedule
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Student $student, RollCall $rollCall)
+    public function update(Student $student, StudentSchedule $studentSchedule)
     {
         //
     }
@@ -60,10 +60,10 @@ class RollCallPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\Student  $student
-     * @param  \App\Models\RollCall  $rollCall
+     * @param  \App\Models\StudentSchedule  $studentSchedule
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Student $student, RollCall $rollCall)
+    public function delete(Student $student, StudentSchedule $studentSchedule)
     {
         //
     }
@@ -72,10 +72,10 @@ class RollCallPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\Student  $student
-     * @param  \App\Models\RollCall  $rollCall
+     * @param  \App\Models\StudentSchedule  $studentSchedule
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(Student $student, RollCall $rollCall)
+    public function restore(Student $student, StudentSchedule $studentSchedule)
     {
         //
     }
@@ -84,10 +84,10 @@ class RollCallPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\Student  $student
-     * @param  \App\Models\RollCall  $rollCall
+     * @param  \App\Models\StudentSchedule  $studentSchedule
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(Student $student, RollCall $rollCall)
+    public function forceDelete(Student $student, StudentSchedule $studentSchedule)
     {
         //
     }

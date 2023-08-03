@@ -1,6 +1,9 @@
 package com.example.myfpl.ui.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,13 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.myfpl.R;
 import com.example.myfpl.adapters.DetailScheduleListAdapter;
-import com.example.myfpl.adapters.ScheduleViewPager;
 import com.example.myfpl.databinding.FragmentNormalScheduleBinding;
 import com.example.myfpl.models.TestModelSchedule;
 import com.example.myfpl.viewmodels.NavigationViewModel;

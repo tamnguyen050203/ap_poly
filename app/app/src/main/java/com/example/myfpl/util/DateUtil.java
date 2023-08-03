@@ -20,6 +20,11 @@ public class DateUtil {
         }
     }
 
+    public static String getCurrentDate() {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(new Date());
+    }
+
     @SuppressLint("SimpleDateFormat")
     public static Date fromStringToDate(String format, String value) throws ParseException {
         return new SimpleDateFormat(format).parse(value);
