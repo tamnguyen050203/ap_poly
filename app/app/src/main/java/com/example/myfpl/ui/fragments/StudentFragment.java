@@ -1,5 +1,7 @@
 package com.example.myfpl.ui.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import com.example.myfpl.data.apis.StudentService;
 import com.example.myfpl.databinding.FragmentStudentBinding;
 import com.example.myfpl.helpers.retrofit.RetrofitHelper;
 import com.example.myfpl.models.InfoModel;
+import com.example.myfpl.ui.activities.ExtensionScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +53,24 @@ public class StudentFragment extends Fragment {
 
     public void init() {
         setupInfoList();
+        addEvent();
     }
 
     public void setupInfoList() {
         getInfoData();
         infoListAdapter = new InfoListAdapter(infoModelList, getContext());
-        binding.listInfoStudent.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        binding.listInfoStudent
+                .setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.listInfoStudent.setAdapter(infoListAdapter);
+    }
+
+    public void addEvent() {
+        binding.buttonExtension.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireContext().startActivity(new Intent(requireContext(), ExtensionScreen.class));
+            }
+        });
     }
 
     public void getInfoData() {
@@ -71,19 +85,25 @@ public class StudentFragment extends Fragment {
 
                     }
 
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
-                    public void onSuccess(StudentDTO.@io.reactivex.rxjava3.annotations.NonNull StudentResponseDTO studentResponseDTO) {
+                    public void onSuccess(
+                            StudentDTO.@io.reactivex.rxjava3.annotations.NonNull StudentResponseDTO studentResponseDTO) {
                         Log.d(TAG, "onSuccess: " + studentResponseDTO.getStudent().getName());
                         infoModelList.add(new InfoModel("Ngày sinh", studentResponseDTO.getStudent().getDob()));
                         infoModelList.add(new InfoModel("Giới tính", "Nam"));
                         infoModelList.add(new InfoModel("Số điện thoại", studentResponseDTO.getStudent().getPhone()));
                         infoModelList.add(new InfoModel("Email", studentResponseDTO.getStudent().getEmail()));
-//                        infoModelList.add(new InfoModel("Lớp", studentModel.getClass()));
-                        infoModelList.add(new InfoModel("Chuyên ngành", studentResponseDTO.getStudent().getSpecialize()));
+                        // infoModelList.add(new InfoModel("Lớp", studentModel.getClass()));
+                        infoModelList
+                                .add(new InfoModel("Chuyên ngành", studentResponseDTO.getStudent().getSpecialize()));
                         binding.email.setText(studentResponseDTO.getStudent().getEmail());
                         infoListAdapter.notifyDataSetChanged();
                         binding.nameStudent.setText(studentResponseDTO.getStudent().getName());
-                        Glide.with(requireContext()).load(studentResponseDTO.getStudent().getAvatar()).into(binding.avatarStudent);
+                        Glide.with(requireContext()).load(studentResponseDTO.getStudent().getAvatar())
+                                .into(binding.avatarStudent);
+                        Glide.with(requireContext()).load(studentResponseDTO.getStudent().getAvatar())
+                                .into(binding.subAvatarStudent);
                     }
 
                     @Override
@@ -101,4 +121,3 @@ public class StudentFragment extends Fragment {
         this.mDisposable = disposable;
     }
 }
-
