@@ -1,6 +1,7 @@
 package com.example.myfpl.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -42,6 +43,8 @@ public class CommunityScreen extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
-        binding.gridView.setAdapter(adapter);
+
+        binding.communityRv.setLayoutManager(new GridLayoutManager(CommunityScreen.this,2 ));
+        binding.communityRv.setAdapter(adapter);
     }
 }

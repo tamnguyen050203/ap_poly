@@ -17,7 +17,7 @@ import com.example.myfpl.models.CommunityModel;
 
 import java.util.List;
 
-public class CommunityListAdapter extends BaseAdapter {
+public class CommunityListAdapter extends RecyclerView.Adapter<CommunityListAdapter.ViewHolder> {
     private List<CommunityModel> list;
     private Context context;
     private HandleEvent handleEvent;
@@ -26,40 +26,32 @@ public class CommunityListAdapter extends BaseAdapter {
         this.context = context;
         this.handleEvent = handleEvent;
     }
+
+    @NonNull
     @Override
-    public int getCount() {
-        return list.size();
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        CommunityItemBinding binding = CommunityItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
-    public Object getItem(int i) {
-        return list.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        if(view==null){
-            view = LayoutInflater.from(context).inflate(R.layout.community_item, viewGroup, false);
-            CommunityItemBinding binding  = CommunityItemBinding.bind(view.getRootView());
-            ViewHolder holder = new ViewHolder(binding);
-            view.setTag(holder);
-        }
-        CommunityModel communityModel = list.get(i);
-        ViewHolder holder = (ViewHolder) view.getTag();
-        holder.binding.communityName.setText(communityModel.getName());
-        holder.binding.communityImage.setImageResource(communityModel.getImage());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        CommunityModel community = list.get(position);
+        if(community==null) return;
+        holder.binding.communityName.setText(community.getName());
+        Glide.with(context).load(community.getImage()).into(holder.binding.communityImage);
         holder.binding.communityItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handleEvent.OnItemClick(communityModel.getUrl());
+                handleEvent.OnItemClick(community.getUrl());
             }
         });
-        return view;
+    }
+
+    @Override
+    public int getItemCount() {
+        if(list==null) return 0;
+        return list.size();
     }
 
 
