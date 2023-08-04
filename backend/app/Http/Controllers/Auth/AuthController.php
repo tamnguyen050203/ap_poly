@@ -74,12 +74,13 @@ class AuthController extends Controller
 
             // Create class for student
             $randomClass = rand(1, ClassGroup::query()->count());
-            StudentClass::firstOrCreate(
+            $studentClass = StudentClass::firstOrCreate(
                 [
                     'student_id' => $student->id,
-                    'class_id' => $randomClass,
+                    'class_group_id' => $randomClass,
                 ]
             );
+
         }
 
         // Create access token and set expiration time
