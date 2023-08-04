@@ -8,6 +8,42 @@
         motion:constraintSetStart="@id/start"
         motion:duration="1200">
        <KeyFrameSet>
+           <KeyAttribute
+               motion:motionTarget="@+id/sub_avatar_container"
+               motion:framePosition="0"
+               android:alpha="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/sub_avatar_container"
+               motion:framePosition="70"
+               android:alpha="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/sub_avatar_container"
+               motion:framePosition="100"
+               android:alpha="1" />
+           <KeyAttribute
+               motion:motionTarget="@+id/avatar_container"
+               motion:framePosition="0"
+               android:alpha="1" />
+           <KeyAttribute
+               motion:motionTarget="@+id/avatar_container"
+               motion:framePosition="30"
+               android:alpha="0.9" />
+           <KeyAttribute
+               motion:motionTarget="@+id/avatar_container"
+               motion:framePosition="100"
+               android:alpha="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/holder_background"
+               motion:framePosition="0"
+               android:alpha="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/holder_background"
+               motion:framePosition="89"
+               android:alpha="1" />
+           <KeyAttribute
+               motion:motionTarget="@+id/avatar_container"
+               motion:framePosition="61"
+               android:alpha="0" />
        </KeyFrameSet>
 
         <OnSwipe motion:touchAnchorId="@+id/scroll_view" />
@@ -21,7 +57,16 @@
             android:layout_height="fill_parent"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/layout_info_basis"
             android:layout_marginTop="150dp" />
+        <Constraint
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            motion:layout_constraintRight_toRightOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:id="@+id/sub_avatar_container" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -41,7 +86,32 @@
             android:layout_height="fill_parent"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="0dp" />
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="75dp" />
+        <Constraint
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:id="@+id/sub_avatar_container"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/bg_info_student"
+            motion:layout_constraintTop_toBottomOf="@+id/scroll_view" />
+        <Constraint
+            android:id="@+id/bg_info_student"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="75dp" />
     </ConstraintSet>
 </MotionScene>
