@@ -29,12 +29,16 @@ class ScheduleController extends Controller
         }
 
         $schedules = $this->model
+            ->when($request->dateStart, function ($query) use ($request) {
+                return $query->where('date', '>=', $request->dateStart);
+            })
+            ->when($request->dateEnd, function ($query) use ($request) {
+                return $query->where('date', '<=', $request->dateEnd);
+            })
             ->when($request->date, function ($query) use ($request) {
                 return $query->where('date', $request->date);
             })
-            ->whereHas('class_group', function ($query) use ($class_group_id) {
-                $query->where('id', $class_group_id);
-            })
+            ->where('class_group_id', $class_group_id)
             ->join('shifts', 'shifts.id', '=', 'schedules.shift_id')
             ->join('rooms', 'rooms.id', '=', 'schedules.room_id')
             ->join('lessons', 'lessons.id', '=', 'schedules.lesson_id')
