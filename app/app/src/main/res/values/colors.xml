@@ -29,6 +29,7 @@
     <color name="aqua_20">#3373BAFC</color>
     <color name="red_light">#EC4310</color>
     <color name="red_light_20">#33F88C6B</color>
+    <color name="red_light_50">#FBBFAD</color>
     <color name="green_light">#61C571</color>
     <color name="green_light_20">#3361C571</color>
     <color name="orange">#FB8232</color>
