@@ -1,38 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="16dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginHorizontal="10dp"
+    android:backgroundTint="@color/grey_item"
+    >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="66sp"
     android:orientation="horizontal"
-    android:gravity="center"
-    android:padding="20sp"
-    android:layout_margin="10sp"
+    android:gravity="center_vertical"
     android:id="@+id/service_item"
-    android:background="@drawable/border_item_sevice"
+    android:paddingHorizontal="20dp"
     >
 
     <TextView
         android:id="@+id/service_number"
-        android:layout_width="10sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.05"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="#CC0F0E2D"
-        android:layout_marginTop="5sp"
-        android:text="1." />
+        android:text="1."
+
+        />
 
     <TextView
         android:id="@+id/service_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
         android:textSize="14sp"
         android:fontFamily="@font/poppins_medium"
         android:textColor="#CC0F0E2D"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_weight="3"
+        android:paddingStart="10dp"
+        android:layout_gravity="center_vertical"
+        />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#EDEDF0"
+        android:layout_marginEnd="20dp"
+        />
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="8sp"
         android:layout_height="14sp"
-        android:layout_marginTop="5sp"
-        android:background="@drawable/ic_service_back" />
+        android:background="@drawable/ic_service_back"
+
+        />
 </LinearLayout>
+</androidx.cardview.widget.CardView>
