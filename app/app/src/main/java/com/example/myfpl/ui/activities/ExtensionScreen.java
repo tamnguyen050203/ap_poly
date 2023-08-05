@@ -43,6 +43,7 @@ public class ExtensionScreen extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_extension:
+                startActivity(new Intent(ExtensionScreen.this, ServiceScreen.class));
                 break;
             case R.id.btn_community:
                 startActivity(new Intent(ExtensionScreen.this, CommunityScreen.class));
