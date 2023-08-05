@@ -1,24 +1,23 @@
 package com.example.myfpl.ui.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListAdapter;
 
-import com.example.myfpl.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import com.example.myfpl.adapters.CommunityListAdapter;
 import com.example.myfpl.databinding.ActivityCommunityScreenBinding;
-import com.example.myfpl.databinding.ActivityNotifyBinding;
 import com.example.myfpl.models.CommunityModel;
 
 public class CommunityScreen extends AppCompatActivity {
     private ActivityCommunityScreenBinding binding;
     private CommunityListAdapter adapter;
     private CommunityModel communityModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,12 +26,13 @@ public class CommunityScreen extends AppCompatActivity {
 
         init();
     }
-    public void init(){
-        Log.d(">>>>CommunityActivity","Community model:"+CommunityModel.getData());
+
+    public void init() {
+        Log.d(">>>>CommunityActivity", "Community model:" + CommunityModel.getData());
         binding.buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                onBackPressed();
             }
         });
         adapter = new CommunityListAdapter(CommunityScreen.this, CommunityModel.getData(), new CommunityListAdapter.HandleEvent() {
@@ -42,6 +42,8 @@ public class CommunityScreen extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
-        binding.gridView.setAdapter(adapter);
+
+        binding.communityRv.setLayoutManager(new GridLayoutManager(CommunityScreen.this, 2));
+        binding.communityRv.setAdapter(adapter);
     }
 }

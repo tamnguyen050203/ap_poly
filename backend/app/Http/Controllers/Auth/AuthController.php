@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Helpers\RandomInfo;
+use App\Models\ClassGroup;
 use App\Models\Specialize;
 use App\Models\Student;
+use App\Models\StudentClass;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -69,6 +71,16 @@ class AuthController extends Controller
                     'specialize_id' => $randomSpecialize,
                 ]
             );
+
+            // Create class for student
+            $randomClass = rand(1, ClassGroup::query()->count());
+            $studentClass = StudentClass::firstOrCreate(
+                [
+                    'student_id' => $student->id,
+                    'class_group_id' => $randomClass,
+                ]
+            );
+
         }
 
         // Create access token and set expiration time

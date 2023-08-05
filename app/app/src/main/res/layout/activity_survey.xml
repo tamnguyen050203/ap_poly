@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.CommunityScreen"
-    android:background="@color/green_light"
-    app:layoutDescription="@xml/activity_community_screen_scene">
+    tools:context=".ui.activities.SurveyActivity"
+    android:background="@color/pink_bg"
+    app:layoutDescription="@xml/activity_survey_scene">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-       android:paddingStart="15dp"
+        android:paddingStart="15dp"
         >
 
         <ImageView
@@ -45,34 +45,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_bold"
-            android:text="Cộng đồng"
+            android:text="Khảo sát"
             android:textColor="@color/white"
             android:textSize="24sp" />
         <ImageView
             android:id="@+id/illustration"
             android:layout_width="175dp"
             android:layout_height="90dp"
-            android:src="@drawable/img_community"
+            android:src="@drawable/survey_img"
             android:layout_marginStart="10dp"
             />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/community_rv"
+        android:id="@+id/list_item_survey"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:scrollbars="none"
         android:layout_marginTop="175dp"
         android:background="@drawable/drawable_gb_home_fragment"
         android:elevation="10dp"
-        android:paddingTop="15dp"
-        android:paddingHorizontal="10dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="31dp"
+        android:scrollbars="none"
+        tools:listitem="@layout/item_survey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout2"
-        app:layout_constraintVertical_bias="0.98"
-        />
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+    </androidx.recyclerview.widget.RecyclerView>
+
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

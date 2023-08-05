@@ -43,7 +43,8 @@ public class CommunityModel implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
-    public static List<CommunityModel> getData(){
+
+    public static List<CommunityModel> getData() {
         List<CommunityModel> list = new ArrayList<>();
         list.add(new CommunityModel(R.drawable.img_coderpoly, "Coder Poly", "https://www.facebook.com/coderpoly"));
         list.add(new CommunityModel(R.drawable.img_footballclub, "Football Club", "https://www.facebook.com/fpolyfootball"));

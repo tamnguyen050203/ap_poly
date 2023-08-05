@@ -31,25 +31,20 @@
                     android:id="@+id/fee_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Loại tiền: "
+                    android:text="Têb môn: "
                     android:textColor="@color/primary_text_color"
                     android:textSize="16sp"/>
 
                 <TextView
-                    android:id="@+id/fee_name_value"
+                    android:id="@+id/lesson_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/fee_name"
-                    android:text="Học phí"
+                    android:text="Android Networking"
                     android:fontFamily="@font/inter_semibold"
                     android:textColor="@color/primary_text_color"
                     android:textSize="16sp"/>
 
-                <ImageView
-                    android:layout_width="19dp"
-                    android:layout_height="19dp"
-                    android:src="@drawable/ic_pin"
-                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -62,16 +57,16 @@
                     android:id="@+id/desc_fee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mô tả: "
+                    android:text="Giảng viên: "
                     android:textColor="@color/primary_text_color"
                     android:textSize="16sp"/>
 
                 <TextView
-                    android:id="@+id/desc_fee_value"
+                    android:id="@+id/lecturer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/desc_fee"
-                    android:text="Học phí kì 5 Spring"
+                    android:text="Nguyễn Ngọc Chấn"
                     android:fontFamily="@font/inter_semibold"
                     android:textColor="@color/primary_text_color"
                     android:textSize="16sp"/>
@@ -87,40 +82,16 @@
                     android:id="@+id/code_student_fee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mã sinh viên: "
+                    android:text="Email: "
                     android:textColor="@color/primary_text_color"
                     android:textSize="16sp"/>
 
                 <TextView
-                    android:id="@+id/code_student_fee_value"
+                    android:id="@+id/email_lecturer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/code_student_fee"
-                    android:text="PS24555"
-                    android:fontFamily="@font/inter_semibold"
-                    android:textColor="@color/primary_text_color"
-                    android:textSize="16sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom">
-
-                <TextView
-                    android:id="@+id/fee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Số tiền: "
-                    android:textColor="@color/primary_text_color"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:id="@+id/fee_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/fee"
-                    android:text="5.600.000đ"
+                    android:text="Chann3@fpt.edu.vn"
                     android:fontFamily="@font/inter_semibold"
                     android:textColor="@color/primary_text_color"
                     android:textSize="16sp"/>
@@ -133,7 +104,7 @@
             android:background="#E4E4E4"/>
 
         <LinearLayout
-            android:id="@+id/btn_pay"
+            android:id="@+id/btn_survey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -141,10 +112,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thanh toán"
+                android:text="Đánh giá"
                 android:textSize="20sp"
                 android:fontFamily="@font/inter_bold"
-                android:textColor="@color/blue_text"/>
+                android:textColor="@color/text_pink"/>
         </LinearLayout>
     </LinearLayout>
 

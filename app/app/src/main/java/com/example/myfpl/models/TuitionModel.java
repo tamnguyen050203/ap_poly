@@ -48,7 +48,7 @@ public class TuitionModel {
         this.fee_value = fee_value;
     }
 
-    public List<TuitionModel> getListData() {
+    public static List<TuitionModel> getTuitionList() {
         List<TuitionModel> tuitionList = new ArrayList<TuitionModel>();
         tuitionList.add(new TuitionModel("Học phí", "Học phí kì 1", "ps24559", "6.000.000"));
         tuitionList.add(new TuitionModel("Học phí", "Học phí kì 2", "ps24559", "5.500.000"));

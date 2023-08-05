@@ -18,21 +18,25 @@
         <activity
             android:name=".ui.activities.CommunityScreen"
             android:exported="true">
-
         </activity>
         <activity
             android:name=".ui.activities.ServiceScreen"
             android:exported="true">
-
         </activity>
         <activity
             android:name=".ui.activities.ExtensionScreen"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true"> 
+        </activity>
+        <activity
+            android:name=".ui.activities.ExtensionScreen"
+            android:exported="true"></activity>
+        <activity
+            android:name=".ui.activities.SurveyActivity"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".ui.activities.TuitionActivity"
+            android:exported="true" >
         </activity>
         <activity
             android:name=".ui.activities.TestCalendarActivity"
