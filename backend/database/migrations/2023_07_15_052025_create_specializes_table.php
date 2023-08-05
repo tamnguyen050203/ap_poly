@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('specializes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->boolean('flag')->default(true);
         });
     }

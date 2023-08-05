@@ -9,22 +9,29 @@ import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.myfpl.data.apis.INotification;
+import com.example.myfpl.data.apis.ScheduleService;
+import com.example.myfpl.helpers.retrofit.RetrofitHelper;
+import com.example.myfpl.models.ScheduleModel;
 import com.example.myfpl.models.TestModelSchedule;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Observable;
 
 public class NavigationViewModel extends AndroidViewModel {
+    private ScheduleService scheduleService;
     private MutableLiveData<List<TestModelSchedule>> listTestSchedule = new MutableLiveData<>();
-    private MutableLiveData<List<TestModelSchedule>> listSchedule = new MutableLiveData<>();
+    private MutableLiveData<List<ScheduleModel>> listSchedule = new MutableLiveData<>();
 
     public NavigationViewModel(@NonNull Application application) {
         super(application);
 
+        scheduleService = RetrofitHelper.createService(ScheduleService.class, application);
         //fake list data
-        listSchedule.setValue(TestModelSchedule.getListModel(5));
+
         listTestSchedule.setValue(TestModelSchedule.getListModel(5));
     }
 
@@ -32,11 +39,11 @@ public class NavigationViewModel extends AndroidViewModel {
         return listTestSchedule;
     }
 
-    public MutableLiveData<List<TestModelSchedule>> getListSchedule(){
+    public MutableLiveData<List<ScheduleModel>> getListSchedule(){
         return  listSchedule;
     }
 
-    public void setListSchedule(List<TestModelSchedule> list){
+    public void setListSchedule(List<ScheduleModel> list){
         this.listSchedule.setValue(list);
     }
 
@@ -44,4 +51,10 @@ public class NavigationViewModel extends AndroidViewModel {
         return Observable.just(TestModelSchedule.getListModel(size));
     }
 
+    public void getListScheduleFromServer(Map<String, String> params){
+        scheduleService.getSchedules(params)
+                .subscribeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
+                .observeOn(io.reactivex.rxjava3.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribe();
+    }
 }

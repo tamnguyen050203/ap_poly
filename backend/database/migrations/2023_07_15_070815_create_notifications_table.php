@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 200);
+            $table->text('title');
             $table->text('content');
             $table->string('author', 150);
             $table->string('type', 100);

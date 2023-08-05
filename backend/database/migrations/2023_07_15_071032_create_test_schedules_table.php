@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('test_schedules', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->dateTime('date')->between('2021-08-01', '2023-09-31');
             $table->foreignId('shift_id')->constrained();
             $table->foreignId('lesson_id')->constrained();
             $table->foreignId('room_id')->constrained();

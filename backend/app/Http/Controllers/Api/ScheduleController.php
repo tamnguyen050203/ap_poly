@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
-
     public function __construct()
     {
         $this->model = (new Schedule())->query();
@@ -45,6 +44,7 @@ class ScheduleController extends Controller
             ->join('class_groups', 'class_groups.id', '=', 'schedules.class_group_id')
             ->join('lecturers', 'lecturers.id', '=', 'class_groups.lecturer_id')
             ->join('amphitheaters', 'amphitheaters.id', '=', 'rooms.amphitheater_id')
+            ->join('student_schedules', 'student_schedules.schedule_id', '=', 'schedules.id')
             ->select(
                 'schedules.id',
                 'lessons.name as lesson_name',
@@ -58,7 +58,8 @@ class ScheduleController extends Controller
                 'shifts.end_time',
                 'lecturers.name as lecturer_name',
                 'amphitheaters.name as amphitheater_name',
-                'schedules.detail',
+                'student_schedules.is_alarm as is_alarm',
+                'student_schedules.reminder_id as reminder_id',
             )
             ->latest('schedules.date')
             ->orderBy('shifts.start_time')
