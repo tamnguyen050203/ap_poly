@@ -2,6 +2,7 @@ package com.example.myfpl.ui.activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +36,12 @@ public class SurveyActivity extends AppCompatActivity {
         binding = ActivitySurveyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         surveyList = new ArrayList<>();
+        binding.buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     public void setupTuitionList() {

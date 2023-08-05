@@ -6,6 +6,8 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.YearMonth;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateUtil {
@@ -76,46 +78,40 @@ public class DateUtil {
     public static YearMonth getEndMonth() {
         return getCurrentMonth().plusMonths(100);
     }
+
     public static String ConvertTimeToString(String input) {
-        try {
-            Log.d("convert:",""+input);
-            String str = input;
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss.SSSSSSXXX");
-            Date date = df.parse(str);
-            Log.d("convert1:",""+date);
-            long givenDate = date.getTime();
-            long current = System.currentTimeMillis() / 1000;
-            System.out.println(current);
-            System.out.println(givenDate / 1000);
-            long timeDistance = current - (givenDate/1000);
-            String convertedTime = "";
-            if (timeDistance <= 59) {
-                convertedTime = timeDistance + " giây trước";
-            } else if (timeDistance <= 3600) {
-                long convertedToMinute = Math.round(timeDistance / 60);
-                convertedTime = convertedToMinute + " phút trước";
-            } else if (timeDistance < 86400) {
-                long convertedToHour = Math.round(timeDistance / 3600);
-                convertedTime = convertedToHour + " giờ trước";
-            } else if (timeDistance < 604800) {
-                long convertedToDay = Math.round(timeDistance / 86400);
-                convertedTime = convertedToDay + " ngày trước";
-            } else if (timeDistance < 2629743) {
-                long convertedToWeek = Math.round(timeDistance / 604800);
-                convertedTime = convertedToWeek + " tuần trước";
-            } else if (timeDistance < 31556926) {
-                long convertedToMonth = Math.round(timeDistance / 2629743);
-                convertedTime = convertedToMonth + " tháng trước";
-            } else {
-                long convertedToYear = Math.round(timeDistance / 31556926);
-                convertedTime = convertedToYear + " năm trước";
-            }
-            System.out.println(convertedTime);
-            return convertedTime;
-        } catch (ParseException e) {
-            Log.e("Error", e.toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX");
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(input, formatter);
+        Log.d("Date util","input:"+input);
+        Log.d("Date util",zonedDateTime.getHour()+":"+zonedDateTime.getMinute());
+        long givenDate = zonedDateTime.toEpochSecond();
+        long current = System.currentTimeMillis() / 1000;
+        long timeDistance = current - givenDate;
+        Log.d("date util", timeDistance + "");
+        String convertedTime = "";
+        if (timeDistance <= 59) {
+            convertedTime = timeDistance + " giây trước";
+        } else if (timeDistance <= 3600) {
+            long convertedToMinute = Math.round(timeDistance / 60);
+            convertedTime = convertedToMinute + " phút trước";
+        } else if (timeDistance < 86400) {
+            long convertedToHour = Math.round(timeDistance / 3600);
+            convertedTime = convertedToHour + " giờ trước";
+        } else if (timeDistance < 604800) {
+            long convertedToDay = Math.round(timeDistance / 86400);
+            convertedTime = convertedToDay + " ngày trước";
+        } else if (timeDistance < 2629743) {
+            long convertedToWeek = Math.round(timeDistance / 604800);
+            convertedTime = convertedToWeek + " tuần trước";
+        } else if (timeDistance < 31556926) {
+            long convertedToMonth = Math.round(timeDistance / 2629743);
+            convertedTime = convertedToMonth + " tháng trước";
+        } else {
+            long convertedToYear = Math.round(timeDistance / 31556926);
+            convertedTime = convertedToYear + " năm trước";
         }
-        return "";
+        System.out.println(convertedTime);
+        return convertedTime;
     }
 
 }

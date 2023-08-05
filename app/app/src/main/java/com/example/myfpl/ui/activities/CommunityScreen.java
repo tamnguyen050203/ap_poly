@@ -32,7 +32,7 @@ public class CommunityScreen extends AppCompatActivity {
         binding.buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                onBackPressed();
             }
         });
         adapter = new CommunityListAdapter(CommunityScreen.this, CommunityModel.getData(), new CommunityListAdapter.HandleEvent() {

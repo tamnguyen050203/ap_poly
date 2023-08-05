@@ -48,8 +48,10 @@ public class ExtensionScreen extends AppCompatActivity implements View.OnClickLi
                 startActivity(new Intent(ExtensionScreen.this, CommunityScreen.class));
                 break;
             case R.id.btn_fee:
+                startActivity(new Intent(ExtensionScreen.this, TuitionActivity.class));
                 break;
             case R.id.btn_survey:
+                startActivity(new Intent(ExtensionScreen.this, SurveyActivity.class));
                 break;
         }
     }
