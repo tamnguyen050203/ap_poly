@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,7 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        binding.progessIndicator.getIndeterminateDrawable().setColorFilter(0xFFFB8232, android.graphics.PorterDuff.Mode.MULTIPLY);
+        binding.progessIndicator.setVisibility(View.INVISIBLE);
         init();
     }
 
@@ -138,6 +140,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void login(String email, String username, String providerId, String avatar) {
+        binding.progessIndicator.setVisibility(View.VISIBLE);
         LoginDTO.LoginRequestDTO loginRequestDTO = new LoginDTO.LoginRequestDTO(email, username, providerId, avatar);
         RetrofitHelper.createService(AuthService.class, getApplication().getApplicationContext()).login(loginRequestDTO)
                 .subscribeOn(Schedulers.io())
