@@ -120,7 +120,7 @@ public class DetailScheduleListAdapter<T extends BaseSchedule> extends RecyclerV
             binding.amphitheater.setText(schedule.getAmphitheater_name());
             binding.lecuturer.setText(schedule.getLecturer_name());
             binding.roomAShift.setText(
-                    schedule.getRoom_name() + " - " + schedule.getShift_name()
+                    schedule.getRoom_name() + " - " + schedule.getShift_name() + " - " + schedule.getDate()
             );
 
             binding.subjectTitle.setText(schedule.getLesson_name());

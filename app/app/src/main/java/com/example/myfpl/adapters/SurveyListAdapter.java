@@ -59,7 +59,6 @@ public class SurveyListAdapter extends RecyclerView.Adapter<SurveyListAdapter.Su
     }
 
     public static class SurveyListViewHolder extends RecyclerView.ViewHolder {
-
         public ItemSurveyBinding binding;
 
         public SurveyListViewHolder(ItemSurveyBinding binding) {
