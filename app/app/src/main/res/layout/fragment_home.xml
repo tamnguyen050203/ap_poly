@@ -122,10 +122,12 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/titleTestSchedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
                 android:lines="1"
+                android:visibility="gone"
                 android:text="Lịch Thi Sắp Tới"
                 android:textColor="@color/primary_text_color"
                 android:textSize="17sp" />
@@ -139,11 +141,13 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <TextView
+                android:id="@+id/titleSchedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/inter_bold"
                 android:lines="1"
+                android:visibility="gone"
                 android:text="Lịch Học Hôm Nay"
                 android:textColor="@color/primary_text_color"
                 android:textSize="17sp" />

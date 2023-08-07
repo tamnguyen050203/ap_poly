@@ -24,10 +24,14 @@ import com.example.myfpl.helpers.retrofit.TokenRepository;
 import com.example.myfpl.models.DialogItemModel;
 import com.example.myfpl.util.StringUtil;
 import com.example.myfpl.util.ToastApp;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -48,7 +52,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = LoginActivity.class.getSimpleName();
     private ActivityLoginBinding binding;
-    private GoogleSignInClient client;
+    private GoogleSignInClient googleSignInClient;
+    // login google with Google API
+    private com.google.api.services.calendar.Calendar calendarService;
     private Dialog optionDialog;
     private DialogItemModel currentOption;
     private ListItemDialogAdapter adapter;
@@ -64,7 +70,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void init() {
-        client = FirebaseHelper.getSignClient(LoginActivity.this);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestProfile()
+                .requestIdToken(getString(R.string.web_client_id))
+                .requestServerAuthCode(getString(R.string.web_client_id))
+                .requestScopes(new Scope("https://www.googleapis.com/auth/calendar"))
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //setup adapter for list item
         adapter = new ListItemDialogAdapter(listItem, new ListItemDialogAdapter.HandleEvent() {
@@ -86,46 +100,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == FirebaseHelper.GoogleSignRequestCode) {
-            Task<GoogleSignInAccount> result = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = result.getResult(ApiException.class);
+        if (requestCode == 555) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if(result.isSuccess()){
+                try {
+                    GoogleSignInAccount account = result.getSignInAccount();
 
-                Log.d(TAG, "onActivityResult: " + result.getResult().getEmail());
-                String email = result.getResult().getEmail();
+                    String email = account.getEmail();
 
-                if (StringUtil.isFPLDomain(email)) {
-                    AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-                    FirebaseAuth.getInstance().signInWithCredential(credential)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        ToastApp.show(LoginActivity.this, "Đăng nhập thành công với tài khoản" + Objects.requireNonNull(task.getResult().getUser()).getDisplayName());
-                                        String email = Objects.requireNonNull(task.getResult().getUser()).getEmail();
-                                        String username = task.getResult().getUser().getDisplayName();
-                                        String providerId = task.getResult().getUser().getProviderId();
-                                        String avatar = task.getResult().getUser().getPhotoUrl().toString();
-                                        login(email, username, providerId, avatar);
-                                    } else {
-                                        ToastApp.show(LoginActivity.this, "Đăng nhập thất bại");
+                    if (StringUtil.isFPLDomain(email)) {
+                        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                        FirebaseAuth.getInstance().signInWithCredential(credential)
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            ToastApp.show(LoginActivity.this, "Đăng nhập thành công với tài khoản" + Objects.requireNonNull(task.getResult().getUser()).getDisplayName());
+                                            String email = Objects.requireNonNull(task.getResult().getUser()).getEmail();
+                                            String username = task.getResult().getUser().getDisplayName();
+                                            String providerId = task.getResult().getUser().getProviderId();
+                                            String avatar = task.getResult().getUser().getPhotoUrl().toString();
+                                            login(email, username, providerId, avatar);
+                                        } else {
+                                            ToastApp.show(LoginActivity.this, "Đăng nhập thất bại");
+                                        }
                                     }
-                                }
-                            });
-                } else {
-                    ToastApp.show(LoginActivity.this, "Bạn phải dùng mail FPT để Login");
-                    client.signOut();
+                                });
+                    } else {
+                        ToastApp.show(LoginActivity.this, "Bạn phải dùng mail FPT để Login");
+                        googleSignInClient.signOut();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "onActivityResult: " + e.getMessage());
                 }
-            } catch (Exception e) {
-                Log.e(TAG, "onActivityResult: " + e.getMessage());
-//                ToastApp.show(LoginActivity.this, "Vui lòng kiểm tra lại kết nối mạng!");
             }
         }
     }
 
     public void login(String email, String username, String providerId, String avatar) {
         LoginDTO.LoginRequestDTO loginRequestDTO = new LoginDTO.LoginRequestDTO(email, username, providerId, avatar);
-
         RetrofitHelper.createService(AuthService.class, getApplication().getApplicationContext()).login(loginRequestDTO)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -185,7 +198,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_login:
-                startActivityForResult(client.getSignInIntent(), FirebaseHelper.GoogleSignRequestCode);
+                Intent signInIntent = googleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, 555);
                 break;
             case R.id.choose_option:
                 handleButtonOption();

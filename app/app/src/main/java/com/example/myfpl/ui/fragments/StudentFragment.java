@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
@@ -20,7 +22,9 @@ import com.example.myfpl.data.apis.StudentService;
 import com.example.myfpl.databinding.FragmentStudentBinding;
 import com.example.myfpl.helpers.retrofit.RetrofitHelper;
 import com.example.myfpl.models.InfoModel;
+import com.example.myfpl.models.StudentModel;
 import com.example.myfpl.ui.activities.ExtensionScreen;
+import com.example.myfpl.viewmodels.NavigationViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +37,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class StudentFragment extends Fragment {
     private static final String TAG = StudentFragment.class.getSimpleName();
     private FragmentStudentBinding binding;
+    private NavigationViewModel navigationViewModel;
     private Disposable mDisposable;
     private InfoListAdapter infoListAdapter;
-    private List<InfoModel> infoModelList = new ArrayList<InfoModel>();
+    private List<InfoModel> infoModelList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +57,8 @@ public class StudentFragment extends Fragment {
     }
 
     public void init() {
+        navigationViewModel = new ViewModelProvider(requireActivity()).get(NavigationViewModel.class);
+
         setupInfoList();
         addEvent();
     }
@@ -74,43 +81,28 @@ public class StudentFragment extends Fragment {
     }
 
     public void getInfoData() {
-        StudentService studentService = RetrofitHelper.createService(StudentService.class, getContext());
-        studentService.getStudentInfo()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<StudentDTO.StudentResponseDTO>() {
-
-                    @Override
-                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
-
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onSuccess(
-                            StudentDTO.@io.reactivex.rxjava3.annotations.NonNull StudentResponseDTO studentResponseDTO) {
-                        Log.d(TAG, "onSuccess: " + studentResponseDTO.getStudent().getName());
-                        infoModelList.add(new InfoModel("Ngày sinh", studentResponseDTO.getStudent().getDob()));
-                        infoModelList.add(new InfoModel("Giới tính", "Nam"));
-                        infoModelList.add(new InfoModel("Số điện thoại", studentResponseDTO.getStudent().getPhone()));
-                        infoModelList.add(new InfoModel("Email", studentResponseDTO.getStudent().getEmail()));
-                        // infoModelList.add(new InfoModel("Lớp", studentModel.getClass()));
-                        infoModelList
-                                .add(new InfoModel("Chuyên ngành", studentResponseDTO.getStudent().getSpecialize()));
-                        binding.email.setText(studentResponseDTO.getStudent().getEmail());
-                        infoListAdapter.notifyDataSetChanged();
-                        binding.nameStudent.setText(studentResponseDTO.getStudent().getName());
-                        Glide.with(requireContext()).load(studentResponseDTO.getStudent().getAvatar())
-                                .into(binding.avatarStudent);
-                        Glide.with(requireContext()).load(studentResponseDTO.getStudent().getAvatar())
-                                .into(binding.subAvatarStudent);
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
-                    }
-                });
+        navigationViewModel.getStudent().observe(getViewLifecycleOwner(), new Observer<StudentModel>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onChanged(StudentModel studentModel) {
+                if (studentModel != null) {
+                    infoModelList.add(new InfoModel("Ngày sinh", studentModel.getDob()));
+                    infoModelList.add(new InfoModel("Giới tính", "Nam"));
+                    infoModelList.add(new InfoModel("Số điện thoại", studentModel.getPhone()));
+                    infoModelList.add(new InfoModel("Email", studentModel.getEmail()));
+                    // infoModelList.add(new InfoModel("Lớp", studentModel.getClass()));
+                    infoModelList
+                            .add(new InfoModel("Chuyên ngành", studentModel.getSpecialize()));
+                    binding.email.setText(studentModel.getEmail());
+                    infoListAdapter.notifyDataSetChanged();
+                    binding.nameStudent.setText(studentModel.getName());
+                    Glide.with(requireContext()).load(studentModel.getAvatar())
+                            .into(binding.avatarStudent);
+                    Glide.with(requireContext()).load(studentModel.getAvatar())
+                            .into(binding.subAvatarStudent);
+                }
+            }
+        });
     }
 
     public Disposable getDisposable() {

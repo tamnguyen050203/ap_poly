@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.activities.TestCalendarActivity">
 
-    <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
+    <Button
+        android:id="@+id/addEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:textColor="@color/primary_text_color"
-        app:selectedItem_background="@drawable/item_calendar_selected_background"
-        app:expandIconColor="@color/primary_text_color"
-        app:selectedItem_textColor="@color/primary_color"
-        app:todayItem_background="@drawable/item_calendar_selected_background"
-        app:todayItem_textColor="@color/primary_color"
-        android:id="@+id/calendarView">
-    </com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar>
+        android:text="Add Event"/>
+
 
 </LinearLayout>

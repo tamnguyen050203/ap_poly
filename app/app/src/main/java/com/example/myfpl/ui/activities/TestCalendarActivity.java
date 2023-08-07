@@ -1,16 +1,25 @@
 package com.example.myfpl.ui.activities;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.myfpl.R;
 import com.example.myfpl.databinding.ActivityTestCalendarBinding;
+import com.example.myfpl.util.ScheduleUtils;
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
 
+import java.lang.reflect.Array;
 import java.util.Calendar;
 
 public class TestCalendarActivity extends AppCompatActivity {
@@ -27,45 +36,43 @@ public class TestCalendarActivity extends AppCompatActivity {
     }
 
     public void init() {
-        binding.calendarView.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
+        binding.addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDaySelect() {
-                Log.d(TAG, "onDaySelect: " + binding.calendarView.getSelectedItem());
-            }
-
-            @Override
-            public void onItemClick(@NonNull View v) {
-
-            }
-
-            @Override
-            public void onDataUpdate() {
-
-            }
-
-            @Override
-            public void onMonthChange() {
-
-            }
-
-            @Override
-            public void onWeekChange(int position) {
-
-            }
-
-            @Override
-            public void onClickListener() {
-
-            }
-
-            @Override
-            public void onDayChanged() {
-
+            public void onClick(View view) {
+                requestPermission();
             }
         });
-        binding.calendarView.plusDay(7);
-        binding.calendarView.minusDay(7);
-        Calendar c = Calendar.getInstance();
-        binding.calendarView.addEventTag(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), getColor(R.color.primary_color));
+    }
+
+    private final ActivityResultLauncher<String[]> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), isGranted -> {
+                if (isGranted.containsValue(false)) {
+                    Log.d(TAG, "Chans oiw laf chasn am: ");
+                } else {
+                    addEvent();
+                }
+            });
+
+    public void requestPermission(){
+        if (hasPermissions(this, Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)) {
+            addEvent();
+        } else {
+            requestPermissionLauncher.launch(new String[]{Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR});
+        }
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void addEvent(){
+
     }
 }

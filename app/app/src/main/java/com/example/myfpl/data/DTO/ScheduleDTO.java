@@ -77,4 +77,30 @@ public class ScheduleDTO {
             return schedules;
         }
     }
+
+    public static class UpdateIsAlarmResponse{
+        private String message;
+        private int status;
+
+        public UpdateIsAlarmResponse(String message, int status) {
+            this.message = message;
+            this.status = status;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
+    }
 }

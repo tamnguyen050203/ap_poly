@@ -88,6 +88,13 @@ public class Day implements Parcelable {
 
     @Override
     public String toString() {
-        return "[" + this.mDay + "," + (this.mMonth + 1) + "]";
+        return  textMakeup(this.mYear) + "-" + textMakeup(this.mMonth + 1) + "-" + textMakeup(this.mDay);
+    }
+
+    private String textMakeup(int number){
+        if(number <= 9){
+            return "0" + number;
+        }
+        return number + "";
     }
 }

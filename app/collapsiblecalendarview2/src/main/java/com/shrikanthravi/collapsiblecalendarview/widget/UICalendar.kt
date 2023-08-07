@@ -222,6 +222,15 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
                 attrs, R.styleable.UICalendar, defStyleAttr, 0)
         setAttributes(attributes)
         attributes.recycle()
+
+        val today = GregorianCalendar()
+        selectedItem.add(
+            Day(
+                today.get(Calendar.YEAR),
+                today.get(Calendar.MONTH),
+                today.get(Calendar.DAY_OF_MONTH)
+            )
+        )
     }
 
     protected abstract fun redraw()
@@ -289,7 +298,6 @@ abstract class UICalendar constructor(context: Context, attrs: AttributeSet? = n
         setButtonLeftDrawableTintColor(attrs.getColor(R.styleable.UICalendar_buttonLeft_drawableTintColor, mButtonLeftDrawableTintColor))
         setButtonRightDrawableTintColor(attrs.getColor(R.styleable.UICalendar_buttonRight_drawableTintColor, mButtonRightDrawableTintColor))
         setExpandIconColor(attrs.getColor(R.styleable.UICalendar_expandIconColor, mExpandIconColor))
-        val selectedItem: Day? = null
     }
 
     fun setButtonLeftDrawableTintColor(color: Int) {

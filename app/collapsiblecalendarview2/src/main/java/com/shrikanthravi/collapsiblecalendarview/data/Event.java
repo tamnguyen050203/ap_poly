@@ -1,5 +1,7 @@
 package com.shrikanthravi.collapsiblecalendarview.data;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by shrikanthravi on 06/03/18.
  */

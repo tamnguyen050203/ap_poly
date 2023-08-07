@@ -2,6 +2,7 @@ package com.shrikanthravi.collapsiblecalendarview.data
 
 import android.content.Context
 import android.graphics.PorterDuff
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -107,7 +108,7 @@ class CalendarAdapter(context: Context, cal: Calendar) {
 
             val view = mInflater.inflate(R.layout.day_layout, null)
             val txtDay = view.findViewById<View>(R.id.txt_day) as TextView
-            val imgEventTag = view.findViewById<View>(R.id.img_event_tag) as ImageView
+            val imgEventTag = view.findViewById<ImageView>(R.id.img_event_tag)
 
             txtDay.text = day.day.toString()
             if (day.month != calendar.get(Calendar.MONTH)) {
@@ -119,7 +120,7 @@ class CalendarAdapter(context: Context, cal: Calendar) {
                 if (day.year == event.year
                         && day.month == event.month
                         && day.day == event.day) {
-                    imgEventTag.visibility = View.VISIBLE
+                    imgEventTag.visibility = View.VISIBLE;
                     imgEventTag.setColorFilter(event.color, PorterDuff.Mode.SRC_ATOP)
                 }
             }
