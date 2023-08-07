@@ -2,6 +2,7 @@ package com.example.myfpl.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -23,10 +24,11 @@ public class DetailNotificationActivity extends AppCompatActivity {
         Intent i = getIntent();
         notification = (NotificationModel) i.getSerializableExtra("detail");
         String createdAt = i.getStringExtra("createdAt");
-        binding.tvAuthorDetail.setText(notification.getAuthor());
         binding.tvContentDetail.setText(notification.getContent());
         binding.tvNotificationNameDetail.setText(notification.getTitle());
-        binding.tvCreatedAtDetail.setText(createdAt);
+        Log.d("detail noti",createdAt);
+        Log.d("detail noti",notification.getAuthor());
+        binding.tvTimeauthor.setText(createdAt+" • "+notification.getAuthor());
         binding.tvTypeDetail.setText(notification.getType());
         binding.headerApp1.setHeaderClickListener(new HeaderApp.HeaderHandleClickListener() {
             @Override
@@ -45,19 +47,19 @@ public class DetailNotificationActivity extends AppCompatActivity {
             }
         });
         switch (notification.getType()) {
-            case "Học tập":
+            case "Học Tập":
                 binding.tvTypeDetail.setBackgroundResource(R.drawable.notification_type_blue);
                 binding.tvTypeDetail.setTextColor(ContextCompat.getColor(DetailNotificationActivity.this, R.color.aqua));
                 break;
-            case "Học phí":
+            case "Học Phí":
                 binding.tvTypeDetail.setBackgroundResource(R.drawable.notification_type_orange);
                 binding.tvTypeDetail.setTextColor(ContextCompat.getColor(DetailNotificationActivity.this, R.color.orange));
                 break;
-            case "Hoạt động":
+            case "Hoạt Động":
                 binding.tvTypeDetail.setBackgroundResource(R.drawable.notification_type_green);
                 binding.tvTypeDetail.setTextColor(ContextCompat.getColor(DetailNotificationActivity.this, R.color.green_light));
                 break;
-            case "Việc làm":
+            case "Việc Làm":
                 binding.tvTypeDetail.setBackgroundResource(R.drawable.notification_type_red);
                 binding.tvTypeDetail.setTextColor(ContextCompat.getColor(DetailNotificationActivity.this, R.color.red_light));
                 break;

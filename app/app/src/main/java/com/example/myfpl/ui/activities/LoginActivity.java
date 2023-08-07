@@ -107,7 +107,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         String providerId = task.getResult().getUser().getProviderId();
                                         String avatar = task.getResult().getUser().getPhotoUrl().toString();
                                         login(email, username, providerId, avatar);
-                                        startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
                                     } else {
                                         ToastApp.show(LoginActivity.this, "Đăng nhập thất bại");
                                     }
@@ -140,7 +139,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onSuccess(LoginDTO.@io.reactivex.rxjava3.annotations.NonNull LoginResponseDTO loginResponseDTO) {
                         TokenRepository.getInstance(getApplication().getApplicationContext()).setToken(loginResponseDTO.getAccessToken());
                         TokenRepository.getInstance(getApplication().getApplicationContext()).setRefreshToken(loginResponseDTO.getRefreshToken());
-
+                        startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
                         Log.d(TAG, "onSuccess: " + loginResponseDTO);
                     }
 

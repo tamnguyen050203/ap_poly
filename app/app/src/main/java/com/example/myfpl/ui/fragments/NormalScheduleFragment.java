@@ -64,7 +64,7 @@ public class NormalScheduleFragment extends Fragment {
 
             @Override
             public void onAlarmClick(TestModelSchedule testModelSchedule, int itemIndex) {
-                viewModel.setListSchedule(adapter.getListData());
+//                viewModel.setListSchedule(adapter.getListData());
             }
         });
         adapter.setListData(new ArrayList<>());
@@ -91,11 +91,11 @@ public class NormalScheduleFragment extends Fragment {
     }
 
     public void addEvent() {
-        viewModel.getListSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
-            @Override
-            public void onChanged(List<TestModelSchedule> testModelSchedules) {
-                adapter.setListData(testModelSchedules);
-            }
-        });
+//        viewModel.getListSchedule().observe(getViewLifecycleOwner(), new Observer<List<TestModelSchedule>>() {
+//            @Override
+//            public void onChanged(List<TestModelSchedule> testModelSchedules) {
+//                adapter.setListData(testModelSchedules);
+//            }
+//        });
     }
 }
