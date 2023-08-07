@@ -1,6 +1,8 @@
 package com.example.myfpl.ui.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +13,24 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.myfpl.R;
 import com.example.myfpl.adapters.ScheduleViewPager;
 import com.example.myfpl.databinding.FragmentScheduleBinding;
+import com.example.myfpl.models.ScheduleModel;
+import com.example.myfpl.models.TestScheduleModel;
 import com.example.myfpl.viewmodels.ScheduleFragmentViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.shrikanthravi.collapsiblecalendarview.data.Day;
+import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleFragment extends Fragment {
 
     private FragmentScheduleBinding binding;
-    private ScheduleFragmentViewModel viewModel;
+    private ScheduleFragmentViewModel scheduleFragmentViewModel;
     private static final String TAG = ScheduleFragment.class.getSimpleName();
 
     @Override
@@ -34,12 +44,12 @@ public class ScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init();
-        addEvent();
     }
 
     public void init() {
         //setup viewmodel
-        viewModel = new ViewModelProvider(requireActivity()).get(ScheduleFragmentViewModel.class);
+        scheduleFragmentViewModel = new ViewModelProvider(requireActivity()).get(ScheduleFragmentViewModel.class);
+        scheduleFragmentViewModel.setCurrentDateSelected(binding.calendarView.getSelectedItem());
 
         //setup tab layout;
         binding.viewPager.setAdapter(new ScheduleViewPager(requireActivity()));
@@ -52,7 +62,11 @@ public class ScheduleFragment extends Fragment {
         }).attach();
         binding.tabLayout.setSmoothScrollingEnabled(true);
 
-        viewModel.getIsListScrolling().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+        addEvent();
+    }
+
+    public void addEvent() {
+        scheduleFragmentViewModel.getIsListScrolling().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isScroll) {
                 if (isScroll) {
@@ -60,10 +74,69 @@ public class ScheduleFragment extends Fragment {
                 }
             }
         });
-    }
+        binding.calendarView.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
+            @Override
+            public void onDaySelect() {
+                scheduleFragmentViewModel.setCurrentDateSelected(binding.calendarView.getSelectedItem());
+            }
 
-    public void addEvent() {
+            @Override
+            public void onItemClick(@Nullable View v) {
 
+            }
+
+            @Override
+            public void onDataUpdate() {
+            }
+
+            @Override
+            public void onMonthChange() {
+
+            }
+
+            @Override
+            public void onWeekChange(int position) {
+
+            }
+
+            @Override
+            public void onClickListener() {
+
+            }
+
+            @Override
+            public void onDayChanged() {
+
+            }
+        });
+
+        scheduleFragmentViewModel.getListScheduleRes().observe(getViewLifecycleOwner(), new Observer<List<ScheduleModel>>() {
+            @Override
+            public void onChanged(List<ScheduleModel> listScheduleModel) {
+                for(ScheduleModel scheduleModel : listScheduleModel){
+                    binding.calendarView.addEventTag(
+                            Integer.parseInt(scheduleModel.getDate().substring(0, 4)),
+                            Integer.parseInt(scheduleModel.getDate().substring(5, 7)) - 1,
+                            Integer.parseInt(scheduleModel.getDate().substring(8)),
+                            Color.parseColor("#FFA04B")
+                    );
+                }
+            }
+        });
+
+        scheduleFragmentViewModel.getListTestScheduleRes().observe(getViewLifecycleOwner(), new Observer<List<TestScheduleModel>>() {
+            @Override
+            public void onChanged(List<TestScheduleModel> listTestScheduleModel) {
+                for(TestScheduleModel testScheduleModel : listTestScheduleModel){
+                    binding.calendarView.addEventTag(
+                            Integer.parseInt(testScheduleModel.getDate().substring(0, 4)),
+                            Integer.parseInt(testScheduleModel.getDate().substring(5, 7)) - 1,
+                            Integer.parseInt(testScheduleModel.getDate().substring(8)),
+                            Color.parseColor("#EC4310")
+                    );
+                }
+            }
+        });
     }
 
     public void collapseCalendar() {

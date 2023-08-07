@@ -1,6 +1,5 @@
 package com.example.myfpl.helpers.retrofit;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -55,7 +54,7 @@ public class RetrofitHelper {
 
 
             String bareUrl = "http://10.0.2.2:8000";
-//            String bareUrl = "http://192.168.1.27:8000";
+//            String bareUrl = "http://192.168.1.5:8000";
             instance = new Retrofit.Builder()
                     .baseUrl(bareUrl)
                     .addConverterFactory(GsonConverterFactory.create())

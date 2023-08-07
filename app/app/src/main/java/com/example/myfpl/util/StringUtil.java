@@ -22,4 +22,11 @@ public class StringUtil {
     public static String capitalize(String value){
         return value.substring(0, 1).toUpperCase(new Locale("vi", "VN")) + value.substring(1, value.length());
     }
+
+    public static String makeupNumber(int number){
+        if(number <= 9){
+            return "0" + number;
+        }
+        return number + "";
+    }
 }

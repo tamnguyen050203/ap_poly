@@ -1,6 +1,7 @@
 package com.example.myfpl.adapters;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,35 +10,62 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfpl.R;
-import com.example.myfpl.databinding.ItemScheduleBinding;
 import com.example.myfpl.databinding.ItemScheduleDetailBinding;
-import com.example.myfpl.models.TestModelSchedule;
+import com.example.myfpl.models.BaseSchedule;
 import com.example.myfpl.util.DateUtil;
-import com.example.myfpl.util.StringUtil;
+import com.shrikanthravi.collapsiblecalendarview.data.Day;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class DetailScheduleListAdapter extends RecyclerView.Adapter<DetailScheduleListAdapter.ItemViewHolder> {
-    private List<TestModelSchedule> listData;
-    HandleEventListItem eventListItem;
+public class DetailScheduleListAdapter<T extends BaseSchedule> extends RecyclerView.Adapter<DetailScheduleListAdapter.ItemViewHolder> {
+    private List<T> listData;
+    HandleEventListItem<T> eventListItem;
 
-    public DetailScheduleListAdapter(HandleEventListItem eventListItem) {
+
+    private ArrayList<Day> currentDate;
+
+    public DetailScheduleListAdapter(HandleEventListItem<T> eventListItem, ArrayList<Day> currentDate) {
         this.eventListItem = eventListItem;
+        this.currentDate = currentDate;
     }
 
-
-    public DetailScheduleListAdapter(List<TestModelSchedule> listData) {
+    public DetailScheduleListAdapter(List<T> listData) {
         this.listData = listData;
     }
 
-    public List<TestModelSchedule> getListData() {
+    @SuppressLint("NotifyDataSetChanged")
+    public void setCurrentDaySelected(ArrayList<Day> currentDate) {
+        this.currentDate = currentDate;
+
+        this.listData = filter(currentDate, (ArrayList<T>) this.listData);
+        notifyDataSetChanged();
+    }
+
+    private ArrayList<T> filter(ArrayList<Day> daysSelected, ArrayList<T> listData) {
+        ArrayList<T> list = new ArrayList<>();
+
+        for (T item : listData) {
+//            Log.d("TAG>filter", "filter: " + daysSelected);
+//            Log.d("TAG>filter", "filter: " + daysSelected.toString().contains(item.getDate()) + ": " + item.getDate());
+            if(daysSelected.toString().contains(item.getDate())){
+                list.add(item);
+            }
+        }
+        return list;
+    }
+
+    public List<T> getListData() {
         return listData;
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void setListData(List<TestModelSchedule> listData) {
-        this.listData = listData;
+    public void setListData(List<T> listData) {
+
+        this.listData = filter(this.currentDate, (ArrayList<T>) listData);
         notifyDataSetChanged();
     }
 
@@ -63,8 +91,9 @@ public class DetailScheduleListAdapter extends RecyclerView.Adapter<DetailSchedu
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onClick(View view) {
-                    listData.get(position).setAlarm(!listData.get(position).isAlarm());
                     eventListItem.onAlarmClick(listData.get(position), position);
+                    listData.get(position).setAlarm(listData.get(position).isAlarm() == 1 ? 0 : 1);
+                    notifyDataSetChanged();
                 }
             });
 
@@ -87,27 +116,31 @@ public class DetailScheduleListAdapter extends RecyclerView.Adapter<DetailSchedu
         }
 
         @SuppressLint("SetTextI18n")
-        public void onBind(TestModelSchedule testModelSchedule, int itemIndex) {
-            binding.amphitheater.setText(testModelSchedule.getAmphitheater());
-            binding.lecuturer.setText(testModelSchedule.getLecturer());
+        public void onBind(BaseSchedule schedule, int itemIndex) {
+            binding.amphitheater.setText(schedule.getAmphitheater_name());
+            binding.lecuturer.setText(schedule.getLecturer_name());
             binding.roomAShift.setText(
-                    testModelSchedule.getRoom() + " - " + testModelSchedule.getShift()
+                    schedule.getRoom_name() + " - " + schedule.getShift_name()
             );
 
-            binding.timeStateEnd.setText(DateUtil.getMeridiemFromString("yyyy-MM-dd hh:mm:ss", testModelSchedule.getEndTime()).toUpperCase(Locale.ROOT));
-            binding.timEnd.setText(DateUtil.getTimeFromString("yyyy-MM-dd hh:mm:ss", testModelSchedule.getEndTime()));
-            binding.timeStart.setText(DateUtil.getTimeFromString("yyyy-MM-dd hh:mm:ss", testModelSchedule.getStartTime()));
-            binding.timeState.setText(DateUtil.getMeridiemFromString("yyyy-MM-dd hh:mm:ss", testModelSchedule.getStartTime()).toUpperCase(Locale.ROOT));
+            binding.subjectTitle.setText(schedule.getLesson_name());
+            binding.subjectCode.setText(schedule.getLesson_code_name());
+            binding.timeStateEnd.setText(DateUtil.getMeridiemFromString("hh:mm:ss", schedule.getEnd_time()).toUpperCase(Locale.ROOT));
+            binding.timeEnd.setText(DateUtil.getTimeFromString("hh:mm:ss", schedule.getEnd_time()));
+            binding.timeStart.setText(DateUtil.getTimeFromString("hh:mm:ss", schedule.getStart_time()));
+            binding.timeState.setText(DateUtil.getMeridiemFromString("hh:mm:ss", schedule.getStart_time()).toUpperCase(Locale.ROOT));
 
-            binding.btnAlarm.setImageResource(
-                    testModelSchedule.isAlarm() ? R.drawable.ic_alarm_active : R.drawable.ic_alarm_inactive
-            );
+            if (schedule.isAlarm() != null) {
+                binding.btnAlarm.setImageResource(
+                        schedule.isAlarm() == 1 ? R.drawable.ic_alarm_active : R.drawable.ic_alarm_inactive
+                );
+            }
         }
     }
 
-    public interface HandleEventListItem {
-        void onItemClick(TestModelSchedule testModelSchedule, int itemIndex);
+    public interface HandleEventListItem<T extends BaseSchedule> {
+        void onItemClick(T scheduleModel, int itemIndex);
 
-        void onAlarmClick(TestModelSchedule testModelSchedule, int itemIndex);
+        void onAlarmClick(T scheduleModel, int itemIndex);
     }
 }

@@ -67,7 +67,7 @@ class TestScheduleController extends Controller
             $item->lecturer_name = $lecturer_name['lecturer_name'] ?? '';
         }
 
-//        dd($testSchedules);
+        //        dd($testSchedules);
 
         return response()->json([
             'status' => 200,

@@ -5,10 +5,18 @@ import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DateUtil {
     public static String getCurrentSession() {
@@ -28,35 +36,27 @@ public class DateUtil {
     }
 
     @SuppressLint("SimpleDateFormat")
-    public static Date fromStringToDate(String format, String value) throws ParseException {
-        return new SimpleDateFormat(format).parse(value);
+    public static Date fromStringToDate(String format, String value){
+        try {
+            return new SimpleDateFormat(format).parse(value);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @SuppressLint("SimpleDateFormat")
     public static String getTimeFromString(String format, String value) {
-        try {
-            return new SimpleDateFormat("hh:mm").format(fromStringToDate(format, value));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        return new SimpleDateFormat("hh:mm").format(fromStringToDate(format, value));
     }
 
     @SuppressLint("SimpleDateFormat")
     public static String getMeridiemFromString(String format, String value) {
-        try {
-            return new SimpleDateFormat("aa").format(fromStringToDate(format, value));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        return new SimpleDateFormat("aa").format(fromStringToDate(format, value));
     }
 
     @SuppressLint("SimpleDateFormat")
     public static String getDateFromString(String format, String value) {
-        try {
-            return new SimpleDateFormat("dd-MM").format(fromStringToDate(format, value));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        return new SimpleDateFormat("yyyy-MM-dd").format(fromStringToDate(format, value));
     }
 
     public static YearMonth getCurrentMonth() {
@@ -79,15 +79,39 @@ public class DateUtil {
         return getCurrentMonth().plusMonths(100);
     }
 
+    @SuppressLint("SimpleDateFormat")
+    public static String getFirstDayOfCurrentMonth(){
+        LocalDate firstDay = LocalDate.now().with(TemporalAdjusters.firstDayOfMonth());
+        return new SimpleDateFormat("yyyy-MM-dd").format(Date.from(firstDay.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String getFirstDayOfMonth(int year, int month, int day){
+        LocalDate firstDay = LocalDate.of(year, month, day).with(TemporalAdjusters.firstDayOfMonth());
+        return new SimpleDateFormat("yyyy-MM-dd").format(Date.from(firstDay.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String getLastDayOfMonth(int year, int month, int day){
+        LocalDate firstDay = LocalDate.of(year, month, day).with(TemporalAdjusters.lastDayOfMonth());
+        return new SimpleDateFormat("yyyy-MM-dd").format(Date.from(firstDay.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String getLastDayOfCurrentMonth(){
+        LocalDate lastDay = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
+        return new SimpleDateFormat("yyyy-MM-dd").format(Date.from(lastDay.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+    }
+
     public static String ConvertTimeToString(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX");
         ZonedDateTime zonedDateTime = ZonedDateTime.parse(input, formatter);
-        Log.d("Date util","input:"+input);
-        Log.d("Date util",zonedDateTime.getHour()+":"+zonedDateTime.getMinute());
+//        Log.d("Date util","input:"+input);
+//        Log.d("Date util",zonedDateTime.getHour()+":"+zonedDateTime.getMinute());
         long givenDate = zonedDateTime.toEpochSecond();
         long current = System.currentTimeMillis() / 1000;
         long timeDistance = current - givenDate;
-        Log.d("date util", timeDistance + "");
+//        Log.d("date util", timeDistance + "");
         String convertedTime = "";
         if (timeDistance <= 59) {
             convertedTime = timeDistance + " giây trước";
@@ -110,7 +134,7 @@ public class DateUtil {
             long convertedToYear = Math.round(timeDistance / 31556926);
             convertedTime = convertedToYear + " năm trước";
         }
-        System.out.println(convertedTime);
+//        System.out.println(convertedTime);
         return convertedTime;
     }
 

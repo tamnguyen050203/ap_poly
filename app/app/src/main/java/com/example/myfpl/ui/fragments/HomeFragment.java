@@ -24,10 +24,12 @@ import com.example.myfpl.data.DTO.ScheduleDTO;
 import com.example.myfpl.databinding.FragmentHomeBinding;
 import com.example.myfpl.models.NotificationModel;
 import com.example.myfpl.models.ScheduleModel;
+import com.example.myfpl.models.StudentModel;
 import com.example.myfpl.models.TestScheduleModel;
 import com.example.myfpl.ui.activities.DetailNotificationActivity;
 import com.example.myfpl.ui.activities.NotifyActivity;
 import com.example.myfpl.util.DateUtil;
+import com.example.myfpl.viewmodels.NavigationViewModel;
 import com.example.myfpl.viewmodels.NotifyViewModel;
 import com.example.myfpl.viewmodels.ScheduleViewModel;
 
@@ -116,11 +118,13 @@ public class HomeFragment extends Fragment {
             public void onChanged(ScheduleDTO.ScheduleResponseDTO scheduleResponseDTO) {
                 if (scheduleResponseDTO == null) {
                     listSchedule = new ArrayList<>();
+                    binding.titleSchedule.setVisibility(View.GONE);
                 } else {
                     listSchedule = scheduleResponseDTO.getSchedules().getData();
                     Log.d(TAG, "onChanged: " + listSchedule.size());
                     scheduleListAdapter = new ScheduleListAdapter(listSchedule, getContext());
                     binding.listSchedule.setAdapter(scheduleListAdapter);
+                    binding.titleSchedule.setVisibility(scheduleResponseDTO.getSchedules().getData().size() == 0 ? View.GONE : View.VISIBLE);
                 }
             }
         });
@@ -130,7 +134,9 @@ public class HomeFragment extends Fragment {
             public void onChanged(ScheduleDTO.TestScheduleResponseDTO TestScheduleResponseDTO) {
                 if (TestScheduleResponseDTO == null) {
                     listTestSchedule = new ArrayList<>();
+                    binding.titleTestSchedule.setVisibility(View.GONE);
                 } else {
+                    binding.titleTestSchedule.setVisibility(TestScheduleResponseDTO.getSchedules().getData().size() == 0 ? View.GONE : View.VISIBLE);
                     listTestSchedule = TestScheduleResponseDTO.getSchedules().getData();
                     testScheduleListAdapter = new TestScheduleListAdapter(listTestSchedule, getContext());
                     binding.listTestSchedule.setAdapter(testScheduleListAdapter);

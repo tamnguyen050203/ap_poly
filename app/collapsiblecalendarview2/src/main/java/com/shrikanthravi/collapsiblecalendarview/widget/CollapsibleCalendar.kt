@@ -112,7 +112,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     /**
      * The date has been selected and can be used on Calender Listener
      */
-    private var selectedDay: java.util.ArrayList<Day> = ArrayList()
+    var selectedDay: java.util.ArrayList<Day> = ArrayList()
         get() {
             val listItemSelected = java.util.ArrayList<Day>();
 
@@ -124,7 +124,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
                 listItemSelected.add(
                     Day(
                         year,
-                        month + 1,
+                        month,
                         day
                     )
                 )
@@ -468,7 +468,6 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
     fun addEventTag(numYear: Int, numMonth: Int, numDay: Int, color: Int) {
         mAdapter!!.addEvent(Event(numYear, numMonth, numDay, color))
 
-
         reload()
     }
 
@@ -723,7 +722,7 @@ class CollapsibleCalendar : UICalendar, View.OnClickListener {
             selectedDay.remove(day)
         }
 
-        Log.d("TAG>>>", "select: " + selectedDay.toString())
+        Log.d("TAG>>>", "select: $selectedItem")
 
         redraw()
 

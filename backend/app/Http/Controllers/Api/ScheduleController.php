@@ -17,8 +17,7 @@ class ScheduleController extends Controller
 
     public function getSchedules(Request $request)
     {
-        $class_group_id = StudentClass::
-        where('student_id', '=', auth()->user()->id)
+        $class_group_id = StudentClass::where('student_id', '=', auth()->user()->id)
             ->first()->class_group_id;
 
         if (!$class_group_id) {
@@ -26,6 +25,7 @@ class ScheduleController extends Controller
                 'message' => 'Không tìm thấy lớp học phù hợp',
             ], 404);
         }
+
 
         $schedules = $this->model
             ->when($request->dateStart, function ($query) use ($request) {
@@ -60,10 +60,11 @@ class ScheduleController extends Controller
                 'amphitheaters.name as amphitheater_name',
                 'student_schedules.is_alarm as is_alarm',
                 'student_schedules.reminder_id as reminder_id',
+                'class_groups.id as class_group_id',
             )
             ->latest('schedules.date')
             ->orderBy('shifts.start_time')
-            ->paginate(5);
+            ->paginate(14);
 
         return response()->json([
             'status' => 200,
@@ -73,8 +74,11 @@ class ScheduleController extends Controller
 
     public function setAlarmSchedule(Request $request)
     {
+
         $student_id = auth()->user()->id;
-        $student_class_id = StudentClass::where('student_id', $student_id)->first()->id;
+        $student_class_id = StudentClass::where('student_id', $student_id)
+            ->where('class_group_id', $request->class_group_id)
+            ->first()->id;
 
         StudentSchedule::query()
             ->where('student_class_id', $student_class_id)
